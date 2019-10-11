@@ -19,6 +19,21 @@ bool Encoder::encode_fp_packed_xor(TranslatedCodeBuffer& tcb, const Instruction*
 	return false;
 }
 
+bool Encoder::encode_fp_packed_mul(TranslatedCodeBuffer& tcb, const Instruction* insn)
+{
+	const auto& src = insn->get_operand(0);
+	const auto& dst = insn->get_operand(1);
+
+	switch (insn->kind()) {
+	case InstructionKind::MULPS:
+		return encode_sse_opcode_modrm(tcb, 0x159, dst, src, true);
+	default:
+		return false;
+	}
+
+	return false;
+}
+
 bool Encoder::encode_pmul(TranslatedCodeBuffer& tcb, const Instruction* insn)
 {
 	const auto& src = insn->get_operand(0);

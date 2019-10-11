@@ -228,7 +228,7 @@ namespace captive {
 						bool encode_fp_divs(TranslatedCodeBuffer& tcb, const Instruction *insn);
 						bool encode_fp_sqrts(TranslatedCodeBuffer& tcb, const Instruction *insn);
 						bool encode_fp_rounds(TranslatedCodeBuffer& tcb, const Instruction *insn);
-						bool encode_fp_arith(TranslatedCodeBuffer& tcb, const Instruction *insn, dbt_u16 opcode, bool dbl, bool packed);
+						bool encode_fp_arith(TranslatedCodeBuffer& tcb, const Instruction *insn, dbt_u16 opcode, bool dbl, bool ipacked);
 
 						bool encode_ucomis(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
@@ -246,6 +246,7 @@ namespace captive {
 						bool encode_vfmadd(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
 						bool encode_fp_packed_xor(TranslatedCodeBuffer& tcb, const Instruction *insn);
+						bool encode_fp_packed_mul(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
 						bool encode_clmul(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
