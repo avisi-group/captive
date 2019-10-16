@@ -962,6 +962,20 @@ Operand X86BinaryOperation::vector_arithmetic_as_operand(X86Emitter& emitter)
 			}
 		}
 
+	case X86BinaryOperationKind::DIV:
+		if (type().is_floating()) {
+			emitter.add_mov_auto(lhs, dst);
+			if (type().vector_element_size_in_bits() == 32) {
+				emitter.add_instruction(InstructionKind::DIVPS, rhs, dst);
+			} else {
+				emitter.add_instruction(InstructionKind::DIVPD, rhs, dst);
+			}
+			return Operand::make_register(dst_reg, type().size_in_bits());
+		} else {
+			emitter._x86_context.support().assertion_fail("unsupported vector division");
+			return Operand::make_invalid();
+		}
+		
 	default:
 		emitter._x86_context.support().assertion_fail("unsupported vector binary arithmetic");
 		return Operand::make_invalid();

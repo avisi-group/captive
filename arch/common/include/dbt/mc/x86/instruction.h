@@ -439,14 +439,15 @@ namespace captive {
 							ADDSS, ADDSD,
 							SUBSS, SUBSD, SUBPS, SUBPD,
 							MULSS, MULSD,
-							MULPS, MULPD,
 							DIVSS, DIVSD,
 							COMISS, COMISD,
 							UCOMISS, UCOMISD,
 							ROUNDSS, ROUNDSD,
 							SQRTSS, SQRTSD,
 
-							XORPS,
+							XORPS, XORPD,
+							MULPS, MULPD,
+							DIVPS, DIVPD,
 
 							PSLLW, PSLLD, PSLLQ,
 							PSRLW, PSRLD, PSRLQ,

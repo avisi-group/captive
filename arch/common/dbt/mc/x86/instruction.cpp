@@ -412,6 +412,11 @@ void Instruction::get_usedefs(UseDefList& list) const
 		break;
 
 	case InstructionKind::XORPS:
+	case InstructionKind::XORPD:
+	case InstructionKind::MULPS:
+	case InstructionKind::MULPD:
+	case InstructionKind::DIVPS:
+	case InstructionKind::DIVPD:
 		usedef_for_operand<true, false>(list, get_operand(0));
 		usedef_for_operand<true, true>(list, get_operand(1));
 		break;

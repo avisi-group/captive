@@ -310,6 +310,10 @@ bool Encoder::encode_instruction(TranslatedCodeBuffer& tcb, const Instruction* i
 	case InstructionKind::MULPD:
 		return encode_fp_packed_mul(tcb, insn);
 
+	case InstructionKind::DIVPS:
+	case InstructionKind::DIVPD:
+		return encode_fp_packed_div(tcb, insn);
+
 	case InstructionKind::PCLMULQDQ:
 		return encode_clmul(tcb, insn);
 

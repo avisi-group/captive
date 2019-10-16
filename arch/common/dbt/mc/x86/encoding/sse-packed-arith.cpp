@@ -37,6 +37,24 @@ bool Encoder::encode_fp_packed_mul(TranslatedCodeBuffer& tcb, const Instruction*
 	return false;
 }
 
+bool Encoder::encode_fp_packed_div(TranslatedCodeBuffer& tcb, const Instruction* insn)
+{
+	const auto& src = insn->get_operand(0);
+	const auto& dst = insn->get_operand(1);
+
+	switch (insn->kind()) {
+	case InstructionKind::DIVPS:
+		return encode_sse_opcode_modrm(tcb, 0x15e, dst, src, true);
+
+	case InstructionKind::DIVPD:
+		return encode_sse_opcode_modrm(tcb, 0x15e, dst, src, false);
+	default:
+		return false;
+	}
+
+	return false;
+}
+
 bool Encoder::encode_pmul(TranslatedCodeBuffer& tcb, const Instruction* insn)
 {
 	const auto& src = insn->get_operand(0);

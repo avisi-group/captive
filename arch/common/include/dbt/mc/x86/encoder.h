@@ -247,6 +247,7 @@ namespace captive {
 
 						bool encode_fp_packed_xor(TranslatedCodeBuffer& tcb, const Instruction *insn);
 						bool encode_fp_packed_mul(TranslatedCodeBuffer& tcb, const Instruction *insn);
+						bool encode_fp_packed_div(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
 						bool encode_clmul(TranslatedCodeBuffer& tcb, const Instruction *insn);
 
