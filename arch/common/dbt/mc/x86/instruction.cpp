@@ -79,7 +79,7 @@ void Instruction::get_usedefs(UseDefList& list) const
 	case InstructionKind::PUNPCKLDQ:
 	case InstructionKind::PUNPCKLQDQ:
 	case InstructionKind::PACKUSWB:
-	case InstructionKind::ADDSS: case InstructionKind::ADDSD:
+	case InstructionKind::ADDSS: case InstructionKind::ADDSD: case InstructionKind::ADDPS: case InstructionKind::ADDPD:
 	case InstructionKind::SUBSS: case InstructionKind::SUBSD: case InstructionKind::SUBPS: case InstructionKind::SUBPD:
 	case InstructionKind::MULSS: case InstructionKind::MULSD:
 	case InstructionKind::DIVSS: case InstructionKind::DIVSD:
@@ -413,10 +413,6 @@ void Instruction::get_usedefs(UseDefList& list) const
 
 	case InstructionKind::XORPS:
 	case InstructionKind::XORPD:
-	case InstructionKind::MULPS:
-	case InstructionKind::MULPD:
-	case InstructionKind::DIVPS:
-	case InstructionKind::DIVPD:
 		usedef_for_operand<true, false>(list, get_operand(0));
 		usedef_for_operand<true, true>(list, get_operand(1));
 		break;

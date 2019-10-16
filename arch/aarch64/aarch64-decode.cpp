@@ -76,8 +76,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 111722624:
     {
-      // Node 931
-      // Node 932
+      // Node 937
+      // Node 938
       opcode = aarch64_a64_msr_sctlr;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -98,8 +98,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 3584003:
     {
-      // Node 1004
-      // Node 1005
+      // Node 1010
+      // Node 1011
       opcode = aarch64_a64_rev;
       length = 4;
       ((aarch64_decode_a64_DP_1S&)*this).sf = BITSEL(ir, 31);
@@ -115,8 +115,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1486850:
     {
-      // Node 1006
-      // Node 1007
+      // Node 1012
+      // Node 1013
       opcode = aarch64_a64_rev;
       length = 4;
       ((aarch64_decode_a64_DP_1S&)*this).sf = BITSEL(ir, 31);
@@ -132,8 +132,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 3584002:
     {
-      // Node 1010
-      // Node 1011
+      // Node 1016
+      // Node 1017
       opcode = aarch64_a64_rev32;
       length = 4;
       ((aarch64_decode_a64_DP_1S&)*this).sf = BITSEL(ir, 31);
@@ -149,8 +149,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1279503:
     {
-      // Node 1410
-      // Node 1411
+      // Node 1416
+      // Node 1417
       opcode = aarch64_a64_umov;
       length = 4;
       ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -167,8 +167,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1278479:
     {
-      // Node 1412
-      // Node 1413
+      // Node 1418
+      // Node 1419
       opcode = aarch64_a64_umov;
       length = 4;
       ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -265,13 +265,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 872498:
     {
-      // Node 537
-      // Node 538
+      // Node 543
+      // Node 544
       switch (UNSIGNED_BITS(ir, 4,0)) 
       {
       case 31:
         {
-          // Node 539
+          // Node 545
           opcode = aarch64_a64_hint;
           length = 4;
           ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -294,14 +294,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 3552:
     {
-      // Node 459
-      // Node 460
+      // Node 465
+      // Node 466
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 61:
         {
-          // Node 461
-          // Node 462
+          // Node 467
+          // Node 468
           opcode = aarch64_a64_fmov_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
@@ -323,48 +323,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      switch (UNSIGNED_BITS(ir, 15,12)) 
-      {
-      case 14:
-        {
-          // Node 884
-          // Node 885
-          switch ((ir & BIT_LSB(10)) >> 10)
-          {
-          case 1:
-            {
-              // Node 886
-              // Node 887
-              opcode = aarch64_a64_movi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          }
-          break;
-        }
-      }
-      break;
-    }
-  case 1504:
-    {
-      // Node 888
-      // Node 889
       switch (UNSIGNED_BITS(ir, 15,12)) 
       {
       case 14:
@@ -403,10 +361,52 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       }
       break;
     }
+  case 1504:
+    {
+      // Node 894
+      // Node 895
+      switch (UNSIGNED_BITS(ir, 15,12)) 
+      {
+      case 14:
+        {
+          // Node 896
+          // Node 897
+          switch ((ir & BIT_LSB(10)) >> 10)
+          {
+          case 1:
+            {
+              // Node 898
+              // Node 899
+              opcode = aarch64_a64_movi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          }
+          break;
+        }
+      }
+      break;
+    }
   case 6823:
     {
-      // Node 918
-      // Node 919
+      // Node 924
+      // Node 925
       opcode = aarch64_a64_mrs;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -423,8 +423,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 6822:
     {
-      // Node 920
-      // Node 921
+      // Node 926
+      // Node 927
       opcode = aarch64_a64_mrs;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -441,19 +441,19 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 6816:
     {
-      // Node 922
-      // Node 923
+      // Node 928
+      // Node 929
       switch (UNSIGNED_BITS(ir, 15,12)) 
       {
       case 4:
         {
-          // Node 924
-          // Node 925
+          // Node 930
+          // Node 931
           switch (UNSIGNED_BITS(ir, 4,0)) 
           {
           case 31:
             {
-              // Node 926
+              // Node 932
               opcode = aarch64_a64_msr_imm;
               length = 4;
               ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -476,8 +476,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 6819:
     {
-      // Node 927
-      // Node 928
+      // Node 933
+      // Node 934
       opcode = aarch64_a64_msr_reg;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -494,8 +494,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 6818:
     {
-      // Node 929
-      // Node 930
+      // Node 935
+      // Node 936
       opcode = aarch64_a64_msr_reg;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -512,8 +512,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 6817:
     {
-      // Node 1362
-      // Node 1363
+      // Node 1368
+      // Node 1369
       opcode = aarch64_a64_sys;
       length = 4;
       ((aarch64_decode_a64_SYSTEM&)*this).l = BITSEL(ir, 21);
@@ -852,8 +852,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 55:
         {
-          // Node 477
-          // Node 478
+          // Node 483
+          // Node 484
           opcode = aarch64_a64_fmul_vector;
           length = 4;
           ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -912,10 +912,38 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       return true;
       break;
     }
+  case 627:
+    {
+      // Node 443
+      // Node 444
+      switch (UNSIGNED_BITS(ir, 15,10)) 
+      {
+      case 51:
+        {
+          // Node 445
+          // Node 446
+          opcode = aarch64_a64_fmla_vector;
+          length = 4;
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).U = BITSEL(ir, 29);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).SCALAR = BITSEL(ir, 28);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).size = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).opcode = UNSIGNED_BITS(ir, 15,11);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
   case 251:
     {
-      // Node 485
-      // Node 486
+      // Node 491
+      // Node 492
       opcode = aarch64_a64_fnm;
       length = 4;
       ((aarch64_decode_a64_FP_DP_3&)*this).M = BITSEL(ir, 31);
@@ -934,8 +962,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 249:
     {
-      // Node 487
-      // Node 488
+      // Node 493
+      // Node 494
       opcode = aarch64_a64_fnm;
       length = 4;
       ((aarch64_decode_a64_FP_DP_3&)*this).M = BITSEL(ir, 31);
@@ -954,14 +982,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 631:
     {
-      // Node 529
-      // Node 530
+      // Node 535
+      // Node 536
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 53:
         {
-          // Node 531
-          // Node 532
+          // Node 537
+          // Node 538
           opcode = aarch64_a64_fsub_vector;
           length = 4;
           ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -982,20 +1010,20 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 880:
     {
-      // Node 540
-      // Node 541
+      // Node 546
+      // Node 547
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 542
-          // Node 543
+          // Node 548
+          // Node 549
           switch ((ir & BIT_LSB(10)) >> 10)
           {
           case 1:
             {
-              // Node 544
-              // Node 545
+              // Node 550
+              // Node 551
               opcode = aarch64_a64_ins_elem;
               length = 4;
               ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -1018,14 +1046,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 624:
     {
-      // Node 546
-      // Node 547
+      // Node 552
+      // Node 553
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 7:
         {
-          // Node 548
-          // Node 549
+          // Node 554
+          // Node 555
           opcode = aarch64_a64_ins_gen;
           length = 4;
           ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -1042,8 +1070,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 11:
         {
-          // Node 1076
-          // Node 1077
+          // Node 1082
+          // Node 1083
           opcode = aarch64_a64_smov;
           length = 4;
           ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -1063,14 +1091,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1606:
     {
-      // Node 596
-      // Node 597
+      // Node 602
+      // Node 603
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 598
-          // Node 599
+          // Node 604
+          // Node 605
           opcode = aarch64_a64_ldar;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1092,14 +1120,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1094:
     {
-      // Node 600
-      // Node 601
+      // Node 606
+      // Node 607
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 602
-          // Node 603
+          // Node 608
+          // Node 609
           opcode = aarch64_a64_ldar;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1121,14 +1149,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 70:
     {
-      // Node 604
-      // Node 605
+      // Node 610
+      // Node 611
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 606
-          // Node 607
+          // Node 612
+          // Node 613
           opcode = aarch64_a64_ldarb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1150,14 +1178,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 582:
     {
-      // Node 608
-      // Node 609
+      // Node 614
+      // Node 615
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 610
-          // Node 611
+          // Node 616
+          // Node 617
           opcode = aarch64_a64_ldarh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1179,14 +1207,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1603:
     {
-      // Node 612
-      // Node 613
+      // Node 618
+      // Node 619
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 614
-          // Node 615
+          // Node 620
+          // Node 621
           opcode = aarch64_a64_ldaxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1205,8 +1233,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 854
-          // Node 855
+          // Node 860
+          // Node 861
           opcode = aarch64_a64_ldxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1228,14 +1256,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1091:
     {
-      // Node 616
-      // Node 617
+      // Node 622
+      // Node 623
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 618
-          // Node 619
+          // Node 624
+          // Node 625
           opcode = aarch64_a64_ldaxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1254,8 +1282,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 856
-          // Node 857
+          // Node 862
+          // Node 863
           opcode = aarch64_a64_ldxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1277,14 +1305,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1602:
     {
-      // Node 620
-      // Node 621
+      // Node 626
+      // Node 627
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 622
-          // Node 623
+          // Node 628
+          // Node 629
           opcode = aarch64_a64_ldaxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1303,8 +1331,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 858
-          // Node 859
+          // Node 864
+          // Node 865
           opcode = aarch64_a64_ldxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1326,14 +1354,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1090:
     {
-      // Node 624
-      // Node 625
+      // Node 630
+      // Node 631
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 626
-          // Node 627
+          // Node 632
+          // Node 633
           opcode = aarch64_a64_ldaxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1352,8 +1380,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 860
-          // Node 861
+          // Node 866
+          // Node 867
           opcode = aarch64_a64_ldxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1375,14 +1403,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 66:
     {
-      // Node 628
-      // Node 629
+      // Node 634
+      // Node 635
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 630
-          // Node 631
+          // Node 636
+          // Node 637
           opcode = aarch64_a64_ldaxrb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1401,8 +1429,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 862
-          // Node 863
+          // Node 868
+          // Node 869
           opcode = aarch64_a64_ldxrb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1424,14 +1452,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 578:
     {
-      // Node 632
-      // Node 633
+      // Node 638
+      // Node 639
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 634
-          // Node 635
+          // Node 640
+          // Node 641
           opcode = aarch64_a64_ldaxrh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1450,8 +1478,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 864
-          // Node 865
+          // Node 870
+          // Node 871
           opcode = aarch64_a64_ldxrh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1473,105 +1501,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 2018:
     {
-      // Node 671
-      // Node 1461
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1462
-          // Node 1463
-          opcode = aarch64_a64_vldur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 672
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 673
-          // Node 674
-          opcode = aarch64_a64_ldr;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 1506:
-    {
-      // Node 675
-      // Node 1464
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1465
-          // Node 1466
-          opcode = aarch64_a64_vldur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 676
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 677
-          // Node 678
-          opcode = aarch64_a64_ldr;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 994:
-    {
-      // Node 679
+      // Node 677
       // Node 1467
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -1593,13 +1523,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 680
+      // Node 678
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 681
-          // Node 682
+          // Node 679
+          // Node 680
           opcode = aarch64_a64_ldr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1618,58 +1548,9 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       }
       break;
     }
-  case 486:
+  case 1506:
     {
-      // Node 683
-      // Node 1458
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1459
-          // Node 1460
-          opcode = aarch64_a64_vldur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 684
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 685
-          // Node 686
-          opcode = aarch64_a64_ldr;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 482:
-    {
-      // Node 687
+      // Node 681
       // Node 1470
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -1691,13 +1572,160 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 688
+      // Node 682
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 689
-          // Node 690
+          // Node 683
+          // Node 684
+          opcode = aarch64_a64_ldr;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 994:
+    {
+      // Node 685
+      // Node 1473
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1474
+          // Node 1475
+          opcode = aarch64_a64_vldur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 686
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 687
+          // Node 688
+          opcode = aarch64_a64_ldr;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 486:
+    {
+      // Node 689
+      // Node 1464
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1465
+          // Node 1466
+          opcode = aarch64_a64_vldur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 690
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 691
+          // Node 692
+          opcode = aarch64_a64_ldr;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 482:
+    {
+      // Node 693
+      // Node 1476
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1477
+          // Node 1478
+          opcode = aarch64_a64_vldur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 694
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 695
+          // Node 696
           opcode = aarch64_a64_ldr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1718,14 +1746,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1986:
     {
-      // Node 691
-      // Node 809
+      // Node 697
+      // Node 815
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 810
-          // Node 811
+          // Node 816
+          // Node 817
           opcode = aarch64_a64_ldtr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1741,8 +1769,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 836
-          // Node 837
+          // Node 842
+          // Node 843
           opcode = aarch64_a64_ldur;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1757,13 +1785,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 692
+      // Node 698
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 693
-          // Node 694
+          // Node 699
+          // Node 700
           opcode = aarch64_a64_ldr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1784,14 +1812,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1474:
     {
-      // Node 695
-      // Node 812
+      // Node 701
+      // Node 818
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 813
-          // Node 814
+          // Node 819
+          // Node 820
           opcode = aarch64_a64_ldtr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1807,8 +1835,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 838
-          // Node 839
+          // Node 844
+          // Node 845
           opcode = aarch64_a64_ldur;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1823,13 +1851,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 696
+      // Node 702
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 697
-          // Node 698
+          // Node 703
+          // Node 704
           opcode = aarch64_a64_ldr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1850,14 +1878,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1477:
     {
-      // Node 705
-      // Node 706
+      // Node 711
+      // Node 712
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 707
-          // Node 708
+          // Node 713
+          // Node 714
           opcode = aarch64_a64_ldr_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1880,14 +1908,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1987:
     {
-      // Node 709
-      // Node 710
+      // Node 715
+      // Node 716
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 711
-          // Node 712
+          // Node 717
+          // Node 718
           opcode = aarch64_a64_ldr_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1910,14 +1938,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1475:
     {
-      // Node 713
-      // Node 714
+      // Node 719
+      // Node 720
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 715
-          // Node 716
+          // Node 721
+          // Node 722
           opcode = aarch64_a64_ldr_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1940,14 +1968,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 487:
     {
-      // Node 717
-      // Node 718
+      // Node 723
+      // Node 724
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 719
-          // Node 720
+          // Node 725
+          // Node 726
           opcode = aarch64_a64_ldr_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -1970,14 +1998,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 2019:
     {
-      // Node 721
-      // Node 722
+      // Node 727
+      // Node 728
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 723
-          // Node 724
+          // Node 729
+          // Node 730
           opcode = aarch64_a64_ldr_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2000,14 +2028,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1507:
     {
-      // Node 725
-      // Node 726
+      // Node 731
+      // Node 732
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 727
-          // Node 728
+          // Node 733
+          // Node 734
           opcode = aarch64_a64_ldr_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2030,14 +2058,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 995:
     {
-      // Node 729
-      // Node 730
+      // Node 735
+      // Node 736
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 731
-          // Node 732
+          // Node 737
+          // Node 738
           opcode = aarch64_a64_ldr_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2060,14 +2088,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 483:
     {
-      // Node 733
-      // Node 734
+      // Node 739
+      // Node 740
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 735
-          // Node 736
+          // Node 741
+          // Node 742
           opcode = aarch64_a64_ldr_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2090,139 +2118,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 454:
     {
-      // Node 737
-      // Node 815
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 2:
-        {
-          // Node 816
-          // Node 817
-          opcode = aarch64_a64_ldtrb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 0:
-        {
-          // Node 840
-          // Node 841
-          opcode = aarch64_a64_ldurb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 738
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 739
-          // Node 740
-          opcode = aarch64_a64_ldrb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 452:
-    {
-      // Node 741
-      // Node 818
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 2:
-        {
-          // Node 819
-          // Node 820
-          opcode = aarch64_a64_ldtrb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 0:
-        {
-          // Node 842
-          // Node 843
-          opcode = aarch64_a64_ldurb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 742
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 743
-          // Node 744
-          opcode = aarch64_a64_ldrb;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 450:
-    {
-      // Node 745
+      // Node 743
       // Node 821
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -2245,8 +2141,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 844
-          // Node 845
+          // Node 846
+          // Node 847
           opcode = aarch64_a64_ldurb;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2261,13 +2157,145 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 746
+      // Node 744
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 747
-          // Node 748
+          // Node 745
+          // Node 746
+          opcode = aarch64_a64_ldrb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 452:
+    {
+      // Node 747
+      // Node 824
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 2:
+        {
+          // Node 825
+          // Node 826
+          opcode = aarch64_a64_ldtrb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 0:
+        {
+          // Node 848
+          // Node 849
+          opcode = aarch64_a64_ldurb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 748
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 749
+          // Node 750
+          opcode = aarch64_a64_ldrb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 450:
+    {
+      // Node 751
+      // Node 827
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 2:
+        {
+          // Node 828
+          // Node 829
+          opcode = aarch64_a64_ldtrb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 0:
+        {
+          // Node 850
+          // Node 851
+          opcode = aarch64_a64_ldurb;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 752
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 753
+          // Node 754
           opcode = aarch64_a64_ldrb;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2288,14 +2316,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 455:
     {
-      // Node 749
-      // Node 750
+      // Node 755
+      // Node 756
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 751
-          // Node 752
+          // Node 757
+          // Node 758
           opcode = aarch64_a64_ldrb_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2318,14 +2346,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 453:
     {
-      // Node 753
-      // Node 754
+      // Node 759
+      // Node 760
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 755
-          // Node 756
+          // Node 761
+          // Node 762
           opcode = aarch64_a64_ldrb_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2348,14 +2376,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 451:
     {
-      // Node 757
-      // Node 758
+      // Node 763
+      // Node 764
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 759
-          // Node 760
+          // Node 765
+          // Node 766
           opcode = aarch64_a64_ldrb_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2378,139 +2406,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 966:
     {
-      // Node 767
-      // Node 824
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 2:
-        {
-          // Node 825
-          // Node 826
-          opcode = aarch64_a64_ldtrh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 0:
-        {
-          // Node 846
-          // Node 847
-          opcode = aarch64_a64_ldurh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 768
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 769
-          // Node 770
-          opcode = aarch64_a64_ldrh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 964:
-    {
-      // Node 771
-      // Node 827
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 2:
-        {
-          // Node 828
-          // Node 829
-          opcode = aarch64_a64_ldtrh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 0:
-        {
-          // Node 848
-          // Node 849
-          opcode = aarch64_a64_ldurh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 772
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 773
-          // Node 774
-          opcode = aarch64_a64_ldrh;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 962:
-    {
-      // Node 775
+      // Node 773
       // Node 830
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -2533,8 +2429,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 850
-          // Node 851
+          // Node 852
+          // Node 853
           opcode = aarch64_a64_ldurh;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2549,13 +2445,145 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 776
+      // Node 774
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 777
-          // Node 778
+          // Node 775
+          // Node 776
+          opcode = aarch64_a64_ldrh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 964:
+    {
+      // Node 777
+      // Node 833
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 2:
+        {
+          // Node 834
+          // Node 835
+          opcode = aarch64_a64_ldtrh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 0:
+        {
+          // Node 854
+          // Node 855
+          opcode = aarch64_a64_ldurh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 778
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 779
+          // Node 780
+          opcode = aarch64_a64_ldrh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 962:
+    {
+      // Node 781
+      // Node 836
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 2:
+        {
+          // Node 837
+          // Node 838
+          opcode = aarch64_a64_ldtrh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 0:
+        {
+          // Node 856
+          // Node 857
+          opcode = aarch64_a64_ldurh;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 782
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 783
+          // Node 784
           opcode = aarch64_a64_ldrh;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2576,14 +2604,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 967:
     {
-      // Node 779
-      // Node 780
+      // Node 785
+      // Node 786
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 781
-          // Node 782
+          // Node 787
+          // Node 788
           opcode = aarch64_a64_ldrh_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2606,14 +2634,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 965:
     {
-      // Node 783
-      // Node 784
+      // Node 789
+      // Node 790
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 785
-          // Node 786
+          // Node 791
+          // Node 792
           opcode = aarch64_a64_ldrh_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2636,14 +2664,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 963:
     {
-      // Node 787
-      // Node 788
+      // Node 793
+      // Node 794
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 789
-          // Node 790
+          // Node 795
+          // Node 796
           opcode = aarch64_a64_ldrh_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2666,14 +2694,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1476:
     {
-      // Node 801
-      // Node 833
+      // Node 807
+      // Node 839
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 834
-          // Node 835
+          // Node 840
+          // Node 841
           opcode = aarch64_a64_ldtrsw;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2689,8 +2717,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 852
-          // Node 853
+          // Node 858
+          // Node 859
           opcode = aarch64_a64_ldursw;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2705,13 +2733,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 802
+      // Node 808
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 803
-          // Node 804
+          // Node 809
+          // Node 810
           opcode = aarch64_a64_ldrsw;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2732,14 +2760,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1988:
     {
-      // Node 984
-      // Node 996
+      // Node 990
+      // Node 1002
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 0:
         {
-          // Node 997
-          // Node 998
+          // Node 1003
+          // Node 1004
           opcode = aarch64_a64_prfum;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2754,13 +2782,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 985
+      // Node 991
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 986
-          // Node 987
+          // Node 992
+          // Node 993
           opcode = aarch64_a64_prfm;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2781,14 +2809,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1989:
     {
-      // Node 990
-      // Node 991
+      // Node 996
+      // Node 997
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 992
-          // Node 993
+          // Node 998
+          // Node 999
           opcode = aarch64_a64_prfm_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2811,14 +2839,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1241:
     {
-      // Node 1062
-      // Node 1063
+      // Node 1068
+      // Node 1069
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 1064
-          // Node 1065
+          // Node 1070
+          // Node 1071
           opcode = aarch64_a64_smaddl;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -2836,8 +2864,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 1082
-          // Node 1083
+          // Node 1088
+          // Node 1089
           opcode = aarch64_a64_smsubl;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -2858,14 +2886,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 112:
     {
-      // Node 1078
-      // Node 1079
+      // Node 1084
+      // Node 1085
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 11:
         {
-          // Node 1080
-          // Node 1081
+          // Node 1086
+          // Node 1087
           opcode = aarch64_a64_smov;
           length = 4;
           ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -2882,8 +2910,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 15:
         {
-          // Node 1414
-          // Node 1415
+          // Node 1420
+          // Node 1421
           opcode = aarch64_a64_umov;
           length = 4;
           ((aarch64_decode_a64_SIMD_COPY&)*this).Q = BITSEL(ir, 30);
@@ -2903,14 +2931,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1242:
     {
-      // Node 1084
-      // Node 1085
+      // Node 1090
+      // Node 1091
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 1086
-          // Node 1087
+          // Node 1092
+          // Node 1093
           opcode = aarch64_a64_smulh;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -2931,14 +2959,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1604:
     {
-      // Node 1164
-      // Node 1165
+      // Node 1170
+      // Node 1171
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1166
-          // Node 1167
+          // Node 1172
+          // Node 1173
           opcode = aarch64_a64_stlr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2960,14 +2988,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1092:
     {
-      // Node 1168
-      // Node 1169
+      // Node 1174
+      // Node 1175
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1170
-          // Node 1171
+          // Node 1176
+          // Node 1177
           opcode = aarch64_a64_stlr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -2989,14 +3017,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 68:
     {
-      // Node 1172
-      // Node 1173
+      // Node 1178
+      // Node 1179
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1174
-          // Node 1175
+          // Node 1180
+          // Node 1181
           opcode = aarch64_a64_stlrb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3018,14 +3046,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 580:
     {
-      // Node 1176
-      // Node 1177
+      // Node 1182
+      // Node 1183
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1178
-          // Node 1179
+          // Node 1184
+          // Node 1185
           opcode = aarch64_a64_stlrh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3047,14 +3075,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1601:
     {
-      // Node 1180
-      // Node 1181
+      // Node 1186
+      // Node 1187
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1182
-          // Node 1183
+          // Node 1188
+          // Node 1189
           opcode = aarch64_a64_stlxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3073,8 +3101,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1334
-          // Node 1335
+          // Node 1340
+          // Node 1341
           opcode = aarch64_a64_stxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3096,14 +3124,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1089:
     {
-      // Node 1184
-      // Node 1185
+      // Node 1190
+      // Node 1191
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1186
-          // Node 1187
+          // Node 1192
+          // Node 1193
           opcode = aarch64_a64_stlxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3122,8 +3150,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1336
-          // Node 1337
+          // Node 1342
+          // Node 1343
           opcode = aarch64_a64_stxp;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3145,14 +3173,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1600:
     {
-      // Node 1188
-      // Node 1189
+      // Node 1194
+      // Node 1195
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1190
-          // Node 1191
+          // Node 1196
+          // Node 1197
           opcode = aarch64_a64_stlxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3171,8 +3199,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1338
-          // Node 1339
+          // Node 1344
+          // Node 1345
           opcode = aarch64_a64_stxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3194,14 +3222,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1088:
     {
-      // Node 1192
-      // Node 1193
+      // Node 1198
+      // Node 1199
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1194
-          // Node 1195
+          // Node 1200
+          // Node 1201
           opcode = aarch64_a64_stlxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3220,8 +3248,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1340
-          // Node 1341
+          // Node 1346
+          // Node 1347
           opcode = aarch64_a64_stxr;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3243,14 +3271,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 64:
     {
-      // Node 1196
-      // Node 1197
+      // Node 1202
+      // Node 1203
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1198
-          // Node 1199
+          // Node 1204
+          // Node 1205
           opcode = aarch64_a64_stlxrb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3269,8 +3297,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1342
-          // Node 1343
+          // Node 1348
+          // Node 1349
           opcode = aarch64_a64_stxrb;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3292,14 +3320,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 576:
     {
-      // Node 1200
-      // Node 1201
+      // Node 1206
+      // Node 1207
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 1:
         {
-          // Node 1202
-          // Node 1203
+          // Node 1208
+          // Node 1209
           opcode = aarch64_a64_stlxrh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3318,8 +3346,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1344
-          // Node 1345
+          // Node 1350
+          // Node 1351
           opcode = aarch64_a64_stxrh;
           length = 4;
           ((aarch64_decode_a64_LS_EX&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3341,105 +3369,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 2016:
     {
-      // Node 1234
-      // Node 1486
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1487
-          // Node 1488
-          opcode = aarch64_a64_vstur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 1235
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 1236
-          // Node 1237
-          opcode = aarch64_a64_str;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 1504:
-    {
-      // Node 1238
-      // Node 1489
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1490
-          // Node 1491
-          opcode = aarch64_a64_vstur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 1239
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 1240
-          // Node 1241
-          opcode = aarch64_a64_str;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 992:
-    {
-      // Node 1242
+      // Node 1240
       // Node 1492
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -3461,13 +3391,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1243
+      // Node 1241
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1244
-          // Node 1245
+          // Node 1242
+          // Node 1243
           opcode = aarch64_a64_str;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3486,58 +3416,9 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       }
       break;
     }
-  case 484:
+  case 1504:
     {
-      // Node 1246
-      // Node 1483
-      switch (UNSIGNED_BITS(ir, 11,10)) 
-      {
-      case 0:
-        {
-          // Node 1484
-          // Node 1485
-          opcode = aarch64_a64_vstur;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      // Node 1247
-      switch ((ir & BIT_LSB(10)) >> 10)
-      {
-      case 1:
-        {
-          // Node 1248
-          // Node 1249
-          opcode = aarch64_a64_str;
-          length = 4;
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      }
-      break;
-    }
-  case 480:
-    {
-      // Node 1250
+      // Node 1244
       // Node 1495
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
@@ -3559,13 +3440,160 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1251
+      // Node 1245
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1252
-          // Node 1253
+          // Node 1246
+          // Node 1247
+          opcode = aarch64_a64_str;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 992:
+    {
+      // Node 1248
+      // Node 1498
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1499
+          // Node 1500
+          opcode = aarch64_a64_vstur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 1249
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 1250
+          // Node 1251
+          opcode = aarch64_a64_str;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 484:
+    {
+      // Node 1252
+      // Node 1489
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1490
+          // Node 1491
+          opcode = aarch64_a64_vstur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 1253
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 1254
+          // Node 1255
+          opcode = aarch64_a64_str;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).X = BITSEL(ir, 23);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).L = BITSEL(ir, 22);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).P = BITSEL(ir, 11);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      break;
+    }
+  case 480:
+    {
+      // Node 1256
+      // Node 1501
+      switch (UNSIGNED_BITS(ir, 11,10)) 
+      {
+      case 0:
+        {
+          // Node 1502
+          // Node 1503
+          opcode = aarch64_a64_vstur;
+          length = 4;
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).V = BITSEL(ir, 26);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).imm9 = UNSIGNED_BITS(ir, 20,12);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_LS_REG_USIMM&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      }
+      // Node 1257
+      switch ((ir & BIT_LSB(10)) >> 10)
+      {
+      case 1:
+        {
+          // Node 1258
+          // Node 1259
           opcode = aarch64_a64_str;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3586,14 +3614,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1984:
     {
-      // Node 1254
-      // Node 1314
+      // Node 1260
+      // Node 1320
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1315
-          // Node 1316
+          // Node 1321
+          // Node 1322
           opcode = aarch64_a64_sttr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3609,8 +3637,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1326
-          // Node 1327
+          // Node 1332
+          // Node 1333
           opcode = aarch64_a64_stur;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3625,13 +3653,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1255
+      // Node 1261
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1256
-          // Node 1257
+          // Node 1262
+          // Node 1263
           opcode = aarch64_a64_str;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3652,14 +3680,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1472:
     {
-      // Node 1258
-      // Node 1317
+      // Node 1264
+      // Node 1323
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1318
-          // Node 1319
+          // Node 1324
+          // Node 1325
           opcode = aarch64_a64_sttr;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3675,8 +3703,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1328
-          // Node 1329
+          // Node 1334
+          // Node 1335
           opcode = aarch64_a64_stur;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3691,13 +3719,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1259
+      // Node 1265
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1260
-          // Node 1261
+          // Node 1266
+          // Node 1267
           opcode = aarch64_a64_str;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3718,14 +3746,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1985:
     {
-      // Node 1262
-      // Node 1263
+      // Node 1268
+      // Node 1269
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1264
-          // Node 1265
+          // Node 1270
+          // Node 1271
           opcode = aarch64_a64_str_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3748,14 +3776,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1473:
     {
-      // Node 1266
-      // Node 1267
+      // Node 1272
+      // Node 1273
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1268
-          // Node 1269
+          // Node 1274
+          // Node 1275
           opcode = aarch64_a64_str_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3778,14 +3806,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 485:
     {
-      // Node 1270
-      // Node 1271
+      // Node 1276
+      // Node 1277
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1272
-          // Node 1273
+          // Node 1278
+          // Node 1279
           opcode = aarch64_a64_str_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3808,14 +3836,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 2017:
     {
-      // Node 1274
-      // Node 1275
+      // Node 1280
+      // Node 1281
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1276
-          // Node 1277
+          // Node 1282
+          // Node 1283
           opcode = aarch64_a64_str_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3838,14 +3866,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1505:
     {
-      // Node 1278
-      // Node 1279
+      // Node 1284
+      // Node 1285
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1280
-          // Node 1281
+          // Node 1286
+          // Node 1287
           opcode = aarch64_a64_str_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3868,14 +3896,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 993:
     {
-      // Node 1282
-      // Node 1283
+      // Node 1288
+      // Node 1289
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1284
-          // Node 1285
+          // Node 1290
+          // Node 1291
           opcode = aarch64_a64_str_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3898,14 +3926,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 481:
     {
-      // Node 1286
-      // Node 1287
+      // Node 1292
+      // Node 1293
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1288
-          // Node 1289
+          // Node 1294
+          // Node 1295
           opcode = aarch64_a64_str_reg_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3928,14 +3956,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 448:
     {
-      // Node 1290
-      // Node 1320
+      // Node 1296
+      // Node 1326
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1321
-          // Node 1322
+          // Node 1327
+          // Node 1328
           opcode = aarch64_a64_sttrb;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3951,8 +3979,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1330
-          // Node 1331
+          // Node 1336
+          // Node 1337
           opcode = aarch64_a64_sturb;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3967,13 +3995,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1291
+      // Node 1297
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1292
-          // Node 1293
+          // Node 1298
+          // Node 1299
           opcode = aarch64_a64_strb;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -3994,14 +4022,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 449:
     {
-      // Node 1294
-      // Node 1295
+      // Node 1300
+      // Node 1301
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1296
-          // Node 1297
+          // Node 1302
+          // Node 1303
           opcode = aarch64_a64_strb_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4024,14 +4052,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 960:
     {
-      // Node 1300
-      // Node 1323
+      // Node 1306
+      // Node 1329
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1324
-          // Node 1325
+          // Node 1330
+          // Node 1331
           opcode = aarch64_a64_sttrh;
           length = 4;
           ((aarch64_decode_a64_LS_REG_UNPRIV&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4047,8 +4075,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 1332
-          // Node 1333
+          // Node 1338
+          // Node 1339
           opcode = aarch64_a64_sturh;
           length = 4;
           ((aarch64_decode_a64_LS_REG_USIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4063,13 +4091,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 1301
+      // Node 1307
       switch ((ir & BIT_LSB(10)) >> 10)
       {
       case 1:
         {
-          // Node 1302
-          // Node 1303
+          // Node 1308
+          // Node 1309
           opcode = aarch64_a64_strh;
           length = 4;
           ((aarch64_decode_a64_LS_REG_IMM_POST&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4090,14 +4118,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 961:
     {
-      // Node 1304
-      // Node 1305
+      // Node 1310
+      // Node 1311
       switch (UNSIGNED_BITS(ir, 11,10)) 
       {
       case 2:
         {
-          // Node 1306
-          // Node 1307
+          // Node 1312
+          // Node 1313
           opcode = aarch64_a64_strh_reg;
           length = 4;
           ((aarch64_decode_a64_LS_REG_REG_OFF&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4120,14 +4148,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1245:
     {
-      // Node 1402
-      // Node 1403
+      // Node 1408
+      // Node 1409
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 1404
-          // Node 1405
+          // Node 1410
+          // Node 1411
           opcode = aarch64_a64_umaddl;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -4145,8 +4173,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 1416
-          // Node 1417
+          // Node 1422
+          // Node 1423
           opcode = aarch64_a64_umsubl;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -4167,14 +4195,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1246:
     {
-      // Node 1418
-      // Node 1419
+      // Node 1424
+      // Node 1425
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 1420
-          // Node 1421
+          // Node 1426
+          // Node 1427
           opcode = aarch64_a64_umulh;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -4396,8 +4424,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 673:
     {
-      // Node 636
-      // Node 637
+      // Node 642
+      // Node 643
       opcode = aarch64_a64_ldnp;
       length = 4;
       ((aarch64_decode_a64_LS_NO_ALLOC&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4414,8 +4442,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 161:
     {
-      // Node 638
-      // Node 639
+      // Node 644
+      // Node 645
       opcode = aarch64_a64_ldnp;
       length = 4;
       ((aarch64_decode_a64_LS_NO_ALLOC&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4432,8 +4460,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 677:
     {
-      // Node 640
-      // Node 641
+      // Node 646
+      // Node 647
       opcode = aarch64_a64_ldp;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4450,8 +4478,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 165:
     {
-      // Node 642
-      // Node 643
+      // Node 648
+      // Node 649
       opcode = aarch64_a64_ldp;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4468,8 +4496,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 693:
     {
-      // Node 644
-      // Node 645
+      // Node 650
+      // Node 651
       opcode = aarch64_a64_ldp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4486,8 +4514,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 437:
     {
-      // Node 646
-      // Node 647
+      // Node 652
+      // Node 653
       opcode = aarch64_a64_ldp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4504,8 +4532,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 181:
     {
-      // Node 648
-      // Node 649
+      // Node 654
+      // Node 655
       opcode = aarch64_a64_ldp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4522,8 +4550,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 421:
     {
-      // Node 665
-      // Node 666
+      // Node 671
+      // Node 672
       opcode = aarch64_a64_ldpsw;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4540,8 +4568,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 231:
     {
-      // Node 761
-      // Node 762
+      // Node 767
+      // Node 768
       opcode = aarch64_a64_ldrbi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4557,8 +4585,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 230:
     {
-      // Node 763
-      // Node 764
+      // Node 769
+      // Node 770
       opcode = aarch64_a64_ldrbi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4574,8 +4602,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 229:
     {
-      // Node 765
-      // Node 766
+      // Node 771
+      // Node 772
       opcode = aarch64_a64_ldrbi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4591,8 +4619,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 487:
     {
-      // Node 791
-      // Node 792
+      // Node 797
+      // Node 798
       opcode = aarch64_a64_ldrhi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4608,8 +4636,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 486:
     {
-      // Node 793
-      // Node 794
+      // Node 799
+      // Node 800
       opcode = aarch64_a64_ldrhi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4625,8 +4653,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 485:
     {
-      // Node 795
-      // Node 796
+      // Node 801
+      // Node 802
       opcode = aarch64_a64_ldrhi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4642,8 +4670,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 997:
     {
-      // Node 797
-      // Node 798
+      // Node 803
+      // Node 804
       opcode = aarch64_a64_ldri;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4659,8 +4687,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 741:
     {
-      // Node 799
-      // Node 800
+      // Node 805
+      // Node 806
       opcode = aarch64_a64_ldri;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4676,8 +4704,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 742:
     {
-      // Node 807
-      // Node 808
+      // Node 813
+      // Node 814
       opcode = aarch64_a64_ldrswi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4693,8 +4721,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 713:
     {
-      // Node 975
-      // Node 976
+      // Node 981
+      // Node 982
       opcode = aarch64_a64_orri;
       length = 4;
       ((aarch64_decode_a64_LOGICAL_IMM&)*this).sf = BITSEL(ir, 31);
@@ -4711,8 +4739,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 712:
     {
-      // Node 977
-      // Node 978
+      // Node 983
+      // Node 984
       opcode = aarch64_a64_orri;
       length = 4;
       ((aarch64_decode_a64_LOGICAL_IMM&)*this).sf = BITSEL(ir, 31);
@@ -4729,8 +4757,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 200:
     {
-      // Node 979
-      // Node 980
+      // Node 985
+      // Node 986
       opcode = aarch64_a64_orri;
       length = 4;
       ((aarch64_decode_a64_LOGICAL_IMM&)*this).sf = BITSEL(ir, 31);
@@ -4747,8 +4775,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 998:
     {
-      // Node 994
-      // Node 995
+      // Node 1000
+      // Node 1001
       opcode = aarch64_a64_prfmi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4764,8 +4792,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 589:
     {
-      // Node 1030
-      // Node 1031
+      // Node 1036
+      // Node 1037
       opcode = aarch64_a64_sbfm;
       length = 4;
       ((aarch64_decode_a64_BITFIELD&)*this).sf = BITSEL(ir, 31);
@@ -4782,8 +4810,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 76:
     {
-      // Node 1032
-      // Node 1033
+      // Node 1038
+      // Node 1039
       opcode = aarch64_a64_sbfm;
       length = 4;
       ((aarch64_decode_a64_BITFIELD&)*this).sf = BITSEL(ir, 31);
@@ -4800,8 +4828,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 672:
     {
-      // Node 1204
-      // Node 1205
+      // Node 1210
+      // Node 1211
       opcode = aarch64_a64_stnp;
       length = 4;
       ((aarch64_decode_a64_LS_NO_ALLOC&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4818,8 +4846,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 160:
     {
-      // Node 1206
-      // Node 1207
+      // Node 1212
+      // Node 1213
       opcode = aarch64_a64_stnp;
       length = 4;
       ((aarch64_decode_a64_LS_NO_ALLOC&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4836,8 +4864,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 676:
     {
-      // Node 1208
-      // Node 1209
+      // Node 1214
+      // Node 1215
       opcode = aarch64_a64_stp;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4854,8 +4882,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 164:
     {
-      // Node 1210
-      // Node 1211
+      // Node 1216
+      // Node 1217
       opcode = aarch64_a64_stp;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4872,8 +4900,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 692:
     {
-      // Node 1212
-      // Node 1213
+      // Node 1218
+      // Node 1219
       opcode = aarch64_a64_stp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4890,8 +4918,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 436:
     {
-      // Node 1214
-      // Node 1215
+      // Node 1220
+      // Node 1221
       opcode = aarch64_a64_stp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4908,8 +4936,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 180:
     {
-      // Node 1216
-      // Node 1217
+      // Node 1222
+      // Node 1223
       opcode = aarch64_a64_stp_simd;
       length = 4;
       ((aarch64_decode_a64_LS_REG_PAIR_OFF&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -4926,8 +4954,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 228:
     {
-      // Node 1298
-      // Node 1299
+      // Node 1304
+      // Node 1305
       opcode = aarch64_a64_strbi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4943,8 +4971,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 484:
     {
-      // Node 1308
-      // Node 1309
+      // Node 1314
+      // Node 1315
       opcode = aarch64_a64_strhi;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4960,8 +4988,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 996:
     {
-      // Node 1310
-      // Node 1311
+      // Node 1316
+      // Node 1317
       opcode = aarch64_a64_stri;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4977,8 +5005,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 740:
     {
-      // Node 1312
-      // Node 1313
+      // Node 1318
+      // Node 1319
       opcode = aarch64_a64_stri;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -4994,8 +5022,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 845:
     {
-      // Node 1384
-      // Node 1385
+      // Node 1390
+      // Node 1391
       opcode = aarch64_a64_ubfm;
       length = 4;
       ((aarch64_decode_a64_BITFIELD&)*this).sf = BITSEL(ir, 31);
@@ -5012,8 +5040,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 332:
     {
-      // Node 1386
-      // Node 1387
+      // Node 1392
+      // Node 1393
       opcode = aarch64_a64_ubfm;
       length = 4;
       ((aarch64_decode_a64_BITFIELD&)*this).sf = BITSEL(ir, 31);
@@ -5030,57 +5058,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 247:
     {
-      // Node 1448
-      // Node 1449
-      opcode = aarch64_a64_vldr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 1013:
-    {
-      // Node 1450
-      // Node 1451
-      opcode = aarch64_a64_vldr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 757:
-    {
-      // Node 1452
-      // Node 1453
-      opcode = aarch64_a64_vldr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 501:
-    {
       // Node 1454
       // Node 1455
       opcode = aarch64_a64_vldr;
@@ -5096,7 +5073,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       return true;
       break;
     }
-  case 245:
+  case 1013:
     {
       // Node 1456
       // Node 1457
@@ -5113,58 +5090,58 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       return true;
       break;
     }
+  case 757:
+    {
+      // Node 1458
+      // Node 1459
+      opcode = aarch64_a64_vldr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
+  case 501:
+    {
+      // Node 1460
+      // Node 1461
+      opcode = aarch64_a64_vldr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
+  case 245:
+    {
+      // Node 1462
+      // Node 1463
+      opcode = aarch64_a64_vldr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
   case 246:
-    {
-      // Node 1473
-      // Node 1474
-      opcode = aarch64_a64_vstr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 1012:
-    {
-      // Node 1475
-      // Node 1476
-      opcode = aarch64_a64_vstr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 756:
-    {
-      // Node 1477
-      // Node 1478
-      opcode = aarch64_a64_vstr;
-      length = 4;
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
-      is_predicated = false;
-      return true;
-      break;
-    }
-  case 500:
     {
       // Node 1479
       // Node 1480
@@ -5181,10 +5158,61 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       return true;
       break;
     }
-  case 244:
+  case 1012:
     {
       // Node 1481
       // Node 1482
+      opcode = aarch64_a64_vstr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
+  case 756:
+    {
+      // Node 1483
+      // Node 1484
+      opcode = aarch64_a64_vstr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
+  case 500:
+    {
+      // Node 1485
+      // Node 1486
+      opcode = aarch64_a64_vstr;
+      length = 4;
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).V = BITSEL(ir, 26);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).opc = UNSIGNED_BITS(ir, 23,22);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).imm12 = UNSIGNED_BITS(ir, 21,10);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+      ((aarch64_decode_a64_LS_REG_UIMM&)*this).decode_behaviour();
+      is_predicated = false;
+      return true;
+      break;
+    }
+  case 244:
+    {
+      // Node 1487
+      // Node 1488
       opcode = aarch64_a64_vstr;
       length = 4;
       ((aarch64_decode_a64_LS_REG_UIMM&)*this).size = UNSIGNED_BITS(ir, 31,30);
@@ -5203,14 +5231,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 190:
     {
-      // Node 1052
-      // Node 1053
+      // Node 1058
+      // Node 1059
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 21:
         {
-          // Node 1054
-          // Node 1055
+          // Node 1060
+          // Node 1061
           opcode = aarch64_a64_shl_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -5228,8 +5256,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 1098
-          // Node 1099
+          // Node 1104
+          // Node 1105
           opcode = aarch64_a64_sshr;
           length = 4;
           ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -5250,14 +5278,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 254:
     {
-      // Node 1436
-      // Node 1437
+      // Node 1442
+      // Node 1443
       switch (UNSIGNED_BITS(ir, 15,10)) 
       {
       case 1:
         {
-          // Node 1438
-          // Node 1439
+          // Node 1444
+          // Node 1445
           opcode = aarch64_a64_ushr;
           length = 4;
           ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -5306,8 +5334,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 88:
     {
-      // Node 699
-      // Node 700
+      // Node 705
+      // Node 706
       opcode = aarch64_a64_ldr_lit;
       length = 4;
       ((aarch64_decode_a64_LOAD_REG_LIT&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -5321,8 +5349,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 24:
     {
-      // Node 701
-      // Node 702
+      // Node 707
+      // Node 708
       opcode = aarch64_a64_ldr_lit;
       length = 4;
       ((aarch64_decode_a64_LOAD_REG_LIT&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -5336,8 +5364,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 152:
     {
-      // Node 805
-      // Node 806
+      // Node 811
+      // Node 812
       opcode = aarch64_a64_ldrsw_lit;
       length = 4;
       ((aarch64_decode_a64_LOAD_REG_LIT&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -5351,8 +5379,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 216:
     {
-      // Node 988
-      // Node 989
+      // Node 994
+      // Node 995
       opcode = aarch64_a64_prfm_lit;
       length = 4;
       ((aarch64_decode_a64_LOAD_REG_LIT&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -5366,7 +5394,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 30:
     {
-      // Node 1500
+      // Node 1506
       switch (UNSIGNED_BITS(ir, 23,10)) 
       {
       case 6192:
@@ -5507,8 +5535,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6160:
         {
-          // Node 443
-          // Node 444
+          // Node 449
+          // Node 450
           opcode = aarch64_a64_fmov;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -5524,8 +5552,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2064:
         {
-          // Node 445
-          // Node 446
+          // Node 451
+          // Node 452
           opcode = aarch64_a64_fmov;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -5541,8 +5569,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6224:
         {
-          // Node 481
-          // Node 482
+          // Node 487
+          // Node 488
           opcode = aarch64_a64_fneg;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -5558,8 +5586,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2128:
         {
-          // Node 483
-          // Node 484
+          // Node 489
+          // Node 490
           opcode = aarch64_a64_fneg;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -5574,57 +5602,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       case 6640:
-        {
-          // Node 493
-          // Node 494
-          opcode = aarch64_a64_frintx;
-          length = 4;
-          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
-          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 2544:
-        {
-          // Node 495
-          // Node 496
-          opcode = aarch64_a64_frintx;
-          length = 4;
-          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
-          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 6608:
-        {
-          // Node 497
-          // Node 498
-          opcode = aarch64_a64_frintx;
-          length = 4;
-          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
-          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 2512:
         {
           // Node 499
           // Node 500
@@ -5641,7 +5618,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6544:
+      case 2544:
         {
           // Node 501
           // Node 502
@@ -5658,7 +5635,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 2448:
+      case 6608:
         {
           // Node 503
           // Node 504
@@ -5675,7 +5652,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6512:
+      case 2512:
         {
           // Node 505
           // Node 506
@@ -5692,7 +5669,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 2416:
+      case 6544:
         {
           // Node 507
           // Node 508
@@ -5709,7 +5686,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6480:
+      case 2448:
         {
           // Node 509
           // Node 510
@@ -5726,7 +5703,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 2384:
+      case 6512:
         {
           // Node 511
           // Node 512
@@ -5743,7 +5720,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6448:
+      case 2416:
         {
           // Node 513
           // Node 514
@@ -5760,7 +5737,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 2352:
+      case 6480:
         {
           // Node 515
           // Node 516
@@ -5777,7 +5754,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6416:
+      case 2384:
         {
           // Node 517
           // Node 518
@@ -5794,7 +5771,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 2320:
+      case 6448:
         {
           // Node 519
           // Node 520
@@ -5811,10 +5788,61 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
-      case 6256:
+      case 2352:
         {
           // Node 521
           // Node 522
+          opcode = aarch64_a64_frintx;
+          length = 4;
+          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
+          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 6416:
+        {
+          // Node 523
+          // Node 524
+          opcode = aarch64_a64_frintx;
+          length = 4;
+          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
+          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 2320:
+        {
+          // Node 525
+          // Node 526
+          opcode = aarch64_a64_frintx;
+          length = 4;
+          ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
+          ((aarch64_decode_a64_FP_DP_1&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_FP_DP_1&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_FP_DP_1&)*this).opcode = UNSIGNED_BITS(ir, 20,15);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_FP_DP_1&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_FP_DP_1&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 6256:
+        {
+          // Node 527
+          // Node 528
           opcode = aarch64_a64_fsqrt;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -5830,8 +5858,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2160:
         {
-          // Node 523
-          // Node 524
+          // Node 529
+          // Node 530
           opcode = aarch64_a64_fsqrt;
           length = 4;
           ((aarch64_decode_a64_FP_DP_1&)*this).M = BITSEL(ir, 31);
@@ -6048,8 +6076,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2:
             {
-              // Node 473
-              // Node 474
+              // Node 479
+              // Node 480
               opcode = aarch64_a64_fmul;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6066,8 +6094,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 34:
             {
-              // Node 489
-              // Node 490
+              // Node 495
+              // Node 496
               opcode = aarch64_a64_fnmul;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6084,8 +6112,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 14:
             {
-              // Node 525
-              // Node 526
+              // Node 531
+              // Node 532
               opcode = aarch64_a64_fsub;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6101,13 +6129,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               break;
             }
           }
-          // Node 467
+          // Node 473
           switch (UNSIGNED_BITS(ir, 12,5)) 
           {
           case 128:
             {
-              // Node 468
-              // Node 469
+              // Node 474
+              // Node 475
               opcode = aarch64_a64_fmovi;
               length = 4;
               ((aarch64_decode_a64_FP_IMM&)*this).M = BITSEL(ir, 31);
@@ -6314,8 +6342,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2:
             {
-              // Node 475
-              // Node 476
+              // Node 481
+              // Node 482
               opcode = aarch64_a64_fmul;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6332,8 +6360,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 34:
             {
-              // Node 491
-              // Node 492
+              // Node 497
+              // Node 498
               opcode = aarch64_a64_fnmul;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6350,8 +6378,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 14:
             {
-              // Node 527
-              // Node 528
+              // Node 533
+              // Node 534
               opcode = aarch64_a64_fsub;
               length = 4;
               ((aarch64_decode_a64_FP_DP_2&)*this).M = BITSEL(ir, 31);
@@ -6367,13 +6395,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               break;
             }
           }
-          // Node 470
+          // Node 476
           switch (UNSIGNED_BITS(ir, 12,5)) 
           {
           case 128:
             {
-              // Node 471
-              // Node 472
+              // Node 477
+              // Node 478
               opcode = aarch64_a64_fmovi;
               length = 4;
               ((aarch64_decode_a64_FP_IMM&)*this).M = BITSEL(ir, 31);
@@ -6464,7 +6492,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 94:
     {
-      // Node 1501
+      // Node 1507
       switch (UNSIGNED_BITS(ir, 23,10)) 
       {
       case 15470:
@@ -6557,8 +6585,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6262:
         {
-          // Node 1042
-          // Node 1043
+          // Node 1048
+          // Node 1049
           opcode = aarch64_a64_scvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -6575,8 +6603,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2166:
         {
-          // Node 1044
-          // Node 1045
+          // Node 1050
+          // Node 1051
           opcode = aarch64_a64_scvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -6695,7 +6723,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 214:
     {
-      // Node 1502
+      // Node 1508
       switch (UNSIGNED_BITS(ir, 23,0)) 
       {
       case 12518368:
@@ -6785,13 +6813,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6080:
         {
-          // Node 1001
-          // Node 1002
+          // Node 1007
+          // Node 1008
           switch (UNSIGNED_BITS(ir, 4,0)) 
           {
           case 0:
             {
-              // Node 1003
+              // Node 1009
               opcode = aarch64_a64_ret;
               length = 4;
               ((aarch64_decode_a64_UB_REG&)*this).opc = UNSIGNED_BITS(ir, 24,21);
@@ -6813,7 +6841,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 158:
     {
-      // Node 1503
+      // Node 1509
       switch (UNSIGNED_BITS(ir, 23,16)) 
       {
       case 89:
@@ -6897,7 +6925,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 126:
     {
-      // Node 1504
+      // Node 1510
       switch (UNSIGNED_BITS(ir, 23,10)) 
       {
       case 14374:
@@ -6920,8 +6948,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 14382:
         {
-          // Node 965
-          // Node 966
+          // Node 971
+          // Node 972
           opcode = aarch64_a64_neg_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -6938,8 +6966,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6262:
         {
-          // Node 1396
-          // Node 1397
+          // Node 1402
+          // Node 1403
           opcode = aarch64_a64_ucvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -6956,8 +6984,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2166:
         {
-          // Node 1398
-          // Node 1399
+          // Node 1404
+          // Node 1405
           opcode = aarch64_a64_ucvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -7100,14 +7128,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 84:
     {
-      // Node 650
-      // Node 651
+      // Node 656
+      // Node 657
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 3:
         {
-          // Node 652
-          // Node 653
+          // Node 658
+          // Node 659
           opcode = aarch64_a64_ldpi;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7125,8 +7153,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2:
         {
-          // Node 1218
-          // Node 1219
+          // Node 1224
+          // Node 1225
           opcode = aarch64_a64_stpi;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7147,14 +7175,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 20:
     {
-      // Node 654
-      // Node 655
+      // Node 660
+      // Node 661
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 3:
         {
-          // Node 656
-          // Node 657
+          // Node 662
+          // Node 663
           opcode = aarch64_a64_ldpi;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7172,8 +7200,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2:
         {
-          // Node 1220
-          // Node 1221
+          // Node 1226
+          // Node 1227
           opcode = aarch64_a64_stpi;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7194,14 +7222,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 52:
     {
-      // Node 667
-      // Node 668
+      // Node 673
+      // Node 674
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 3:
         {
-          // Node 669
-          // Node 670
+          // Node 675
+          // Node 676
           opcode = aarch64_a64_ldpswi;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7222,14 +7250,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 86:
     {
-      // Node 1222
-      // Node 1223
+      // Node 1228
+      // Node 1229
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 2:
         {
-          // Node 1224
-          // Node 1225
+          // Node 1230
+          // Node 1231
           opcode = aarch64_a64_stpi_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7250,14 +7278,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 54:
     {
-      // Node 1226
-      // Node 1227
+      // Node 1232
+      // Node 1233
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 2:
         {
-          // Node 1228
-          // Node 1229
+          // Node 1234
+          // Node 1235
           opcode = aarch64_a64_stpi_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7278,14 +7306,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 22:
     {
-      // Node 1230
-      // Node 1231
+      // Node 1236
+      // Node 1237
       switch (UNSIGNED_BITS(ir, 23,22)) 
       {
       case 2:
         {
-          // Node 1232
-          // Node 1233
+          // Node 1238
+          // Node 1239
           opcode = aarch64_a64_stpi_simd;
           length = 4;
           ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -7483,8 +7511,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 235638:
         {
-          // Node 1038
-          // Node 1039
+          // Node 1044
+          // Node 1045
           opcode = aarch64_a64_scvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -7501,8 +7529,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 231542:
         {
-          // Node 1040
-          // Node 1041
+          // Node 1046
+          // Node 1047
           opcode = aarch64_a64_scvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -7519,8 +7547,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 759926:
         {
-          // Node 1392
-          // Node 1393
+          // Node 1398
+          // Node 1399
           opcode = aarch64_a64_ucvtf_simd;
           length = 4;
           ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -7690,78 +7718,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 53:
             {
-              // Node 947
-              // Node 948
-              opcode = aarch64_a64_mvni;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 49:
-            {
-              // Node 949
-              // Node 950
-              opcode = aarch64_a64_mvni;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 41:
-            {
-              // Node 951
-              // Node 952
-              opcode = aarch64_a64_mvni;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 33:
-            {
               // Node 953
               // Node 954
               opcode = aarch64_a64_mvni;
@@ -7784,7 +7740,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 25:
+          case 49:
             {
               // Node 955
               // Node 956
@@ -7808,7 +7764,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 17:
+          case 41:
             {
               // Node 957
               // Node 958
@@ -7832,7 +7788,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 9:
+          case 33:
             {
               // Node 959
               // Node 960
@@ -7856,10 +7812,82 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 1:
+          case 25:
             {
               // Node 961
               // Node 962
+              opcode = aarch64_a64_mvni;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 17:
+            {
+              // Node 963
+              // Node 964
+              opcode = aarch64_a64_mvni;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 9:
+            {
+              // Node 965
+              // Node 966
+              opcode = aarch64_a64_mvni;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 1:
+            {
+              // Node 967
+              // Node 968
               opcode = aarch64_a64_mvni;
               length = 4;
               ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
@@ -7885,14 +7913,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 480:
         {
-          // Node 463
-          // Node 464
+          // Node 469
+          // Node 470
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 61:
             {
-              // Node 465
-              // Node 466
+              // Node 471
+              // Node 472
               opcode = aarch64_a64_fmov_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
@@ -7914,78 +7942,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               break;
             }
           case 53:
-            {
-              // Node 894
-              // Node 895
-              opcode = aarch64_a64_movi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 49:
-            {
-              // Node 896
-              // Node 897
-              opcode = aarch64_a64_movi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 25:
-            {
-              // Node 898
-              // Node 899
-              opcode = aarch64_a64_movi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 17:
             {
               // Node 900
               // Node 901
@@ -8009,7 +7965,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 9:
+          case 49:
             {
               // Node 902
               // Node 903
@@ -8033,7 +7989,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 1:
+          case 25:
             {
               // Node 904
               // Node 905
@@ -8057,7 +8013,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 41:
+          case 17:
             {
               // Node 906
               // Node 907
@@ -8081,7 +8037,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 33:
+          case 9:
             {
               // Node 908
               // Node 909
@@ -8105,10 +8061,82 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
-          case 57:
+          case 1:
             {
               // Node 910
               // Node 911
+              opcode = aarch64_a64_movi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 41:
+            {
+              // Node 912
+              // Node 913
+              opcode = aarch64_a64_movi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 33:
+            {
+              // Node 914
+              // Node 915
+              opcode = aarch64_a64_movi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).op = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).a = BITSEL(ir, 18);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).b = BITSEL(ir, 17);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).c = BITSEL(ir, 16);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).cmode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).o2 = BITSEL(ir, 11);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).d = BITSEL(ir, 9);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).e = BITSEL(ir, 8);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).f = BITSEL(ir, 7);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).g = BITSEL(ir, 6);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).h = BITSEL(ir, 5);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 57:
+            {
+              // Node 916
+              // Node 917
               opcode = aarch64_a64_movi;
               length = 4;
               ((aarch64_decode_a64_SIMD_MOD_IMM&)*this).Q = BITSEL(ir, 30);
@@ -8137,61 +8165,10 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       {
       case 196:
         {
-          // Node 1505
+          // Node 1511
           switch (UNSIGNED_BITS(ir, 19,12)) 
           {
           case 10:
-            {
-              // Node 550
-              // Node 551
-              opcode = aarch64_a64_ld1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 7:
-            {
-              // Node 552
-              // Node 553
-              opcode = aarch64_a64_ld1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 6:
-            {
-              // Node 554
-              // Node 555
-              opcode = aarch64_a64_ld1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 2:
             {
               // Node 556
               // Node 557
@@ -8208,10 +8185,61 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
+          case 7:
+            {
+              // Node 558
+              // Node 559
+              opcode = aarch64_a64_ld1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 6:
+            {
+              // Node 560
+              // Node 561
+              opcode = aarch64_a64_ld1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 2:
+            {
+              // Node 562
+              // Node 563
+              opcode = aarch64_a64_ld1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
           case 8:
             {
-              // Node 584
-              // Node 585
+              // Node 590
+              // Node 591
               opcode = aarch64_a64_ld2;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8227,8 +8255,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 4:
             {
-              // Node 588
-              // Node 589
+              // Node 594
+              // Node 595
               opcode = aarch64_a64_ld3;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8244,8 +8272,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 0:
             {
-              // Node 592
-              // Node 593
+              // Node 598
+              // Node 599
               opcode = aarch64_a64_ld4;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8264,61 +8292,10 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 192:
         {
-          // Node 1506
+          // Node 1512
           switch (UNSIGNED_BITS(ir, 19,12)) 
           {
           case 10:
-            {
-              // Node 1104
-              // Node 1105
-              opcode = aarch64_a64_st1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 7:
-            {
-              // Node 1106
-              // Node 1107
-              opcode = aarch64_a64_st1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 6:
-            {
-              // Node 1108
-              // Node 1109
-              opcode = aarch64_a64_st1;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 2:
             {
               // Node 1110
               // Node 1111
@@ -8335,10 +8312,61 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
+          case 7:
+            {
+              // Node 1112
+              // Node 1113
+              opcode = aarch64_a64_st1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 6:
+            {
+              // Node 1114
+              // Node 1115
+              opcode = aarch64_a64_st1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 2:
+            {
+              // Node 1116
+              // Node 1117
+              opcode = aarch64_a64_st1;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
           case 8:
             {
-              // Node 1152
-              // Node 1153
+              // Node 1158
+              // Node 1159
               opcode = aarch64_a64_st2;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8354,8 +8382,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 4:
             {
-              // Node 1156
-              // Node 1157
+              // Node 1162
+              // Node 1163
               opcode = aarch64_a64_st3;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8371,8 +8399,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 0:
             {
-              // Node 1160
-              // Node 1161
+              // Node 1166
+              // Node 1167
               opcode = aarch64_a64_st4;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT&)*this).Q = BITSEL(ir, 30);
@@ -8445,10 +8473,29 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
+          case 51:
+            {
+              // Node 447
+              // Node 448
+              opcode = aarch64_a64_fmla_vector;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).U = BITSEL(ir, 29);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).SCALAR = BITSEL(ir, 28);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).size = UNSIGNED_BITS(ir, 23,22);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).opcode = UNSIGNED_BITS(ir, 15,11);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
           case 37:
             {
-              // Node 878
-              // Node 879
+              // Node 884
+              // Node 885
               opcode = aarch64_a64_mla_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8466,8 +8513,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 39:
             {
-              // Node 945
-              // Node 946
+              // Node 951
+              // Node 952
               opcode = aarch64_a64_mul_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8513,8 +8560,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 37:
             {
-              // Node 876
-              // Node 877
+              // Node 882
+              // Node 883
               opcode = aarch64_a64_mla_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8532,8 +8579,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 39:
             {
-              // Node 943
-              // Node 944
+              // Node 949
+              // Node 950
               opcode = aarch64_a64_mul_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8721,14 +8768,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 117:
         {
-          // Node 533
-          // Node 534
+          // Node 539
+          // Node 540
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 53:
             {
-              // Node 535
-              // Node 536
+              // Node 541
+              // Node 542
               opcode = aarch64_a64_fsub_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8746,8 +8793,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 37:
             {
-              // Node 874
-              // Node 875
+              // Node 880
+              // Node 881
               opcode = aarch64_a64_mla_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8765,8 +8812,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 39:
             {
-              // Node 941
-              // Node 942
+              // Node 947
+              // Node 948
               opcode = aarch64_a64_mul_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8784,8 +8831,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 7:
             {
-              // Node 973
-              // Node 974
+              // Node 979
+              // Node 980
               opcode = aarch64_a64_orr_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8806,65 +8853,11 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 102:
         {
-          // Node 558
-          // Node 559
+          // Node 564
+          // Node 565
           switch (UNSIGNED_BITS(ir, 15,12)) 
           {
           case 10:
-            {
-              // Node 560
-              // Node 561
-              opcode = aarch64_a64_ld1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 7:
-            {
-              // Node 562
-              // Node 563
-              opcode = aarch64_a64_ld1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 6:
-            {
-              // Node 564
-              // Node 565
-              opcode = aarch64_a64_ld1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 2:
             {
               // Node 566
               // Node 567
@@ -8882,10 +8875,64 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
+          case 7:
+            {
+              // Node 568
+              // Node 569
+              opcode = aarch64_a64_ld1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 6:
+            {
+              // Node 570
+              // Node 571
+              opcode = aarch64_a64_ld1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 2:
+            {
+              // Node 572
+              // Node 573
+              opcode = aarch64_a64_ld1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
           case 8:
             {
-              // Node 586
-              // Node 587
+              // Node 592
+              // Node 593
               opcode = aarch64_a64_ld2pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -8902,8 +8949,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 4:
             {
-              // Node 590
-              // Node 591
+              // Node 596
+              // Node 597
               opcode = aarch64_a64_ld3pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -8920,8 +8967,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 0:
             {
-              // Node 594
-              // Node 595
+              // Node 600
+              // Node 601
               opcode = aarch64_a64_ld4pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -8941,14 +8988,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 119:
         {
-          // Node 969
-          // Node 970
+          // Node 975
+          // Node 976
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 7:
             {
-              // Node 971
-              // Node 972
+              // Node 977
+              // Node 978
               opcode = aarch64_a64_orn_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -8969,65 +9016,11 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 100:
         {
-          // Node 1112
-          // Node 1113
+          // Node 1118
+          // Node 1119
           switch (UNSIGNED_BITS(ir, 15,12)) 
           {
           case 10:
-            {
-              // Node 1114
-              // Node 1115
-              opcode = aarch64_a64_st1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 7:
-            {
-              // Node 1116
-              // Node 1117
-              opcode = aarch64_a64_st1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 6:
-            {
-              // Node 1118
-              // Node 1119
-              opcode = aarch64_a64_st1pi;
-              length = 4;
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
-              is_predicated = false;
-              return true;
-              break;
-            }
-          case 2:
             {
               // Node 1120
               // Node 1121
@@ -9045,10 +9038,64 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               return true;
               break;
             }
+          case 7:
+            {
+              // Node 1122
+              // Node 1123
+              opcode = aarch64_a64_st1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 6:
+            {
+              // Node 1124
+              // Node 1125
+              opcode = aarch64_a64_st1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
+          case 2:
+            {
+              // Node 1126
+              // Node 1127
+              opcode = aarch64_a64_st1pi;
+              length = 4;
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).L = BITSEL(ir, 22);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,12);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+              ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).decode_behaviour();
+              is_predicated = false;
+              return true;
+              break;
+            }
           case 8:
             {
-              // Node 1154
-              // Node 1155
+              // Node 1160
+              // Node 1161
               opcode = aarch64_a64_st2pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -9065,8 +9112,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 4:
             {
-              // Node 1158
-              // Node 1159
+              // Node 1164
+              // Node 1165
               opcode = aarch64_a64_st3pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -9083,8 +9130,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 0:
             {
-              // Node 1162
-              // Node 1163
+              // Node 1168
+              // Node 1169
               opcode = aarch64_a64_st4pi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_MULT_PI&)*this).Q = BITSEL(ir, 30);
@@ -9104,14 +9151,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 108:
         {
-          // Node 1136
-          // Node 1137
+          // Node 1142
+          // Node 1143
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 33:
             {
-              // Node 1138
-              // Node 1139
+              // Node 1144
+              // Node 1145
               opcode = aarch64_a64_st1spi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
@@ -9133,59 +9180,10 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 4:
             {
-              // Node 1140
-              // Node 1141
+              // Node 1146
+              // Node 1147
               switch (UNSIGNED_BITS(ir, 11,10)) 
               {
-              case 0:
-                {
-                  // Node 1142
-                  // Node 1143
-                  opcode = aarch64_a64_st1spi;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
-              }
-              break;
-            }
-          case 2:
-            {
-              // Node 1144
-              // Node 1145
-              switch (UNSIGNED_BITS(ir, 11,10)) 
-              {
-              case 2:
-                {
-                  // Node 1146
-                  // Node 1147
-                  opcode = aarch64_a64_st1spi;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
               case 0:
                 {
                   // Node 1148
@@ -9209,10 +9207,59 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               }
               break;
             }
-          case 0:
+          case 2:
             {
               // Node 1150
               // Node 1151
+              switch (UNSIGNED_BITS(ir, 11,10)) 
+              {
+              case 2:
+                {
+                  // Node 1152
+                  // Node 1153
+                  opcode = aarch64_a64_st1spi;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              case 0:
+                {
+                  // Node 1154
+                  // Node 1155
+                  opcode = aarch64_a64_st1spi;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rm = UNSIGNED_BITS(ir, 20,16);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              }
+              break;
+            }
+          case 0:
+            {
+              // Node 1156
+              // Node 1157
               opcode = aarch64_a64_st1spi;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE_PI&)*this).Q = BITSEL(ir, 30);
@@ -9234,14 +9281,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 503:
         {
-          // Node 1352
-          // Node 1353
+          // Node 1358
+          // Node 1359
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 33:
             {
-              // Node 1354
-              // Node 1355
+              // Node 1360
+              // Node 1361
               opcode = aarch64_a64_sub_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -9262,13 +9309,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 106:
         {
-          // Node 1507
+          // Node 1513
           switch (UNSIGNED_BITS(ir, 20,10)) 
           {
           case 33:
             {
-              // Node 570
-              // Node 571
+              // Node 576
+              // Node 577
               opcode = aarch64_a64_ld1s;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
@@ -9289,8 +9336,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 12:
             {
-              // Node 568
-              // Node 569
+              // Node 574
+              // Node 575
               opcode = aarch64_a64_ld1r;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
@@ -9311,57 +9358,10 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 4:
             {
-              // Node 572
-              // Node 573
+              // Node 578
+              // Node 579
               switch (UNSIGNED_BITS(ir, 11,10)) 
               {
-              case 0:
-                {
-                  // Node 574
-                  // Node 575
-                  opcode = aarch64_a64_ld1s;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
-              }
-              break;
-            }
-          case 2:
-            {
-              // Node 576
-              // Node 577
-              switch (UNSIGNED_BITS(ir, 11,10)) 
-              {
-              case 2:
-                {
-                  // Node 578
-                  // Node 579
-                  opcode = aarch64_a64_ld1s;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
               case 0:
                 {
                   // Node 580
@@ -9384,10 +9384,57 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               }
               break;
             }
-          case 0:
+          case 2:
             {
               // Node 582
               // Node 583
+              switch (UNSIGNED_BITS(ir, 11,10)) 
+              {
+              case 2:
+                {
+                  // Node 584
+                  // Node 585
+                  opcode = aarch64_a64_ld1s;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              case 0:
+                {
+                  // Node 586
+                  // Node 587
+                  opcode = aarch64_a64_ld1s;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              }
+              break;
+            }
+          case 0:
+            {
+              // Node 588
+              // Node 589
               opcode = aarch64_a64_ld1s;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
@@ -9408,7 +9455,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 369:
         {
-          // Node 1508
+          // Node 1514
           switch (UNSIGNED_BITS(ir, 20,10)) 
           {
           case 1074:
@@ -9447,8 +9494,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 22:
             {
-              // Node 967
-              // Node 968
+              // Node 973
+              // Node 974
               opcode = aarch64_a64_not_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -9465,8 +9512,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 118:
             {
-              // Node 1394
-              // Node 1395
+              // Node 1400
+              // Node 1401
               opcode = aarch64_a64_ucvtf_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -9526,8 +9573,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 55:
             {
-              // Node 479
-              // Node 480
+              // Node 485
+              // Node 486
               opcode = aarch64_a64_fmul_vector;
               length = 4;
               ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -9548,13 +9595,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 104:
         {
-          // Node 1509
+          // Node 1515
           switch (UNSIGNED_BITS(ir, 20,10)) 
           {
           case 33:
             {
-              // Node 1122
-              // Node 1123
+              // Node 1128
+              // Node 1129
               opcode = aarch64_a64_st1s;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
@@ -9575,57 +9622,10 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 4:
             {
-              // Node 1124
-              // Node 1125
+              // Node 1130
+              // Node 1131
               switch (UNSIGNED_BITS(ir, 11,10)) 
               {
-              case 0:
-                {
-                  // Node 1126
-                  // Node 1127
-                  opcode = aarch64_a64_st1s;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
-              }
-              break;
-            }
-          case 2:
-            {
-              // Node 1128
-              // Node 1129
-              switch (UNSIGNED_BITS(ir, 11,10)) 
-              {
-              case 2:
-                {
-                  // Node 1130
-                  // Node 1131
-                  opcode = aarch64_a64_st1s;
-                  length = 4;
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
-                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
-                  is_predicated = false;
-                  return true;
-                  break;
-                }
               case 0:
                 {
                   // Node 1132
@@ -9648,10 +9648,57 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               }
               break;
             }
-          case 0:
+          case 2:
             {
               // Node 1134
               // Node 1135
+              switch (UNSIGNED_BITS(ir, 11,10)) 
+              {
+              case 2:
+                {
+                  // Node 1136
+                  // Node 1137
+                  opcode = aarch64_a64_st1s;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              case 0:
+                {
+                  // Node 1138
+                  // Node 1139
+                  opcode = aarch64_a64_st1s;
+                  length = 4;
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).L = BITSEL(ir, 22);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).R = BITSEL(ir, 21);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).opcode = UNSIGNED_BITS(ir, 15,13);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).S = BITSEL(ir, 12);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).size = UNSIGNED_BITS(ir, 11,10);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).rt = UNSIGNED_BITS(ir, 4,0);
+                  ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).decode_behaviour();
+                  is_predicated = false;
+                  return true;
+                  break;
+                }
+              }
+              break;
+            }
+          case 0:
+            {
+              // Node 1140
+              // Node 1141
               opcode = aarch64_a64_st1s;
               length = 4;
               ((aarch64_decode_a64_SIMD_LS_SINGLE&)*this).Q = BITSEL(ir, 30);
@@ -9675,14 +9722,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       {
       case 30:
         {
-          // Node 1048
-          // Node 1049
+          // Node 1054
+          // Node 1055
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 21:
             {
-              // Node 1050
-              // Node 1051
+              // Node 1056
+              // Node 1057
               opcode = aarch64_a64_shl_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -9700,8 +9747,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 1:
             {
-              // Node 1096
-              // Node 1097
+              // Node 1102
+              // Node 1103
               opcode = aarch64_a64_sshr;
               length = 4;
               ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -9722,14 +9769,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 94:
         {
-          // Node 1432
-          // Node 1433
+          // Node 1438
+          // Node 1439
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 1:
             {
-              // Node 1434
-              // Node 1435
+              // Node 1440
+              // Node 1441
               opcode = aarch64_a64_ushr;
               length = 4;
               ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -9830,8 +9877,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2050:
             {
-              // Node 1014
-              // Node 1015
+              // Node 1020
+              // Node 1021
               opcode = aarch64_a64_rev64_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -9848,8 +9895,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3086:
             {
-              // Node 1020
-              // Node 1021
+              // Node 1026
+              // Node 1027
               opcode = aarch64_a64_saddlv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -9865,8 +9912,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3114:
             {
-              // Node 1070
-              // Node 1071
+              // Node 1076
+              // Node 1077
               opcode = aarch64_a64_smaxv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -9882,8 +9929,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3178:
             {
-              // Node 1074
-              // Node 1075
+              // Node 1080
+              // Node 1081
               opcode = aarch64_a64_sminv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -9965,8 +10012,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 56:
                 {
-                  // Node 982
-                  // Node 983
+                  // Node 988
+                  // Node 989
                   opcode = aarch64_a64_pmull;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -9984,8 +10031,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 0:
                 {
-                  // Node 1018
-                  // Node 1019
+                  // Node 1024
+                  // Node 1025
                   opcode = aarch64_a64_saddl;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10003,8 +10050,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 4:
                 {
-                  // Node 1022
-                  // Node 1023
+                  // Node 1028
+                  // Node 1029
                   opcode = aarch64_a64_saddw;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10022,8 +10069,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 48:
                 {
-                  // Node 1088
-                  // Node 1089
+                  // Node 1094
+                  // Node 1095
                   opcode = aarch64_a64_smull;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10041,8 +10088,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 8:
                 {
-                  // Node 1100
-                  // Node 1101
+                  // Node 1106
+                  // Node 1107
                   opcode = aarch64_a64_ssubl;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10060,8 +10107,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 12:
                 {
-                  // Node 1102
-                  // Node 1103
+                  // Node 1108
+                  // Node 1109
                   opcode = aarch64_a64_ssubw;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10082,14 +10129,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 0:
             {
-              // Node 1364
-              // Node 1365
+              // Node 1370
+              // Node 1371
               switch (UNSIGNED_BITS(ir, 15,10)) 
               {
               case 6:
                 {
-                  // Node 1444
-                  // Node 1445
+                  // Node 1450
+                  // Node 1451
                   opcode = aarch64_a64_uzp1;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_PERMUTE&)*this).Q = BITSEL(ir, 30);
@@ -10105,8 +10152,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 22:
                 {
-                  // Node 1446
-                  // Node 1447
+                  // Node 1452
+                  // Node 1453
                   opcode = aarch64_a64_uzp2;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_PERMUTE&)*this).Q = BITSEL(ir, 30);
@@ -10125,14 +10172,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               {
               case 0:
                 {
-                  // Node 1366
-                  // Node 1367
+                  // Node 1372
+                  // Node 1373
                   switch (UNSIGNED_BITS(ir, 12,10)) 
                   {
                   case 0:
                     {
-                      // Node 1368
-                      // Node 1369
+                      // Node 1374
+                      // Node 1375
                       opcode = aarch64_a64_tbl;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_TABLE_LOOKUP&)*this).Q = BITSEL(ir, 30);
@@ -10149,8 +10196,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                     }
                   case 4:
                     {
-                      // Node 1370
-                      // Node 1371
+                      // Node 1376
+                      // Node 1377
                       opcode = aarch64_a64_tbx;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_TABLE_LOOKUP&)*this).Q = BITSEL(ir, 30);
@@ -10200,8 +10247,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2094:
             {
-              // Node 963
-              // Node 964
+              // Node 969
+              // Node 970
               opcode = aarch64_a64_neg_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10218,8 +10265,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2050:
             {
-              // Node 1012
-              // Node 1013
+              // Node 1018
+              // Node 1019
               opcode = aarch64_a64_rev32_simd;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10236,8 +10283,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2074:
             {
-              // Node 1374
-              // Node 1375
+              // Node 1380
+              // Node 1381
               opcode = aarch64_a64_uadalp;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10254,8 +10301,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 2058:
             {
-              // Node 1378
-              // Node 1379
+              // Node 1384
+              // Node 1385
               opcode = aarch64_a64_uaddlp;
               length = 4;
               ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10272,8 +10319,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3086:
             {
-              // Node 1380
-              // Node 1381
+              // Node 1386
+              // Node 1387
               opcode = aarch64_a64_uaddlv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -10289,8 +10336,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3114:
             {
-              // Node 1406
-              // Node 1407
+              // Node 1412
+              // Node 1413
               opcode = aarch64_a64_umaxv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -10306,8 +10353,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
             }
           case 3178:
             {
-              // Node 1408
-              // Node 1409
+              // Node 1414
+              // Node 1415
               opcode = aarch64_a64_uminv;
               length = 4;
               ((aarch64_decode_a64_SIMD_ACROSS_LANES&)*this).Q = BITSEL(ir, 30);
@@ -10370,8 +10417,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 33:
                 {
-                  // Node 1356
-                  // Node 1357
+                  // Node 1362
+                  // Node 1363
                   opcode = aarch64_a64_sub_vector;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -10389,8 +10436,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 0:
                 {
-                  // Node 1376
-                  // Node 1377
+                  // Node 1382
+                  // Node 1383
                   opcode = aarch64_a64_uaddl;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10408,8 +10455,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 4:
                 {
-                  // Node 1382
-                  // Node 1383
+                  // Node 1388
+                  // Node 1389
                   opcode = aarch64_a64_uaddw;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10427,8 +10474,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 48:
                 {
-                  // Node 1422
-                  // Node 1423
+                  // Node 1428
+                  // Node 1429
                   opcode = aarch64_a64_umull;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10446,8 +10493,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 8:
                 {
-                  // Node 1440
-                  // Node 1441
+                  // Node 1446
+                  // Node 1447
                   opcode = aarch64_a64_usubl;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10465,8 +10512,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 12:
                 {
-                  // Node 1442
-                  // Node 1443
+                  // Node 1448
+                  // Node 1449
                   opcode = aarch64_a64_usubw;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_THREE_DIFF&)*this).Q = BITSEL(ir, 30);
@@ -10525,20 +10572,20 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 15:
         {
-          // Node 935
-          // Node 936
+          // Node 941
+          // Node 942
           switch (UNSIGNED_BITS(ir, 15,12)) 
           {
           case 8:
             {
-              // Node 937
-              // Node 938
+              // Node 943
+              // Node 944
               switch ((ir & BIT_LSB(10)) >> 10)
               {
               case 0:
                 {
-                  // Node 939
-                  // Node 940
+                  // Node 945
+                  // Node 946
                   opcode = aarch64_a64_mul_idx_vector;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_VECTOR_IDX&)*this).Q = BITSEL(ir, 30);
@@ -10573,14 +10620,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 30:
             {
-              // Node 1092
-              // Node 1093
+              // Node 1098
+              // Node 1099
               switch (UNSIGNED_BITS(ir, 15,10)) 
               {
               case 41:
                 {
-                  // Node 1094
-                  // Node 1095
+                  // Node 1100
+                  // Node 1101
                   opcode = aarch64_a64_sshll;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -10646,8 +10693,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                 }
               case 2122:
                 {
-                  // Node 1498
-                  // Node 1499
+                  // Node 1504
+                  // Node 1505
                   opcode = aarch64_a64_xtn;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10667,14 +10714,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               {
               case 1:
                 {
-                  // Node 1066
-                  // Node 1067
+                  // Node 1072
+                  // Node 1073
                   switch (UNSIGNED_BITS(ir, 15,10)) 
                   {
                   case 25:
                     {
-                      // Node 1068
-                      // Node 1069
+                      // Node 1074
+                      // Node 1075
                       opcode = aarch64_a64_smax;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -10692,8 +10739,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                     }
                   case 27:
                     {
-                      // Node 1072
-                      // Node 1073
+                      // Node 1078
+                      // Node 1079
                       opcode = aarch64_a64_smin;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -10711,8 +10758,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
                     }
                   case 17:
                     {
-                      // Node 1090
-                      // Node 1091
+                      // Node 1096
+                      // Node 1097
                       opcode = aarch64_a64_sshl;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -10739,20 +10786,20 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 1056
-          // Node 1057
+          // Node 1062
+          // Node 1063
           switch (UNSIGNED_BITS(ir, 27,23)) 
           {
           case 30:
             {
-              // Node 1428
-              // Node 1429
+              // Node 1434
+              // Node 1435
               switch (UNSIGNED_BITS(ir, 15,10)) 
               {
               case 41:
                 {
-                  // Node 1430
-                  // Node 1431
+                  // Node 1436
+                  // Node 1437
                   opcode = aarch64_a64_ushll;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_SHIFT_IMM&)*this).Q = BITSEL(ir, 30);
@@ -10776,14 +10823,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           {
           case 14:
             {
-              // Node 1058
-              // Node 1059
+              // Node 1064
+              // Node 1065
               switch (UNSIGNED_BITS(ir, 21,10)) 
               {
               case 2126:
                 {
-                  // Node 1060
-                  // Node 1061
+                  // Node 1066
+                  // Node 1067
                   opcode = aarch64_a64_shll;
                   length = 4;
                   ((aarch64_decode_a64_SIMD_TWO_REG_MISC&)*this).Q = BITSEL(ir, 30);
@@ -10803,14 +10850,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
               {
               case 1:
                 {
-                  // Node 1424
-                  // Node 1425
+                  // Node 1430
+                  // Node 1431
                   switch (UNSIGNED_BITS(ir, 15,10)) 
                   {
                   case 17:
                     {
-                      // Node 1426
-                      // Node 1427
+                      // Node 1432
+                      // Node 1433
                       opcode = aarch64_a64_ushl;
                       length = 4;
                       ((aarch64_decode_a64_SIMD_THREE_SAME&)*this).Q = BITSEL(ir, 30);
@@ -10875,8 +10922,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 502720:
     {
-      // Node 447
-      // Node 448
+      // Node 453
+      // Node 454
       opcode = aarch64_a64_fmov_gen;
       length = 4;
       ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -10893,8 +10940,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 502656:
     {
-      // Node 449
-      // Node 450
+      // Node 455
+      // Node 456
       opcode = aarch64_a64_fmov_gen;
       length = 4;
       ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -10914,7 +10961,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 5808:
     {
-      // Node 1511
+      // Node 1517
       switch (UNSIGNED_BITS(ir, 17,10)) 
       {
       case 5:
@@ -10953,8 +11000,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 0:
         {
-          // Node 999
-          // Node 1000
+          // Node 1005
+          // Node 1006
           opcode = aarch64_a64_rbit;
           length = 4;
           ((aarch64_decode_a64_DP_1S&)*this).sf = BITSEL(ir, 31);
@@ -10970,8 +11017,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 1008
-          // Node 1009
+          // Node 1014
+          // Node 1015
           opcode = aarch64_a64_rev16;
           length = 4;
           ((aarch64_decode_a64_DP_1S&)*this).sf = BITSEL(ir, 31);
@@ -11016,8 +11063,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 8:
         {
-          // Node 866
-          // Node 867
+          // Node 872
+          // Node 873
           opcode = aarch64_a64_lslv;
           length = 4;
           ((aarch64_decode_a64_DP_2S&)*this).sf = BITSEL(ir, 31);
@@ -11033,8 +11080,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 9:
         {
-          // Node 868
-          // Node 869
+          // Node 874
+          // Node 875
           opcode = aarch64_a64_lsrv;
           length = 4;
           ((aarch64_decode_a64_DP_2S&)*this).sf = BITSEL(ir, 31);
@@ -11050,8 +11097,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 11:
         {
-          // Node 1016
-          // Node 1017
+          // Node 1022
+          // Node 1023
           opcode = aarch64_a64_rorv;
           length = 4;
           ((aarch64_decode_a64_DP_2S&)*this).sf = BITSEL(ir, 31);
@@ -11067,8 +11114,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 3:
         {
-          // Node 1046
-          // Node 1047
+          // Node 1052
+          // Node 1053
           opcode = aarch64_a64_sdiv;
           length = 4;
           ((aarch64_decode_a64_DP_2S&)*this).sf = BITSEL(ir, 31);
@@ -11084,8 +11131,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2:
         {
-          // Node 1400
-          // Node 1401
+          // Node 1406
+          // Node 1407
           opcode = aarch64_a64_udiv;
           length = 4;
           ((aarch64_decode_a64_DP_2S&)*this).sf = BITSEL(ir, 31);
@@ -11332,14 +11379,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 216:
     {
-      // Node 870
-      // Node 871
+      // Node 876
+      // Node 877
       switch ((ir & BIT_LSB(15)) >> 15)
       {
       case 0:
         {
-          // Node 872
-          // Node 873
+          // Node 878
+          // Node 879
           opcode = aarch64_a64_madd;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -11357,8 +11404,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 1:
         {
-          // Node 933
-          // Node 934
+          // Node 939
+          // Node 940
           opcode = aarch64_a64_msub;
           length = 4;
           ((aarch64_decode_a64_DP_3S&)*this).sf = BITSEL(ir, 31);
@@ -11382,8 +11429,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 229:
     {
-      // Node 912
-      // Node 913
+      // Node 918
+      // Node 919
       opcode = aarch64_a64_movk;
       length = 4;
       ((aarch64_decode_a64_MOVE_WIDE_IMM&)*this).sf = BITSEL(ir, 31);
@@ -11398,8 +11445,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 37:
     {
-      // Node 914
-      // Node 915
+      // Node 920
+      // Node 921
       opcode = aarch64_a64_movn;
       length = 4;
       ((aarch64_decode_a64_MOVE_WIDE_IMM&)*this).sf = BITSEL(ir, 31);
@@ -11414,8 +11461,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 165:
     {
-      // Node 916
-      // Node 917
+      // Node 922
+      // Node 923
       opcode = aarch64_a64_movz;
       length = 4;
       ((aarch64_decode_a64_MOVE_WIDE_IMM&)*this).sf = BITSEL(ir, 31);
@@ -11430,7 +11477,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 60:
     {
-      // Node 1510
+      // Node 1516
       switch (UNSIGNED_BITS(ir, 22,10)) 
       {
       case 7232:
@@ -11795,60 +11842,6 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6592:
         {
-          // Node 451
-          // Node 452
-          opcode = aarch64_a64_fmov_gen;
-          length = 4;
-          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 6528:
-        {
-          // Node 453
-          // Node 454
-          opcode = aarch64_a64_fmov_gen;
-          length = 4;
-          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 2496:
-        {
-          // Node 455
-          // Node 456
-          opcode = aarch64_a64_fmov_gen;
-          length = 4;
-          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
-          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
-          is_predicated = false;
-          return true;
-          break;
-        }
-      case 2432:
-        {
           // Node 457
           // Node 458
           opcode = aarch64_a64_fmov_gen;
@@ -11865,10 +11858,64 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           return true;
           break;
         }
+      case 6528:
+        {
+          // Node 459
+          // Node 460
+          opcode = aarch64_a64_fmov_gen;
+          length = 4;
+          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 2496:
+        {
+          // Node 461
+          // Node 462
+          opcode = aarch64_a64_fmov_gen;
+          length = 4;
+          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
+      case 2432:
+        {
+          // Node 463
+          // Node 464
+          opcode = aarch64_a64_fmov_gen;
+          length = 4;
+          ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).S = BITSEL(ir, 29);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).type = UNSIGNED_BITS(ir, 23,22);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rmode = UNSIGNED_BITS(ir, 20,19);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).opcode = UNSIGNED_BITS(ir, 18,16);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rn = UNSIGNED_BITS(ir, 9,5);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).rd = UNSIGNED_BITS(ir, 4,0);
+          ((aarch64_decode_a64_CVT_FP_I&)*this).decode_behaviour();
+          is_predicated = false;
+          return true;
+          break;
+        }
       case 6272:
         {
-          // Node 1034
-          // Node 1035
+          // Node 1040
+          // Node 1041
           opcode = aarch64_a64_scvtf;
           length = 4;
           ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -11885,8 +11932,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2176:
         {
-          // Node 1036
-          // Node 1037
+          // Node 1042
+          // Node 1043
           opcode = aarch64_a64_scvtf;
           length = 4;
           ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -11903,8 +11950,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 6336:
         {
-          // Node 1388
-          // Node 1389
+          // Node 1394
+          // Node 1395
           opcode = aarch64_a64_ucvtf;
           length = 4;
           ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -11921,8 +11968,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 2240:
         {
-          // Node 1390
-          // Node 1391
+          // Node 1396
+          // Node 1397
           opcode = aarch64_a64_ucvtf;
           length = 4;
           ((aarch64_decode_a64_CVT_FP_I&)*this).sf = BITSEL(ir, 31);
@@ -12058,14 +12105,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 42:
     {
-      // Node 880
-      // Node 881
+      // Node 886
+      // Node 887
       switch (UNSIGNED_BITS(ir, 15,5)) 
       {
       case 31:
         {
-          // Node 882
-          // Node 883
+          // Node 888
+          // Node 889
           opcode = aarch64_a64_mov;
           length = 4;
           ((aarch64_decode_a64_LOGICAL_SR&)*this).sf = BITSEL(ir, 31);
@@ -12082,7 +12129,7 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
           break;
         }
       }
-      // Node 981
+      // Node 987
       opcode = aarch64_a64_orrsr;
       length = 4;
       ((aarch64_decode_a64_LOGICAL_SR&)*this).sf = BITSEL(ir, 31);
@@ -12119,8 +12166,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 27:
     {
-      // Node 1372
-      // Node 1373
+      // Node 1378
+      // Node 1379
       opcode = aarch64_a64_tbz;
       length = 4;
       ((aarch64_decode_a64_TEST_B_IMM&)*this).b5 = BITSEL(ir, 31);
@@ -12261,20 +12308,20 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
     }
   case 1:
     {
-      // Node 1024
-      // Node 1025
+      // Node 1030
+      // Node 1031
       switch (UNSIGNED_BITS(ir, 28,21)) 
       {
       case 208:
         {
-          // Node 1026
-          // Node 1027
+          // Node 1032
+          // Node 1033
           switch (UNSIGNED_BITS(ir, 15,10)) 
           {
           case 0:
             {
-              // Node 1028
-              // Node 1029
+              // Node 1034
+              // Node 1035
               opcode = aarch64_a64_sbc;
               length = 4;
               ((aarch64_decode_a64_ADD_SUB_CARRY&)*this).sf = BITSEL(ir, 31);
@@ -12294,8 +12341,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 89:
         {
-          // Node 1346
-          // Node 1347
+          // Node 1352
+          // Node 1353
           opcode = aarch64_a64_sub_ereg;
           length = 4;
           ((aarch64_decode_a64_ADD_SUB_EREG&)*this).sf = BITSEL(ir, 31);
@@ -12317,8 +12364,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       {
       case 69:
         {
-          // Node 1358
-          // Node 1359
+          // Node 1364
+          // Node 1365
           opcode = aarch64_a64_subi;
           length = 4;
           ((aarch64_decode_a64_ADD_SUB_IMM&)*this).sf = BITSEL(ir, 31);
@@ -12335,8 +12382,8 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
         }
       case 68:
         {
-          // Node 1360
-          // Node 1361
+          // Node 1366
+          // Node 1367
           opcode = aarch64_a64_subi;
           length = 4;
           ((aarch64_decode_a64_ADD_SUB_IMM&)*this).sf = BITSEL(ir, 31);
@@ -12356,14 +12403,14 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       {
       case 11:
         {
-          // Node 1348
-          // Node 1349
+          // Node 1354
+          // Node 1355
           switch ((ir & BIT_LSB(21)) >> 21)
           {
           case 0:
             {
-              // Node 1350
-              // Node 1351
+              // Node 1356
+              // Node 1357
               opcode = aarch64_a64_sub_sreg;
               length = 4;
               ((aarch64_decode_a64_ADD_SUB_SREG&)*this).sf = BITSEL(ir, 31);
@@ -12386,13 +12433,13 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
       break;
     }
   }
-  // Node 658
+  // Node 664
   switch (UNSIGNED_BITS(ir, 29,24)) 
   {
   case 28:
     {
-      // Node 703
-      // Node 704
+      // Node 709
+      // Node 710
       opcode = aarch64_a64_ldr_lit_simd;
       length = 4;
       ((aarch64_decode_a64_LOAD_REG_LIT&)*this).opc = UNSIGNED_BITS(ir, 31,30);
@@ -12409,20 +12456,20 @@ inline bool aarch64_decode::decode_a64(uint32_t ir)
   {
   case 5:
     {
-      // Node 659
-      // Node 660
+      // Node 665
+      // Node 666
       switch ((ir & BIT_LSB(25)) >> 25)
       {
       case 0:
         {
-          // Node 661
-          // Node 662
+          // Node 667
+          // Node 668
           switch ((ir & BIT_LSB(23)) >> 23)
           {
           case 1:
             {
-              // Node 663
-              // Node 664
+              // Node 669
+              // Node 670
               opcode = aarch64_a64_ldpi_simd;
               length = 4;
               ((aarch64_decode_a64_LS_REG_PAIR_IDX&)*this).opc = UNSIGNED_BITS(ir, 31,30);

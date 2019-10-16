@@ -171,6 +171,8 @@ template<bool TRACE>bool aarch64_jit2<TRACE>::translate(const Decode *decode_obj
     return translate_a64_fminnmv((const aarch64_decode_a64_SIMD_ACROSS_LANES&)insn, emitter);
   case aarch64_decode::aarch64_a64_fminv:
     return translate_a64_fminv((const aarch64_decode_a64_SIMD_ACROSS_LANES&)insn, emitter);
+  case aarch64_decode::aarch64_a64_fmla_vector:
+    return translate_a64_fmla_vector((const aarch64_decode_a64_SIMD_THREE_SAME&)insn, emitter);
   case aarch64_decode::aarch64_a64_fmov:
     return translate_a64_fmov((const aarch64_decode_a64_FP_DP_1&)insn, emitter);
   case aarch64_decode::aarch64_a64_fmov_gen:
@@ -621,7 +623,7 @@ template<bool TRACE>captive::arch::dbt::el::Value *aarch64_jit2<TRACE>::generate
     /* execute.a64:3051 [F] s_b_0_11 = constant s32 5 (const) */
     /* execute.a64:3055 [F] s_b_0_12 = constant s32 6 (const) */
     /* execute.a64:3059 [F] s_b_0_13 = constant s32 7 (const) */
-    /* execute.a64:3030 [F] s_b_0_14: Switch s_b_0_5: < <todo> > def b_1 (const) -> b_3, b_2, b_4, b_6, b_7, b_8, b_5, b_1, b_9,  */
+    /* execute.a64:3030 [F] s_b_0_14: Switch s_b_0_5: < <todo> > def b_1 (const) -> b_6, b_8, b_7, b_3, b_1, b_5, b_2, b_4, b_9,  */
     switch (s_b_0_5) 
     {
     case (int32_t)2ULL:
@@ -633,6 +635,12 @@ template<bool TRACE>captive::arch::dbt::el::Value *aarch64_jit2<TRACE>::generate
     case (int32_t)0ULL:
       goto fixed_block_b_2;
       break;
+    case (int32_t)3ULL:
+      goto fixed_block_b_5;
+      break;
+    case (int32_t)7ULL:
+      goto fixed_block_b_9;
+      break;
     case (int32_t)6ULL:
       goto fixed_block_b_8;
       break;
@@ -641,12 +649,6 @@ template<bool TRACE>captive::arch::dbt::el::Value *aarch64_jit2<TRACE>::generate
       break;
     case (int32_t)4ULL:
       goto fixed_block_b_6;
-      break;
-    case (int32_t)3ULL:
-      goto fixed_block_b_5;
-      break;
-    case (int32_t)7ULL:
-      goto fixed_block_b_9;
       break;
     default:
       goto fixed_block_b_1;

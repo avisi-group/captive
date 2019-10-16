@@ -92,6 +92,7 @@ namespace captive
           aarch64_a64_fmaxv,
           aarch64_a64_fminnmv,
           aarch64_a64_fminv,
+          aarch64_a64_fmla_vector,
           aarch64_a64_fmov,
           aarch64_a64_fmov_gen,
           aarch64_a64_fmov_simd,

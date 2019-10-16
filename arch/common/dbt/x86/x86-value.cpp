@@ -792,17 +792,28 @@ Operand X86BinaryOperation::vector_arithmetic_as_operand(X86Emitter& emitter)
 	case X86BinaryOperationKind::ADD:
 		emitter.add_mov_auto(lhs, dst);
 
-		switch (type().vector_element_size_in_bits()) {
-		case 8: emitter.add_instruction(InstructionKind::PADDB, rhs, dst);
-			break;
-		case 16: emitter.add_instruction(InstructionKind::PADDW, rhs, dst);
-			break;
-		case 32: emitter.add_instruction(InstructionKind::PADDD, rhs, dst);
-			break;
-		case 64: emitter.add_instruction(InstructionKind::PADDQ, rhs, dst);
-			break;
-		default: emitter._x86_context.support().assertion_fail("unsupported vector element width in add");
-			break;
+		if (type().is_floating()) {
+			switch (type().vector_element_size_in_bits()) {
+			case 32: emitter.add_instruction(InstructionKind::ADDPS, rhs, dst);
+				break;
+			case 64: emitter.add_instruction(InstructionKind::ADDPD, rhs, dst);
+				break;
+			default: emitter._x86_context.support().assertion_fail("unsupported fp vector element width in add");
+				break;
+			}
+		} else {
+			switch (type().vector_element_size_in_bits()) {
+			case 8: emitter.add_instruction(InstructionKind::PADDB, rhs, dst);
+				break;
+			case 16: emitter.add_instruction(InstructionKind::PADDW, rhs, dst);
+				break;
+			case 32: emitter.add_instruction(InstructionKind::PADDD, rhs, dst);
+				break;
+			case 64: emitter.add_instruction(InstructionKind::PADDQ, rhs, dst);
+				break;
+			default: emitter._x86_context.support().assertion_fail("unsupported vector element width in add");
+				break;
+			}
 		}
 
 		return Operand::make_register(dst_reg, type().size_in_bits());

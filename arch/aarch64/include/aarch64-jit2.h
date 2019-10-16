@@ -104,6 +104,7 @@ namespace captive
         bool translate_a64_fmaxv(const aarch64_decode_a64_SIMD_ACROSS_LANES& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_fminnmv(const aarch64_decode_a64_SIMD_ACROSS_LANES& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_fminv(const aarch64_decode_a64_SIMD_ACROSS_LANES& insn, captive::arch::dbt::el::Emitter& emitter);
+        bool translate_a64_fmla_vector(const aarch64_decode_a64_SIMD_THREE_SAME& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_fmov(const aarch64_decode_a64_FP_DP_1& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_fmov_gen(const aarch64_decode_a64_CVT_FP_I& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_fmov_simd(const aarch64_decode_a64_SIMD_MOD_IMM& insn, captive::arch::dbt::el::Emitter& emitter);

@@ -105,7 +105,11 @@ bool Encoder::encode_p_bitwise(TranslatedCodeBuffer& tcb, const Instruction* ins
 
 bool Encoder::encode_fp_adds(TranslatedCodeBuffer& tcb, const Instruction* insn)
 {
-	return encode_fp_arith(tcb, insn, 0x158, insn->kind() == InstructionKind::ADDSD, false);
+	if (insn->kind() == InstructionKind::ADDSS || insn->kind() == InstructionKind::ADDSD) {
+		return encode_fp_arith(tcb, insn, 0x158, insn->kind() == InstructionKind::ADDSD, false);
+	} else {
+		return encode_fp_arith(tcb, insn, 0x158, insn->kind() == InstructionKind::ADDPD, true);
+	}
 }
 
 bool Encoder::encode_fp_subs(TranslatedCodeBuffer& tcb, const Instruction* insn)
@@ -119,12 +123,20 @@ bool Encoder::encode_fp_subs(TranslatedCodeBuffer& tcb, const Instruction* insn)
 
 bool Encoder::encode_fp_muls(TranslatedCodeBuffer& tcb, const Instruction* insn)
 {
-	return encode_fp_arith(tcb, insn, 0x159, insn->kind() == InstructionKind::MULSD, false);
+	if (insn->kind() == InstructionKind::MULSS || insn->kind() == InstructionKind::MULSD) {
+		return encode_fp_arith(tcb, insn, 0x159, insn->kind() == InstructionKind::MULSD, false);
+	} else {
+		return encode_fp_arith(tcb, insn, 0x159, insn->kind() == InstructionKind::MULPD, true);
+	}
 }
 
 bool Encoder::encode_fp_divs(TranslatedCodeBuffer& tcb, const Instruction* insn)
 {
-	return encode_fp_arith(tcb, insn, 0x15e, insn->kind() == InstructionKind::DIVSD, false);
+	if (insn->kind() == InstructionKind::DIVSS || insn->kind() == InstructionKind::DIVSD) {
+		return encode_fp_arith(tcb, insn, 0x15e, insn->kind() == InstructionKind::DIVSD, false);
+	} else {
+		return encode_fp_arith(tcb, insn, 0x15e, insn->kind() == InstructionKind::DIVPD, true);
+	}
 }
 
 bool Encoder::encode_fp_sqrts(TranslatedCodeBuffer& tcb, const Instruction* insn)

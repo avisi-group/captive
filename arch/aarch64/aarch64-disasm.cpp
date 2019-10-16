@@ -320,6 +320,9 @@ const char *aarch64_disasm::disassemble(uint64_t pc, const uint8_t *data)
   case aarch64_decode::aarch64_a64_fminv:
     disassemble_a64_fminv(pc, (const aarch64_decode_a64_SIMD_ACROSS_LANES&)insn);
     break;
+  case aarch64_decode::aarch64_a64_fmla_vector:
+    disassemble_a64_fmla_vector(pc, (const aarch64_decode_a64_SIMD_THREE_SAME&)insn);
+    break;
   case aarch64_decode::aarch64_a64_fmov:
     disassemble_a64_fmov(pc, (const aarch64_decode_a64_FP_DP_1&)insn);
     break;
@@ -9546,6 +9549,148 @@ void aarch64_disasm::disassemble_a64_fminv(uint64_t pc, const aarch64_decode_a64
 {
   uint32_t map_val = 0;
   append_str("fminv");
+}
+void aarch64_disasm::disassemble_a64_fmla_vector(uint64_t pc, const aarch64_decode_a64_SIMD_THREE_SAME& insn)
+{
+  uint32_t map_val = 0;
+  if ((insn.Q == (1)) && (insn.size == (1))) 
+  {
+    append_str("fmla");
+    append_str(" ");
+    map_val = 0 + (insn.rd);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("d");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rn);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("d");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rm);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("d");
+    return;
+  }
+  if ((insn.Q == (1)) && (insn.size == (0))) 
+  {
+    append_str("fmla");
+    append_str(" ");
+    map_val = 0 + (insn.rd);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("4");
+    append_str("s");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rn);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("4");
+    append_str("s");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rm);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("4");
+    append_str("s");
+    return;
+  }
+  if ((insn.Q == (0)) && (insn.size == (0))) 
+  {
+    append_str("fmla");
+    append_str(" ");
+    map_val = 0 + (insn.rd);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("s");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rn);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("s");
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rm);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    append_str("2");
+    append_str("s");
+    return;
+  }
 }
 void aarch64_disasm::disassemble_a64_fmov(uint64_t pc, const aarch64_decode_a64_FP_DP_1& insn)
 {

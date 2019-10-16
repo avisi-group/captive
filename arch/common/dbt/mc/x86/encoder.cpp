@@ -254,14 +254,20 @@ bool Encoder::encode_instruction(TranslatedCodeBuffer& tcb, const Instruction* i
 
 	case InstructionKind::ADDSS: return encode_fp_adds(tcb, insn);
 	case InstructionKind::ADDSD: return encode_fp_adds(tcb, insn);
+	case InstructionKind::ADDPS: return encode_fp_adds(tcb, insn);
+	case InstructionKind::ADDPD: return encode_fp_adds(tcb, insn);
 	case InstructionKind::SUBSS: return encode_fp_subs(tcb, insn);
 	case InstructionKind::SUBSD: return encode_fp_subs(tcb, insn);
 	case InstructionKind::SUBPS: return encode_fp_subs(tcb, insn);
 	case InstructionKind::SUBPD: return encode_fp_subs(tcb, insn);
 	case InstructionKind::MULSS: return encode_fp_muls(tcb, insn);
 	case InstructionKind::MULSD: return encode_fp_muls(tcb, insn);
+	case InstructionKind::MULPS: return encode_fp_muls(tcb, insn);
+	case InstructionKind::MULPD: return encode_fp_muls(tcb, insn);
 	case InstructionKind::DIVSS: return encode_fp_divs(tcb, insn);
 	case InstructionKind::DIVSD: return encode_fp_divs(tcb, insn);
+	case InstructionKind::DIVPS: return encode_fp_divs(tcb, insn);
+	case InstructionKind::DIVPD: return encode_fp_divs(tcb, insn);
 	case InstructionKind::SQRTSS: return encode_fp_sqrts(tcb, insn);
 	case InstructionKind::SQRTSD: return encode_fp_sqrts(tcb, insn);
 
@@ -305,14 +311,6 @@ bool Encoder::encode_instruction(TranslatedCodeBuffer& tcb, const Instruction* i
 
 	case InstructionKind::XORPS:
 		return encode_fp_packed_xor(tcb, insn);
-
-	case InstructionKind::MULPS:
-	case InstructionKind::MULPD:
-		return encode_fp_packed_mul(tcb, insn);
-
-	case InstructionKind::DIVPS:
-	case InstructionKind::DIVPD:
-		return encode_fp_packed_div(tcb, insn);
 
 	case InstructionKind::PCLMULQDQ:
 		return encode_clmul(tcb, insn);

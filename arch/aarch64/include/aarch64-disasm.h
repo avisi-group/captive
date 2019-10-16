@@ -107,6 +107,7 @@ namespace captive
         void disassemble_a64_fmaxv(uint64_t, const aarch64_decode_a64_SIMD_ACROSS_LANES&);
         void disassemble_a64_fminnmv(uint64_t, const aarch64_decode_a64_SIMD_ACROSS_LANES&);
         void disassemble_a64_fminv(uint64_t, const aarch64_decode_a64_SIMD_ACROSS_LANES&);
+        void disassemble_a64_fmla_vector(uint64_t, const aarch64_decode_a64_SIMD_THREE_SAME&);
         void disassemble_a64_fmov(uint64_t, const aarch64_decode_a64_FP_DP_1&);
         void disassemble_a64_fmov_gen(uint64_t, const aarch64_decode_a64_CVT_FP_I&);
         void disassemble_a64_fmov_simd(uint64_t, const aarch64_decode_a64_SIMD_MOD_IMM&);
