@@ -27,6 +27,9 @@ bool Encoder::encode_fp_packed_mul(TranslatedCodeBuffer& tcb, const Instruction*
 	switch (insn->kind()) {
 	case InstructionKind::MULPS:
 		return encode_sse_opcode_modrm(tcb, 0x159, dst, src, true);
+
+	case InstructionKind::MULPD:
+		return encode_sse_opcode_modrm(tcb, 0x159, dst, src, false);
 	default:
 		return false;
 	}

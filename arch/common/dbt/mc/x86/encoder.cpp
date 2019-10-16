@@ -307,6 +307,7 @@ bool Encoder::encode_instruction(TranslatedCodeBuffer& tcb, const Instruction* i
 		return encode_fp_packed_xor(tcb, insn);
 
 	case InstructionKind::MULPS:
+	case InstructionKind::MULPD:
 		return encode_fp_packed_mul(tcb, insn);
 
 	case InstructionKind::PCLMULQDQ:
