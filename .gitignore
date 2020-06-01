@@ -11,3 +11,5 @@ bios.bin
 bios.elf
 zero
 /dist/
+fs/
+run.sh
