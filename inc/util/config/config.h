@@ -11,7 +11,7 @@ namespace captive {
 			class Configuration {
 			public:
 
-				Configuration() : print_usage(false), insn_count(false), cache_simulation(false), tracing(false), dump_code(false), debugging(false), debug_port(10000), mpk(false), universal_machine(false)
+				Configuration() : print_usage(false), insn_count(false), cache_simulation(false), tracing(false), dump_code(false), debugging(false), debug_port(10000), mpk(false), universal_machine(false), no_take_console(false)
 				{
 				}
 
@@ -37,6 +37,7 @@ namespace captive {
 				bool debugging;
 				int debug_port;
 				bool mpk, universal_machine;
+				bool no_take_console;
 			};
 		}
 	}

@@ -76,6 +76,11 @@ namespace captive {
 				return jit_state.perf_cnt_a;
 			}
 
+			inline void performance_counter_a(uint64_t v)
+			{
+				jit_state.perf_cnt_a = v;
+			}
+
 			inline void inc_performance_counter_a()
 			{
 				jit_state.perf_cnt_a++;

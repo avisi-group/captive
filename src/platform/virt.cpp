@@ -78,7 +78,10 @@ Virtual::Virtual(const util::config::Configuration& hcfg, devices::timers::Timer
 	cfg.devices.push_back(GuestDeviceConfiguration(0x08040000, *pl031));
 
 	auto console = new devices::io::ConsoleUART();
-	console->open();
+
+	if (!hcfg.no_take_console) {
+		console->open();
+	}
 
 	uart0 = new devices::arm::PL011(gic0->get_irq_line(66), *console);
 	cfg.devices.push_back(GuestDeviceConfiguration(0x08020000, *uart0));

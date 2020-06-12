@@ -43,7 +43,7 @@ namespace captive {
 					friend class X86VectorExtract;
 
 				public:
-					X86Emitter(const ArchData& arch_data, dbt::el::Context& context, dbt::el::Block *current_block, bool no_mmu, bool kernel_mode);
+					X86Emitter(const ArchData& arch_data, dbt::el::Context& context, dbt::el::Block *current_block, bool no_mmu, bool kernel_mode, bool count_kernel_instructions, bool count_user_instructions);
 					virtual ~X86Emitter();
 
 					dbt::el::Value* adc(dbt::el::Value* lhs, dbt::el::Value* rhs, dbt::el::Value* carry) override;
@@ -141,6 +141,7 @@ namespace captive {
 				private:
 					const ArchData& _arch_data;
 					bool _no_mmu, _kernel_mode;
+					bool _count_kernel_instructions, _count_user_instructions;
 
 					inline dbt::mc::x86::Instruction *alloc_instruction(dbt::mc::x86::InstructionKind::InstructionKind kind)
 					{
@@ -195,6 +196,7 @@ namespace captive {
 
 					void increment_pca();
 					void increment_pcb();
+					void increment_icount();
 
 					std::map<uint64_t, X86GuestRegister *> _guest_register_objects;
 

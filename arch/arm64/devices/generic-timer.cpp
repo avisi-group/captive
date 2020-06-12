@@ -4,29 +4,7 @@
 #include <arm64-env.h>
 #include <printf.h>
 #include <x86/lapic-timer.h>
-
-#define EXTRACT_SYSREG(v) (v & 0x001fffe0)
-#define HANDLE_SYSREG(op0,op1,crn,crm,op2) case (op0 << 19 | op1 << 16 | crn << 12 | crm << 8 | op2 << 5)
-
-#define REG_CNTKCTL_EL1   HANDLE_SYSREG(3,0,14,1,0)
-
-#define REG_CNTFRQ_EL0   HANDLE_SYSREG(3,3,14,0,0)
-#define REG_CNTPCT_EL0   HANDLE_SYSREG(3,3,14,0,1)
-#define REG_CNTVCT_EL0   HANDLE_SYSREG(3,3,14,0,2)
-
-#define REG_CNTP_TVAL_EL0  HANDLE_SYSREG(3,3,14,2,0)
-#define REG_CNTP_CTL_EL0  HANDLE_SYSREG(3,3,14,2,1)
-#define REG_CNTP_CVAL_EL0  HANDLE_SYSREG(3,3,14,2,2)
-
-#define REG_CNTVOFF_EL2   HANDLE_SYSREG(3,4,14,0,3)
-
-#define REG_CNTPS_TVAL_EL1  HANDLE_SYSREG(3,7,14,2,0)
-#define REG_CNTPS_CTL_EL1  HANDLE_SYSREG(3,7,14,2,1)
-#define REG_CNTPS_CVAL_EL1  HANDLE_SYSREG(3,7,14,2,2)
-
-#define REG_CNTV_TVAL_EL0  HANDLE_SYSREG(3,3,14,3,0)
-#define REG_CNTV_CTL_EL0  HANDLE_SYSREG(3,3,14,3,1)
-#define REG_CNTV_CVAL_EL0  HANDLE_SYSREG(3,3,14,3,2)
+#include <devices/sysreg-helper.h>
 
 using namespace captive::arch::arm64::devices;
 

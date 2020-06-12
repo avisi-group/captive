@@ -6,6 +6,7 @@
 #include <devices/psci.h>
 #include <devices/generic-timer.h>
 #include <devices/semihosting.h>
+#include <devices/pmu.h>
 
 #include <printf.h>
 
@@ -27,6 +28,7 @@ arm64_environment::arm64_environment(enum core_variant _core_variant, PerGuestDa
 	install_core_device(18, new GenericTimer(*this));
 #endif
 	install_core_device(19, new SemihostingHandler(*this));
+	install_core_device(20, new PMU(*this));
 }
 
 arm64_environment::~arm64_environment()

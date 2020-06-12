@@ -11,7 +11,7 @@ using namespace captive::util::cl;
 
 extern std::map<std::string, OptionHandler *> registered_option_handlers;
 
-OptionHandlerRegistration::OptionHandlerRegistration(std::string tag, OptionHandler& handler) 
+OptionHandlerRegistration::OptionHandlerRegistration(std::string tag, OptionHandler& handler)
 	: _tag(tag), _handler(handler)
 {
 	registered_option_handlers[tag] = &handler;
@@ -86,9 +86,9 @@ DEFINE_OPTION_HANDLER("dump-code", DumpCode, OptionRequirement::None, ValueRequi
 
 DEFINE_OPTION_HANDLER("debugging", Debugging, OptionRequirement::None, ValueRequirement::Optional) {
 	config.debugging = true;
-	
+
 	//if (arg.h)
-	
+
 	return HandleResult::OK;
 }
 
@@ -104,5 +104,10 @@ DEFINE_OPTION_HANDLER("mpk", MPK, OptionRequirement::None, ValueRequirement::Non
 
 DEFINE_OPTION_HANDLER("universal-machine", UM, OptionRequirement::None, ValueRequirement::None) {
 	config.universal_machine = true;
+	return HandleResult::OK;
+}
+
+DEFINE_OPTION_HANDLER("leave-console-alone", LCA, OptionRequirement::None, ValueRequirement::None) {
+	config.no_take_console = true;
 	return HandleResult::OK;
 }
