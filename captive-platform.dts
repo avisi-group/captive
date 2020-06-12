@@ -80,4 +80,9 @@
 		clock-output-names = "clk24mhz";
 		phandle = <0x02>;
 	};
+
+	pmu {
+		compatible = "arm,armv8-pmuv3";
+		interrupts = <0x01 0x07 0x04>;
+	};
 };
