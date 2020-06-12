@@ -14,7 +14,7 @@ src := $(patsubst src/%,$(src-dir)/%,$(shell find src/ | grep -e "\.cpp$$"))
 obj := $(src:.cpp=.o)
 dep := $(src:.cpp=.d)
 
-export ndebug := 
+export ndebug :=
 	#-DNDEBUG
 
 common-cflags := -I$(inc-dir) -I$(shared-dir) -g -Wall -O3 -pthread $(ndebug)
@@ -29,8 +29,9 @@ as  := as
 ld  := ld
 rm  := rm
 make := +make
+dtc := dtc
 
-all: $(out) .FORCE
+all: $(out) captive-platform.dtb .FORCE
 	$(q)$(make) -C $(arch-dir)
 
 clean: .FORCE
@@ -38,6 +39,10 @@ clean: .FORCE
 	$(rm) -f $(obj)
 	$(rm) -f $(dep)
 	$(rm) -f $(out)
+
+%.dtb: %.dts
+	@echo "  DTC     $(patsubst $(top-dir)/%,%,$@)"
+	$(q)$(dtc) -I dts -O dtb -o $@ $<
 
 $(out): $(dep) $(obj) $(bin-dir)
 	@echo "  LD      $(patsubst $(bin-dir)/%,%,$@)"
