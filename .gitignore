@@ -13,3 +13,4 @@ zero
 /dist/
 fs/
 run.sh
+.vscode

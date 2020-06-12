@@ -23,7 +23,7 @@
 #include <pump-timer.h>
 
 extern captive::arch::Environment *create_environment_arm(captive::PerGuestData *per_guest_data);
-extern captive::arch::Environment *create_environment_aarch64(captive::PerGuestData *per_guest_data);
+extern captive::arch::Environment *create_environment_arm64(captive::PerGuestData *per_guest_data);
 extern captive::arch::Environment *create_environment_um(captive::PerGuestData *per_guest_data);
 
 //#define lprintf(a...) printf(a)
@@ -170,8 +170,8 @@ extern "C" {
 
 		lprintf("enabled events: %08x\n", cpu_data->guest_data->simulation_events);
 
-		lprintf("creating environment...\n");
-		captive::arch::Environment *env = create_environment_aarch64(cpu_data->guest_data);
+		lprintf("creating arm64 environment...\n");
+		captive::arch::Environment *env = create_environment_arm64(cpu_data->guest_data);
 
 		if (!env) {
 			printf("error: unable to create environment\n");

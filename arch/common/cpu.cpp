@@ -13,7 +13,7 @@
 #include <mmu/strategy/strategy.h>
 #include <mmu/guest-mmu.h>
 
-#include "../aarch64/include/aarch64-decode.h"
+#include "../arm64/include/arm64-decode.h"
 
 using namespace captive::arch;
 using namespace captive::arch::jit;
@@ -216,7 +216,7 @@ void CPU::handle_irq_raised()
 const char* CPU::disassemble_address(uint8_t isa, gva_t va)
 {
 	static char decode_data[128];
-	Decode *decode = new (decode_data) aarch64::aarch64_decode();
+	Decode *decode = new (decode_data) arm64::arm64_decode();
 
 	AddressTranslationContext atc;
 

@@ -28,7 +28,7 @@
 #include <list>
 #include <vector>
 
-#include "../aarch64/include/aarch64-decode.h"
+#include "../arm64/include/arm64-decode.h"
 
 //#define REG_STATE_PROTECTION
 // #define DEBUG_TRANSLATION
@@ -601,7 +601,7 @@ bool CPU::emit_block(uint8_t isa_mode, gpa_t pa, dbt::el::Emitter& emitter)
 	seen_pcs.insert(pa);
 
 	static uint8_t decode_data[256];
-	Decode *insn = new (decode_data) aarch64::aarch64_decode();
+	Decode *insn = new (decode_data) arm64::arm64_decode();
 
 #ifdef QEMU_STYLE
 	uint64_t vpc = read_pc();
