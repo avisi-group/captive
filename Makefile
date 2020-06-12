@@ -19,7 +19,7 @@ export ndebug :=
 
 common-cflags := -I$(inc-dir) -I$(shared-dir) -g -Wall -O3 -pthread $(ndebug)
 cflags   := $(common-cflags)
-cxxflags := $(common-cflags) -std=gnu++17
+cxxflags := $(common-cflags) -std=gnu++20
 asflags  := -g
 ldflags  := -pthread -Wl,--no-as-needed -ldl -lrt
 
