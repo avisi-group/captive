@@ -535,7 +535,15 @@ Translation *CPU::compile_block(uint8_t isa_mode, gpa_t pa)
 
 	// --- EMIT ---
 
-	X86Emitter emitter(ad, ctx, ctx.entry_block(), !mmu_strategy.enabled(), feature_manager().get_feature(0), feature_manager().get_feature(6), feature_manager().get_feature(7));
+	X86EmitterOptions options;
+	options.no_mmu = !mmu_strategy.enabled();
+	options.kernel_mode = feature_manager().get_feature(0);
+	options.perf_kernel_icount = feature_manager().get_feature(6);
+	options.perf_kernel_brcount = feature_manager().get_feature(7);
+	options.perf_user_icount = feature_manager().get_feature(8);
+	options.perf_user_brcount = feature_manager().get_feature(9);
+
+	X86Emitter emitter(ad, ctx, ctx.entry_block(), options);
 
 #ifdef CONFIG_COMPILATION_DRILLDOWN
 	{
@@ -719,7 +727,7 @@ bool CPU::emit_block(uint8_t isa_mode, gpa_t pa, dbt::el::Emitter &emitter)
 		vpc += insn->length;
 #endif
 
-		emitter.instruction_end(insn->pc);
+		emitter.instruction_end(insn->pc, insn->end_of_block);
 
 		pc += insn->length;
 		insn_count++;

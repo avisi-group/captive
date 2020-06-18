@@ -22,7 +22,7 @@ extern "C" void cpu_write_device(captive::arch::CPU *cpu, uint32_t devid, uint32
 	cpu->env().write_core_device(*cpu, devid, reg, val);
 }
 
-extern "C" void cpu_read_device(captive::arch::CPU *cpu, uint32_t devid, uint32_t reg, uint64_t& val)
+extern "C" void cpu_read_device(captive::arch::CPU *cpu, uint32_t devid, uint32_t reg, uint64_t &val)
 {
 	cpu->env().read_core_device(*cpu, devid, reg, val);
 }
@@ -31,7 +31,8 @@ extern "C" void jit_trace(captive::arch::CPU *cpu, uint64_t opcode, uint64_t a1,
 {
 	assert(cpu);
 
-	switch ((uint8_t) opcode) {
+	switch ((uint8_t)opcode)
+	{
 	case 0: // START
 	{
 		printf("[%016lx] %25s ", read_pc(), cpu->disassemble_address(*cpu->tagged_registers().ISA, read_pc()));
@@ -43,61 +44,85 @@ extern "C" void jit_trace(captive::arch::CPU *cpu, uint64_t opcode, uint64_t a1,
 		break;
 
 	case 2: // READ MEM
-		switch ((uint8_t) a3) {
-		case 1: printf("M1[%016lx] => 0x%02x ", a1, a2 & 0xff);
+		switch ((uint8_t)a3)
+		{
+		case 1:
+			printf("M1[%016lx] => 0x%02x ", a1, a2 & 0xff);
 			break;
-		case 2: printf("M2[%016lx] => 0x%04x ", a1, a2 & 0xffff);
+		case 2:
+			printf("M2[%016lx] => 0x%04x ", a1, a2 & 0xffff);
 			break;
-		case 4: printf("M4[%016lx] => 0x%08x ", a1, a2 & 0xffffffff);
+		case 4:
+			printf("M4[%016lx] => 0x%08x ", a1, a2 & 0xffffffff);
 			break;
-		case 8: printf("M8[%016lx] => 0x%016lx ", a1, a2);
+		case 8:
+			printf("M8[%016lx] => 0x%016lx ", a1, a2);
 			break;
-		default: printf("M?[%016lx] => 0x%016lx ", a1, a2);
+		default:
+			printf("M?[%016lx] => 0x%016lx ", a1, a2);
 			break;
 		}
 		break;
 
 	case 3: // WRITE MEM
-		switch ((uint8_t) a3) {
-		case 1: printf("M1[%016lx] <= 0x%02x ", a1, a2 & 0xff);
+		switch ((uint8_t)a3)
+		{
+		case 1:
+			printf("M1[%016lx] <= 0x%02x ", a1, a2 & 0xff);
 			break;
-		case 2: printf("M2[%016lx] <= 0x%04x ", a1, a2 & 0xffff);
+		case 2:
+			printf("M2[%016lx] <= 0x%04x ", a1, a2 & 0xffff);
 			break;
-		case 4: printf("M4[%016lx] <= 0x%08x ", a1, a2 & 0xffffffff);
+		case 4:
+			printf("M4[%016lx] <= 0x%08x ", a1, a2 & 0xffffffff);
 			break;
-		case 8: printf("M8[%016lx] <= 0x%016lx ", a1, a2);
+		case 8:
+			printf("M8[%016lx] <= 0x%016lx ", a1, a2);
 			break;
-		default: printf("M?[%016lx] <= 0x%016lx ", a1, a2);
+		default:
+			printf("M?[%016lx] <= 0x%016lx ", a1, a2);
 			break;
 		}
 		break;
 
 	case 4: // READ REG
-		switch ((uint8_t) a3) {
-		case 1: printf("R[%s] => 0x%02x ", cpu->get_reg_name(a1), a2 & 0xff);
+		switch ((uint8_t)a3)
+		{
+		case 1:
+			printf("R[%s] => 0x%02x ", cpu->get_reg_name(a1), a2 & 0xff);
 			break;
-		case 2: printf("R[%s] => 0x%04x ", cpu->get_reg_name(a1), a2 & 0xffff);
+		case 2:
+			printf("R[%s] => 0x%04x ", cpu->get_reg_name(a1), a2 & 0xffff);
 			break;
-		case 4: printf("R[%s] => 0x%08x ", cpu->get_reg_name(a1), a2 & 0xffffffff);
+		case 4:
+			printf("R[%s] => 0x%08x ", cpu->get_reg_name(a1), a2 & 0xffffffff);
 			break;
-		case 8: printf("R[%s] => 0x%016lx ", cpu->get_reg_name(a1), a2);
+		case 8:
+			printf("R[%s] => 0x%016lx ", cpu->get_reg_name(a1), a2);
 			break;
-		default: printf("R[%s] => 0x%016lx ", cpu->get_reg_name(a1), a2);
+		default:
+			printf("R[%s] => 0x%016lx ", cpu->get_reg_name(a1), a2);
 			break;
 		}
 
 		break;
 	case 5: // WRITE REG
-		switch ((uint8_t) a3) {
-		case 1: printf("R[%s] <= 0x%02x ", cpu->get_reg_name(a1), a2 & 0xff);
+		switch ((uint8_t)a3)
+		{
+		case 1:
+			printf("R[%s] <= 0x%02x ", cpu->get_reg_name(a1), a2 & 0xff);
 			break;
-		case 2: printf("R[%s] <= 0x%04x ", cpu->get_reg_name(a1), a2 & 0xffff);
+		case 2:
+			printf("R[%s] <= 0x%04x ", cpu->get_reg_name(a1), a2 & 0xffff);
 			break;
-		case 4: printf("R[%s] <= 0x%08x ", cpu->get_reg_name(a1), a2 & 0xffffffff);
+		case 4:
+			printf("R[%s] <= 0x%08x ", cpu->get_reg_name(a1), a2 & 0xffffffff);
 			break;
-		case 8: printf("R[%s] <= 0x%016lx ", cpu->get_reg_name(a1), a2);
+		case 8:
+			printf("R[%s] <= 0x%016lx ", cpu->get_reg_name(a1), a2);
 			break;
-		default: printf("R[%s] <= 0x%016lx ", cpu->get_reg_name(a1), a2);
+		default:
+			printf("R[%s] <= 0x%016lx ", cpu->get_reg_name(a1), a2);
 			break;
 		}
 
@@ -121,9 +146,12 @@ extern "C" void jit_trace(captive::arch::CPU *cpu, uint64_t opcode, uint64_t a1,
 
 extern "C" void jit_rum(captive::arch::CPU *cpu)
 {
-	if (in_kernel_mode()) {
+	if (in_kernel_mode())
+	{
 		printf("*** read-user-memory: in kernel mode\n");
-	} else {
+	}
+	else
+	{
 		printf("*** read-user-memory: in user mode\n");
 	}
 }

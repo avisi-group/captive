@@ -16,6 +16,10 @@ namespace captive
         A64_A1 = 3,
         EMULATE_LINUX = 4,
         EMULATE_LINUX_ARCHSIM = 5,
+        A64_KERNEL_ICOUNT = 6,
+        A64_KERNEL_BRCOUNT = 7,
+        A64_USER_ICOUNT = 8,
+        A64_USER_BRCOUNT = 9,
       }
       ;
       class arm64_cpu : public CPU 
@@ -82,6 +86,7 @@ namespace captive
           uint64_t *VBAR;
           uint64_t *TPIDR_EL0;
           uint64_t *TPIDR_EL1;
+          uint64_t *TPIDRRO_EL0;
           uint64_t *ELR_EL1;
           uint32_t *SPSR_EL1;
           uint32_t *ESR_EL1;

@@ -30,6 +30,23 @@ namespace captive {
 					unsigned int ZERO_DISPLACEMENT, NEGATIVE_DISPLACEMENT, CARRY_DISPLACEMENT, OVERFLOW_DISPLACEMENT;
 				};
 
+				struct X86EmitterOptions {
+					X86EmitterOptions()
+						: no_mmu(false),
+						kernel_mode(false),
+						perf_kernel_icount(false),
+						perf_kernel_brcount(false),
+						perf_user_icount(false),
+						perf_user_brcount(false) { }
+
+					bool no_mmu;
+					bool kernel_mode;
+					bool perf_kernel_icount;
+					bool perf_kernel_brcount;
+					bool perf_user_icount;
+					bool perf_user_brcount;
+				};
+
 				class X86Emitter : public dbt::el::Emitter {
 					friend class X86Constant;
 					friend class X86UnaryOperation;
@@ -43,7 +60,7 @@ namespace captive {
 					friend class X86VectorExtract;
 
 				public:
-					X86Emitter(const ArchData& arch_data, dbt::el::Context& context, dbt::el::Block *current_block, bool no_mmu, bool kernel_mode, bool count_kernel_instructions, bool count_user_instructions);
+					X86Emitter(const ArchData& arch_data, dbt::el::Context& context, dbt::el::Block *current_block, const X86EmitterOptions& options);
 					virtual ~X86Emitter();
 
 					dbt::el::Value* adc(dbt::el::Value* lhs, dbt::el::Value* rhs, dbt::el::Value* carry) override;
@@ -100,7 +117,7 @@ namespace captive {
 
 					void inc_pc(dbt::el::Value* amount) override;
 					void instruction_start(dbt_u64 addr) override;
-					void instruction_end(dbt_u64 addr) override;
+					void instruction_end(dbt_u64 addr, bool end_of_block) override;
 
 					dbt::el::Value* select(dbt::el::Value* cond, dbt::el::Value* tv, dbt::el::Value *fv) override;
 					void jump(dbt::el::Block* target) override;
@@ -140,8 +157,7 @@ namespace captive {
 
 				private:
 					const ArchData& _arch_data;
-					bool _no_mmu, _kernel_mode;
-					bool _count_kernel_instructions, _count_user_instructions;
+					const X86EmitterOptions options_;
 
 					inline dbt::mc::x86::Instruction *alloc_instruction(dbt::mc::x86::InstructionKind::InstructionKind kind)
 					{
@@ -197,6 +213,7 @@ namespace captive {
 					void increment_pca();
 					void increment_pcb();
 					void increment_icount();
+					void increment_brcount();
 
 					std::map<uint64_t, X86GuestRegister *> _guest_register_objects;
 

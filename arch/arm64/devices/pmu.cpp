@@ -19,32 +19,38 @@ bool PMU::read(CPU &cpu, uint32_t reg, uint64_t &data)
     {
     REG_PMCR_EL0:
         data = PMCR;
-        return true;
+        break;
 
     REG_PMUSERENR_EL0:
         data = PMUSERENR;
-        return true;
+        break;
 
     REG_PMCEID0_EL0:
-        data = 0xd01;
-        return true;
+        data = 0x00001101u; // PC-WRITE, INST RETIRED, PC SWINC
+        break;
 
     REG_PMCEID1_EL0:
         data = 0;
-        return true;
+        break;
 
     REG_PMXEVCNTR_EL0:
-        if ((PMXEVTYPER[PMSELR] & 0xffff) == 8) {
-            data = cpu.performance_counter_a();
-        } else {
+        if ((PMXEVTYPER[PMSELR] & 0xffff) == 0x8)
+        {
+            data = cpu.jit_state.perf_icount;
+        }
+        else if ((PMXEVTYPER[PMSELR] & 0xffff) == 0xc)
+        {
+            data = cpu.jit_state.perf_brcount;
+        }
+        else
+        {
             data = PMXEVCNTR[PMSELR];
         }
-
-        return true;
+        break;
 
     REG_PMXEVTYPER_EL0:
         data = PMXEVTYPER[PMSELR];
-        return true;
+        break;
 
     default:
         printf("pmu: unhandled read reg=%x\n", reg);
@@ -52,15 +58,25 @@ bool PMU::read(CPU &cpu, uint32_t reg, uint64_t &data)
         return false;
     }
 
+    // printf("pmu: read %08x = %lx @ %p\n", reg, data, read_pc());
     return true;
 }
 
 bool PMU::write(CPU &cpu, uint32_t reg, uint64_t data)
 {
+    //printf("pmu: write %08x = %lx\n", reg, data);
+
     switch (EXTRACT_SYSREG(reg))
     {
     REG_PMCR_EL0:
-        PMCR = (PMCR & ~0x7f) | (data & 0x7f);
+        PMCR = (PMCR & ~0xe9) | (data & 0xe9);
+
+        if (data & 2)
+        {
+            reset_counters(cpu);
+        }
+
+        update_counters(cpu);
         return true;
 
     REG_PMUSERENR_EL0:
@@ -98,21 +114,38 @@ bool PMU::write(CPU &cpu, uint32_t reg, uint64_t data)
         return true;
 
     REG_PMXEVCNTR_EL0:
-        if ((PMXEVTYPER[PMSELR] & 0xffff) == 8) {
-            cpu.performance_counter_a(data);
-        } else {
+        //printf("pmu: setting value of %u to %08x\n", PMSELR, data);
+        if ((PMXEVTYPER[PMSELR] & 0xffff) == 0x8)
+        {
+            cpu.jit_state.perf_icount = data;
+        }
+        else if ((PMXEVTYPER[PMSELR] & 0xffff) == 0xc)
+        {
+            cpu.jit_state.perf_brcount = data;
+        }
+        else
+        {
             PMXEVCNTR[PMSELR] = data;
         }
 
         return true;
 
     REG_PMXEVTYPER_EL0:
-        printf("pmu: setting type of %u to %08x\n", PMSELR, data);
+        //printf("pmu: setting type of %u to %08x\n", PMSELR, data);
         PMXEVTYPER[PMSELR] = data;
+        /*if ((data & 0xffff) == 0x8)
+        {
+            cpu.jit_state.perf_icount = PMXEVCNTR[PMSELR];
+        }
+        else if ((data & 0xffff) == 0xc)
+        {
+            cpu.jit_state.perf_brcount = PMXEVCNTR[PMSELR];
+        }
+*/
         return true;
 
     default:
-        printf("pmu: unhandled write reg=%x data=%lx\n", reg, data);
+        printf("pmu: unhandled write reg=%x data=%lx @ %p\n", reg, data, read_pc());
         abort();
         return false;
     }
@@ -120,51 +153,46 @@ bool PMU::write(CPU &cpu, uint32_t reg, uint64_t data)
     return true;
 }
 
-void PMU::update_counters(CPU& cpu)
+void PMU::update_counters(CPU &cpu)
 {
-    bool count_kernel_instructions = false;
-    bool count_user_instructions = false;
+    cpu.feature_manager().set_feature(6, 0);
+    cpu.feature_manager().set_feature(7, 0);
+    cpu.feature_manager().set_feature(8, 0);
+    cpu.feature_manager().set_feature(9, 0);
 
-    for (int i = 0; i < 32; i++) {
-        if ((PMXEVTYPER[i] & 0xffff) == 8) {
-            // Instruction Retired
-            if (PMCNTEN & (1 << i)) {
-                // Enabled
-                count_kernel_instructions = false;
-                count_user_instructions = true;
-            }
+    // Don't do anything if the PMU is not enabled
+    if (!(PMCR & 1))
+    {
+        return;
+    }
+
+    for (int i = 0; i < 32; i++)
+    {
+        // Ignore disabled counters
+        if (!(PMCNTEN & (1 << i)))
+        {
+            continue;
+        }
+
+        switch ((PMXEVTYPER[i] & 0xffff))
+        {
+        case 0x08:                                   // Instruction retired
+            cpu.feature_manager().set_feature(8, 1); // user-icount
+            break;
+        case 0x0c:                                   // PC-write retired
+            cpu.feature_manager().set_feature(9, 1); // user-brcount
+            break;
         }
     }
-
-    if (count_kernel_instructions) {
-        cpu.feature_manager().set_feature(6, 1);
-    } else {
-        cpu.feature_manager().set_feature(6, 0);
-    }
-
-    if (count_user_instructions) {
-        cpu.feature_manager().set_feature(7, 1);
-    } else {
-        cpu.feature_manager().set_feature(7, 0);
-    }
-
-    //cpu.invalidate_translations();
 }
 
-/*
-REG_PMCEID0_EL0:
-	REG_PMCEID1_EL0:
-		data = 0x7fff0f3f; // a72
-		//data = 0xd01;
-		return true;
+void PMU::reset_counters(CPU &cpu)
+{
+    for (int i = 0; i < 32; i++)
+    {
+        PMXEVCNTR[i] = 0;
+    }
 
-        REG_PMCR_EL0:
-		printf("sys-reg: pmcr: old=%lx new=%lx\n", PMCR, data);
-		PMCR = (PMCR & ~0x7f) | (data & 0x7f);
-		return true;
-
-	REG_PMCNTENCLR_EL0:
-	REG_PMINTENCLR_EL1:
-	REG_PMOVSCLR_EL0:
-		return true;
-        */
+    cpu.jit_state.perf_icount = 0;
+    cpu.jit_state.perf_brcount = 0;
+}

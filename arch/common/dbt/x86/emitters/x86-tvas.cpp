@@ -50,7 +50,7 @@ template<>
 void X86Emitter::mmu_flush<captive::arch::mmu::strategy::TVAS>(X86Value *addr)
 {
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __flush_mmu<true>, 64), Operand::make_register(tmp, 64));
 	} else {
 		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __flush_mmu<false>, 64), Operand::make_register(tmp, 64));
@@ -74,7 +74,7 @@ template<>
 void X86Emitter::mmu_asid_change<captive::arch::mmu::strategy::TVAS>(X86Value *asid)
 {
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __asid_change<true>, 64), Operand::make_register(tmp, 64));
 	} else {
 		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __asid_change<false>, 64), Operand::make_register(tmp, 64));
@@ -185,7 +185,7 @@ X86PhysicalRegister X86Emitter::tvas_compute_host_ptr(X86Value *addr)
 	//add_mov_auto(addr->as_operand(*this), Operand::make_register(X86PhysicalRegisters::SI, 64));
 
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __tvas_invalidate_segment<true>, 64), Operand::make_register(tmp, 64));
 		//add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t)___tvas_invalidate_segment_priv, 64), Operand::make_register(tmp, 64));
 	} else {
@@ -216,7 +216,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::TVAS>(X86Value *
 	add_instruction(InstructionKind::MOV, value->as_operand(*this), Operand::make_register(X86PhysicalRegisters::SI, value->type().size_in_bits()));
 
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (value->type().size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __tvas_store<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -250,14 +250,14 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::TVAS>(X86Value *
 }
 
 template<>
-dbt::el::Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::TVAS>(X86Value *addr, const dbt::el::Type& type)
+captive::arch::dbt::el::Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::TVAS>(X86Value *addr, const dbt::el::Type& type)
 {
 #ifdef USE_FUNCTIONS
 	add_instruction(InstructionKind::MOV, addr->as_operand(*this), Operand::make_register(X86PhysicalRegisters::DI, 64));
 
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (type.size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __tvas_load<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -301,5 +301,29 @@ dbt::el::Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::TVAS>(
 	return _x86_context.support().alloc_obj<X86Operand>(_x86_context, type, Operand::make_register(val, type.size_in_bits()));
 #endif
 }
+
+
+template<>
+void X86Emitter::mmu_monitor_acquire<captive::arch::mmu::strategy::TVAS>(X86Value *addr)
+{
+	add_instruction(InstructionKind::MOV, Operand::make_constant(1, 32), Operand::make_mem(64, 32, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x50));
+}
+
+template<>
+Value *X86Emitter::mmu_monitor_release<captive::arch::mmu::strategy::TVAS>(X86Value *addr)
+{
+	add_instruction(InstructionKind::XOR, Operand::make_register(X86PhysicalRegisters::C, 32), Operand::make_register(X86PhysicalRegisters::C, 32));
+	add_instruction(InstructionKind::MOV, Operand::make_constant(1, 32), Operand::make_register(X86PhysicalRegisters::A, 32));
+	add_instruction(InstructionKind::CMPXCHG, Operand::make_register(X86PhysicalRegisters::C, 32), Operand::make_mem(32, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x50));
+
+	return _x86_context.support().alloc_obj<X86Operand>(_x86_context, _x86_context.types().u32(), Operand::make_register(X86PhysicalRegisters::A, 32));
+}
+
+template<>
+void X86Emitter::mmu_monitor_release_all<captive::arch::mmu::strategy::TVAS>()
+{
+	add_instruction(InstructionKind::MOV, Operand::make_constant(0, 32), Operand::make_mem(64, 32, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x50));
+}
+
 
 #endif

@@ -986,7 +986,7 @@ Operand X86BinaryOperation::vector_arithmetic_as_operand(X86Emitter& emitter)
 			emitter._x86_context.support().assertion_fail("unsupported vector division");
 			return Operand::make_invalid();
 		}
-		
+
 	default:
 		emitter._x86_context.support().assertion_fail("unsupported vector binary arithmetic");
 		return Operand::make_invalid();
@@ -1238,7 +1238,7 @@ Operand X86ComparisonOperation::vector_comparison(X86Emitter& emitter)
 		if (v2.constant.value == 0) {
 			emitter.add_instruction(InstructionKind::PXOR, dst, dst);
 		} else {
-			emitter._x86_context.support().assertion_fail("unsupported vector comparison with constant"); 
+			emitter._x86_context.support().assertion_fail("unsupported vector comparison with constant");
 			return Operand::make_invalid();
 		}
 	} else {
@@ -1470,12 +1470,12 @@ Operand X86Cast::generate(X86Emitter& emitter)
 
 		if (_value->type().is_vector() && type().is_vector() && _kind == X86CastKind::TRUNCATE && _value->type().vector_element_size_in_bits() > type().vector_element_size_in_bits()) {
 			/*// Vector narrowing operation
-			
+
 			auto zero_tmp = emitter.vreg_allocator().alloc_vreg(X86RegisterClasses::SSE);
 			auto zero_op = Operand::make_register(zero_tmp, 128);
-			
+
 			emitter.add_instruction(InstructionKind::PXOR, zero_op, zero_op);
-			
+
 			switch (_value->type().vector_element_size_in_bits()) {
 			case 32:
 			{
@@ -1483,14 +1483,14 @@ Operand X86Cast::generate(X86Emitter& emitter)
 				// packssdw
 				break;
 			}
-			
+
 			case 16:
 			{
 				assert(_type().vector_element_size_in_bits() == 8);
 				// packsswb
 				break;
 			}
-			
+
 			default: assert(false);
 			}*/
 		} else {
@@ -1605,7 +1605,7 @@ Operand X86Cast::generate(X86Emitter& emitter)
 						   js       1f
 						   pxor     %xmm0,%xmm0
 						   cvtsi2ss %rdi,%xmm0
-						   jmp      2f   
+						   jmp      2f
 						1: mov      %rdi,%rax
 						   pxor     %xmm0,%xmm0
 						   shr      %rax
@@ -1671,7 +1671,7 @@ Operand X86Cast::generate(X86Emitter& emitter)
 						   js     80 <cvt_u64_f64+0x10>
 						   pxor   %xmm0,%xmm0
 						   cvtsi2sd %rdi,%xmm0
-						   retq   
+						   retq
 						   nop
 						   mov    %rdi,%rax
 						   pxor   %xmm0,%xmm0
@@ -1680,7 +1680,7 @@ Operand X86Cast::generate(X86Emitter& emitter)
 						   or     %rdi,%rax
 						   cvtsi2sd %rax,%xmm0
 						   addsd  %xmm0,%xmm0
-						   retq   
+						   retq
 						   nopw   0x0(%rax,%rax,1)
 						 */
 
@@ -1739,16 +1739,7 @@ Operand X86Cast::generate(X86Emitter& emitter)
 
 				case 128:
 				{
-					// f32 -> f80		
-					/*auto scratch32 = Operand::make_mem(32, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x108);
-					auto scratch80 = Operand::make_mem(80, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x108);
-								
-					emitter.add_mov_auto(_value->as_operand(emitter), scratch32);
-					emitter.add_instruction(InstructionKind::FLD, scratch32);
-					emitter.add_instruction(InstructionKind::FSTP, scratch80);
-					emitter.add_mov_auto(scratch80, dst);
-					
-					return dst;*/
+					// f32 -> f80
 					emitter._x86_context.support().assertion_fail("unsupported f32 -> f80 precision cast");
 					return Operand::make_invalid();
 				}
@@ -2385,4 +2376,3 @@ Operand X86VectorInsert::generate(X86Emitter& emitter)
 		assert(false);
 	}
 }
-

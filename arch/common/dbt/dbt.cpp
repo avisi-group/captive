@@ -8,6 +8,9 @@ using namespace captive::arch::jit;
 
 void *__captive_single_step = &__captive_single_step;
 
+void *__captive___branch_taken = &__captive___branch_taken;
+void *__captive___branch_not_taken = &__captive___branch_not_taken;
+
 void *__captive_mmu_flush_all = &__captive_mmu_flush_all;
 void *__captive_mmu_flush_va = &__captive_mmu_flush_va;
 void *__captive_mmu_notify_pgt_change = &__captive_mmu_notify_pgt_change;

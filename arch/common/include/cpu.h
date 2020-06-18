@@ -230,36 +230,43 @@ namespace captive {
 				}
 			} packed;
 
+public:
 			struct {
-				void *cpu; // 0			00
-				void *registers; // 8			08
-				uint64_t registers_size; // 16			10
-				uint64_t execution_mode; // 24			18
+				void *cpu; 												// 0			00
+				void *registers; 										// 8			08
+				uint64_t registers_size; 								// 16			10
+				uint64_t execution_mode; 								// 24			18
 				const struct block_chain_cache_entry *block_txln_cache; // 32			20
-				void *trace_buffer; // 40			28
-				uint64_t exit_chain; // 48			30
+				void *trace_buffer; 									// 40			28
+				uint64_t exit_chain; 									// 48			30
 
-				uint64_t perf_cnt_a; // 56			38
-				uint64_t perf_cnt_b; // 64			40
+				uint64_t perf_cnt_a; 									// 56			38
+				uint64_t perf_cnt_b; 									// 64			40
 
-				void *per_cpu_data; // 72			48
-				uint64_t mmu_monitor; // 80			50
-				uint64_t entry_address; // 88			58
-				uint64_t active_features; // 96			60
-				uint64_t virtual_memory_mode; // 104			68
-				uint64_t virtual_memory_mode_table[5]; // 112			70
+				void *per_cpu_data; 									// 72			48
+				uint64_t mmu_monitor; 									// 80			50
+				uint64_t entry_address; 								// 88			58
+				uint64_t active_features; 								// 96			60
+				uint64_t virtual_memory_mode; 							// 104			68
+				uint64_t virtual_memory_mode_table[5]; 					// 112			70, 78, 80, 88, 90
 
-				uint64_t call_gate_tmp; // 152			98
-				uint64_t call_gate_segment; // 160			a0
+				uint64_t call_gate_tmp; 								// 152			98
+				uint64_t call_gate_segment; 							// 160			a0
 
-				uint64_t mem_call_gate; // 168			a8
-				uint64_t mem_call_gate_segment; // 176			b0
+				uint64_t mem_call_gate; 								// 168			a8
+				uint64_t mem_call_gate_segment; 						// 176			b0
 
-				uint64_t scratch; // 184			b8
+				uint64_t perf_icount;									// 184			b8
+				uint64_t perf_brcount;									// 184			c0
+				uint64_t perf_0;										// 184			c8
+				uint64_t perf_1;										// 184			d0
 
-				uint64_t data[16]; // 192			c0
+				uint64_t scratch; 										// 184			d8
+
+				uint64_t data[16]; 										// 192			e0
 			} packed jit_state;
 
+protected:
 			inline void trap()
 			{
 				fatal("it's a trap!\n");

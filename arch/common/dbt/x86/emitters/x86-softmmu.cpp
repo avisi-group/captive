@@ -368,7 +368,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 
 #ifdef USE_FUNCTIONS
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (value->type().size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_store_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -416,7 +416,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 	add_instruction(InstructionKind::SHL, Operand::make_constant(4, 8), Operand::make_register(entryOffset, 32));
 
 	// Check tag
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KW_OFFSET_TAG));
 	} else {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UW_OFFSET_TAG));
@@ -426,7 +426,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 
 	// Grab HVA from cache
 	auto hva = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KW_OFFSET_VAL), Operand::make_register(hva, 64));
 	} else {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UW_OFFSET_VAL), Operand::make_register(hva, 64));
@@ -442,7 +442,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 	ja_slow_path->set_operand(0, Operand::make_label(slow_path_label));
 	jne_slow_path->set_operand(0, Operand::make_label(slow_path_label));
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (value->type().size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_store_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -477,7 +477,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 
 	// if (offset + size > 0x1000) slow_path
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (value->type().size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_store_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -521,7 +521,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 	add_instruction(InstructionKind::SHL, Operand::make_constant(4, 8), Operand::make_register(entryOffset, 32));
 
 	// Check tag
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KW_OFFSET_TAG));
 	} else {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UW_OFFSET_TAG));
@@ -529,7 +529,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 
 	auto je_tag_matches = add_instruction(InstructionKind::JE);
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (value->type().size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_store_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -562,7 +562,7 @@ void X86Emitter::mmu_store_memory<captive::arch::mmu::strategy::SoftMMUStrategy>
 
 	// Grab HVA from cache
 	auto hva = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KW_OFFSET_VAL), Operand::make_register(hva, 64));
 	} else {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UW_OFFSET_VAL), Operand::make_register(hva, 64));
@@ -588,7 +588,7 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 
 #ifdef USE_FUNCTIONS
 	auto tmp = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (type.size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_load_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -632,7 +632,7 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 
 	// if (offset + size > 0x1000) slow_path
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (type.size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_load_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -681,7 +681,7 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 	add_instruction(InstructionKind::SHL, Operand::make_constant(4, 8), Operand::make_register(entryOffset, 32));
 
 	// Check tag
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KR_OFFSET_TAG));
 	} else {
 		add_instruction(InstructionKind::CMP, Operand::make_register(pageIndex, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UR_OFFSET_TAG));
@@ -689,7 +689,7 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 
 	auto je_tag_matches = add_instruction(InstructionKind::JE);
 
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		switch (type.size_in_bits()) {
 		case 8: add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t) __softmmu_load_slow<true, 8>, 64), Operand::make_register(tmp, 64));
 			break;
@@ -727,7 +727,7 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 
 	// Grab HVA from cache
 	auto hva = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-	if (_kernel_mode) {
+	if (options_.kernel_mode) {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_KR_OFFSET_VAL), Operand::make_register(hva, 64));
 	} else {
 		add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::GS, entryOffset, SOFTMMU_UR_OFFSET_VAL), Operand::make_register(hva, 64));
@@ -744,8 +744,6 @@ Value* X86Emitter::mmu_load_memory<captive::arch::mmu::strategy::SoftMMUStrategy
 
 	return _x86_context.support().alloc_obj<X86Operand>(_x86_context, type, Operand::make_register(value, type.size_in_bits()));
 }
-
-#endif
 
 template<>
 void X86Emitter::mmu_monitor_acquire<captive::arch::mmu::strategy::SoftMMUStrategy>(X86Value *addr)
@@ -768,3 +766,5 @@ void X86Emitter::mmu_monitor_release_all<captive::arch::mmu::strategy::SoftMMUSt
 {
 	add_instruction(InstructionKind::MOV, Operand::make_constant(0, 32), Operand::make_mem(64, 32, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x50));
 }
+
+#endif

@@ -24,6 +24,7 @@ namespace captive::arch::arm64
             uint64_t PMXEVCNTR[32];
 
             void update_counters(CPU& cpu);
+            void reset_counters(CPU& cpu);
         };
     } // namespace devices
 } // namespace captive::arch::arm64

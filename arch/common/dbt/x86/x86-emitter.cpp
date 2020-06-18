@@ -66,298 +66,12 @@ static void __invalidate_translations()
 }
 #endif
 
-enum class fpcls
-{
-	unclassified,
-	zero,
-	normal,
-	inf,
-	qnan,
-	snan,
-};
-
-static uint64_t extract64(uint64_t raw, int start, int len)
-{
-	return (raw >> start) & ((1ull << len) - 1ull);
-}
-
-struct fpfmt
-{
-	int exp_size;
-	int exp_bias;
-	int exp_max;
-	int frac_size;
-	int frac_shift;
-	uint64_t frac_lsb;
-	uint64_t frac_lsbm1;
-	uint64_t round_mask;
-	uint64_t roundeven_mask;
-	bool arm_althp;
-};
-
-#define DECOMPOSED_BINARY_POINT (64 - 2)
-#define DECOMPOSED_IMPLICIT_BIT (1ull << DECOMPOSED_BINARY_POINT)
-#define DECOMPOSED_OVERFLOW_BIT (DECOMPOSED_IMPLICIT_BIT << 1)
-
-#define F_EXP 11
-#define F_EXP_BIAS (((1 << F_EXP) - 1) >> 1)
-#define F_EXP_MAX ((1 << F_EXP) - 1)
-#define F_FRAC 52
-#define F_FRAC_SHIFT (DECOMPOSED_BINARY_POINT - F_FRAC)
-
-static int clz64(uint64_t a)
-{
-	if (a)
-	{
-		return __builtin_clzll(a);
-	}
-	else
-	{
-		return 64;
-	}
-}
-
-struct fprep
-{
-	uint64_t frac;
-	int32_t exp;
-	fpcls cls;
-	bool sign;
-
-	fprep(uint64_t bits) : frac(extract64(bits, 0, F_FRAC)), exp(extract64(bits, F_FRAC, F_EXP)), cls(fpcls::unclassified), sign(extract64(bits, F_FRAC + F_EXP, 1))
-	{
-		canonicalize();
-	}
-
-	uint64_t raw() const
-	{
-		return 0;
-	}
-
-private:
-	void canonicalize()
-	{
-		if (exp == F_EXP_MAX)
-		{
-			if (frac == 0)
-			{
-				cls = fpcls::inf;
-			}
-			else
-			{
-				frac <<= F_FRAC_SHIFT;
-				cls = fpcls::qnan;
-			}
-		}
-		else if (exp == 0)
-		{
-			if (likely(frac == 0))
-			{
-				cls = fpcls::zero;
-				/*} else if (status->flush_inputs_to_zero) {
-					float_raise(float_flag_input_denormal, status);
-					cls = float_class_zero;
-					frac = 0;*/
-			}
-			else
-			{
-				int shift = clz64(frac) - 1;
-				cls = fpcls::normal;
-				exp = F_FRAC_SHIFT - F_EXP_BIAS - shift + 1;
-				frac <<= shift;
-			}
-		}
-		else
-		{
-			cls = fpcls::normal;
-			exp -= F_EXP_BIAS;
-			frac = DECOMPOSED_IMPLICIT_BIT + (frac << F_FRAC_SHIFT);
-		}
-	}
-};
-
-enum class fpr
-{
-	round_down
-};
-
-enum class fpx
-{
-	invalid = 1
-};
-
-struct fpstat
-{
-	signed char float_detect_tininess;
-	fpr float_rounding_mode;
-	fpx float_exception_flags;
-	signed char floatx80_rounding_precision;
-	/* should denormalised results go to zero and set the inexact flag? */
-	bool flush_to_zero;
-	/* should denormalised inputs go to zero and set the input_denormal flag? */
-	bool flush_inputs_to_zero;
-	bool default_nan_mode;
-	/* not always used -- see snan_bit_is_one() in softfloat-specialize.h */
-	bool snan_bit_is_one;
-};
-
-static inline bool is_nan(fpcls c)
-{
-	return c >= fpcls::qnan;
-}
-
-static inline bool is_snan(fpcls c)
-{
-	return c == fpcls::snan;
-}
-
-static inline bool is_qnan(fpcls c)
-{
-	return c == fpcls::qnan;
-}
-
-static inline void shift64RightJamming(uint64_t a, int count, uint64_t *zPtr)
-{
-	uint64_t z;
-
-	if (count == 0)
-	{
-		z = a;
-	}
-	else if (count < 64)
-	{
-		z = (a >> count) | ((a << ((-count) & 63)) != 0);
-	}
-	else
-	{
-		z = (a != 0);
-	}
-	*zPtr = z;
-}
-
-static fprep pick_nan(fprep a, fprep b, fpstat *s)
-{
-	if (is_snan(a.cls) || is_snan(b.cls))
-	{
-		s->float_exception_flags = (fpx)((int)s->float_exception_flags | (int)fpx::invalid);
-	}
-
-	return a;
-}
-
-static fprep _sfp_add64(fprep a, fprep b, fpstat *s)
-{
-	return a;
-
-	bool a_sign = a.sign;
-	bool b_sign = b.sign ^ false;
-
-	if (a_sign != b_sign)
-	{
-		/* Subtraction */
-
-		if (a.cls == fpcls::normal && b.cls == fpcls::normal)
-		{
-			if (a.exp > b.exp || (a.exp == b.exp && a.frac >= b.frac))
-			{
-				shift64RightJamming(b.frac, a.exp - b.exp, &b.frac);
-				a.frac = a.frac - b.frac;
-			}
-			else
-			{
-				shift64RightJamming(a.frac, b.exp - a.exp, &a.frac);
-				a.frac = b.frac - a.frac;
-				a.exp = b.exp;
-				a_sign ^= 1;
-			}
-
-			if (a.frac == 0)
-			{
-				a.cls = fpcls::zero;
-				a.sign = s->float_rounding_mode == fpr::round_down;
-			}
-			else
-			{
-				int shift = clz64(a.frac) - 1;
-				a.frac = a.frac << shift;
-				a.exp = a.exp - shift;
-				a.sign = a_sign;
-			}
-			return a;
-		}
-		if (is_nan(a.cls) || is_nan(b.cls))
-		{
-			return pick_nan(a, b, s);
-		}
-		if (a.cls == fpcls::inf)
-		{
-			if (b.cls == fpcls::inf)
-			{
-				/*float_raise(float_flag_invalid, s);
-				return parts_default_nan(s);*/
-			}
-			return a;
-		}
-		if (a.cls == fpcls::zero && b.cls == fpcls::zero)
-		{
-			a.sign = s->float_rounding_mode == fpr::round_down;
-			return a;
-		}
-		if (a.cls == fpcls::zero || b.cls == fpcls::inf)
-		{
-			b.sign = a_sign ^ 1;
-			return b;
-		}
-		if (b.cls == fpcls::zero)
-		{
-			return a;
-		}
-	}
-	else
-	{
-		/* Addition */
-		if (a.cls == fpcls::normal && b.cls == fpcls::normal)
-		{
-			if (a.exp > b.exp)
-			{
-				shift64RightJamming(b.frac, a.exp - b.exp, &b.frac);
-			}
-			else if (a.exp < b.exp)
-			{
-				shift64RightJamming(a.frac, b.exp - a.exp, &a.frac);
-				a.exp = b.exp;
-			}
-			a.frac += b.frac;
-			if (a.frac & DECOMPOSED_OVERFLOW_BIT)
-			{
-				a.frac >>= 1;
-				a.exp += 1;
-			}
-			return a;
-		}
-		if (is_nan(a.cls) || is_nan(b.cls))
-		{
-			return pick_nan(a, b, s);
-		}
-		if (a.cls == fpcls::inf || b.cls == fpcls::zero)
-		{
-			return a;
-		}
-		if (b.cls == fpcls::inf || a.cls == fpcls::zero)
-		{
-			b.sign = b_sign;
-			return b;
-		}
-	}
-}
-
-static uint64_t sfp_add64(uint64_t a_, uint64_t b_)
-{
-	fpstat s;
-	return _sfp_add64(fprep(a_), fprep(b_), &s).raw();
-}
-
-X86Emitter::X86Emitter(const ArchData &arch_data, Context &context, Block *current_block, bool no_mmu, bool kernel_mode, bool count_kernel_instructions, bool count_user_instructions) : Emitter(context, current_block), _arch_data(arch_data), _no_mmu(no_mmu), _kernel_mode(kernel_mode), _count_kernel_instructions(count_kernel_instructions), _count_user_instructions(count_user_instructions), _x86_context((X86Context &)context), _used_features(0)
+X86Emitter::X86Emitter(const ArchData &arch_data, Context &context, Block *current_block, const X86EmitterOptions& options)
+	: Emitter(context, current_block),
+	_arch_data(arch_data),
+	options_(options),
+	_x86_context((X86Context &)context),
+	_used_features(0)
 {
 }
 
@@ -575,17 +289,17 @@ void X86Emitter::block_start(dbt_u64 addr, dbt_u32 feature_set)
 
 void X86Emitter::block_end(dbt_u32 feature_set)
 {
-	uint32_t feature_mask = (1u << 30) | 0x7; //_used_features;
+	uint32_t feature_mask = (1u << 30) | 0x7; // EL, SPSEL, SS;
 
-	if (_kernel_mode) {
-		feature_mask |= 0x40;
+	if (options_.kernel_mode) {
+		feature_mask |= 0x0c0;	// kernel-icount, kernel-brcount
 	} else {
-		feature_mask |= 0x80;
+		feature_mask |= 0x300;	// user-icount, user-brcount
 	}
 
 	feature_set &= feature_mask;
 
-	//printf("XXX BLOCK END set=%x, mask=%x, used=%x\n", feature_set, feature_mask, _used_features);
+	// printf("XXX BLOCK END set=%x, mask=%x, used=%x\n", feature_set, feature_mask, _used_features);
 
 	_feature_mask_and->set_operand(0, Operand::make_constant(feature_mask, 32));
 	_feature_set_cmp->set_operand(0, Operand::make_constant(feature_set, 32));
@@ -1194,17 +908,6 @@ Value *X86Emitter::call(void *fnp, Value *o0, Value *o1, Value *o2, Value *o3)
 
 		return _x86_context.support().alloc_obj<X86Operand>(_x86_context, _x86_context.types().u64(), Operand::make_register(X86PhysicalRegisters::A, 64));
 	}
-	else if (fnp == __captive___softfp_add64)
-	{
-		auto tmp = _vreg_allocator.alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
-		add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t)sfp_add64, 64), Operand::make_register(tmp, 64));
-
-		add_mov_auto(((X86Value *)o0)->as_operand(*this), Operand::make_register(X86PhysicalRegisters::DI, 64));
-		add_mov_auto(((X86Value *)o1)->as_operand(*this), Operand::make_register(X86PhysicalRegisters::SI, 64));
-		add_instruction(InstructionKind::CALL, Operand::make_register(tmp, 64));
-
-		return _x86_context.support().alloc_obj<X86Operand>(_x86_context, _x86_context.types().u64(), Operand::make_register(X86PhysicalRegisters::A, 64));
-	}
 	else if (fnp == __captive_mem_monitor_acquire)
 	{
 		mmu_monitor_acquire<captive::arch::mmu::strategy::MMUStrategyType>((X86Value *)o1);
@@ -1217,6 +920,18 @@ Value *X86Emitter::call(void *fnp, Value *o0, Value *o1, Value *o2, Value *o3)
 	else if (fnp == __captive_mem_monitor_release_all)
 	{
 		mmu_monitor_release_all<captive::arch::mmu::strategy::MMUStrategyType>();
+		return nullptr;
+	}
+	else if (fnp == __captive___branch_taken)
+	{
+		if (((options_.kernel_mode && options_.perf_kernel_brcount) || (!options_.kernel_mode && options_.perf_user_brcount))) {
+			increment_brcount();
+		}
+
+		return nullptr;
+	}
+	else if (fnp == __captive___branch_not_taken)
+	{
 		return nullptr;
 	}
 	else
@@ -1386,18 +1101,14 @@ void X86Emitter::instruction_start(dbt_u64 addr)
 #endif
 }
 
-void X86Emitter::instruction_end(dbt_u64 addr)
+void X86Emitter::instruction_end(dbt_u64 addr, bool end_of_block)
 {
 	//auto tmp = _vreg_allocator.alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
 	//add_instruction(InstructionKind::MOV, Operand::make_mem(64, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x48), Operand::make_register(tmp, 64));
 	//add_instruction(InstructionKind::ADD, Operand::make_constant(1, 64), Operand::make_mem(64, 64, tmp, 40));
 	//increment_pca();
 
-	if (_kernel_mode && _count_kernel_instructions)
-	{
-		increment_icount();
-	}
-	else if (!_kernel_mode && _count_user_instructions)
+	if ((options_.kernel_mode && options_.perf_kernel_icount) || (!options_.kernel_mode && options_.perf_user_icount))
 	{
 		increment_icount();
 	}
@@ -1510,6 +1221,11 @@ void X86Emitter::chain(dbt_u64 target, dbt_u64 fallthrough, void *target_ptr, vo
 #endif
 }
 
+static void __debug(uint64_t offset, uint64_t value)
+{
+	printf("XXX: %lx = %lx\n", offset, value);
+}
+
 Value *X86Emitter::load_device(Value *id_, Value *offset_, const dbt::el::Type &type)
 {
 	DEBUG_EMIT("load-device", id_, offset_);
@@ -1532,7 +1248,16 @@ Value *X86Emitter::load_device(Value *id_, Value *offset_, const dbt::el::Type &
 	auto result_reg = _vreg_allocator.alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
 	add_instruction(InstructionKind::POP, Operand::make_register(result_reg, 64));
 
-	return _x86_context.support().alloc_obj<X86Operand>(_x86_context, type, Operand::make_register(result_reg, type.size_in_bits()));
+	auto result_value = _x86_context.support().alloc_obj<X86Operand>(_x86_context, type, Operand::make_register(result_reg, type.size_in_bits()));
+
+	/*auto debug_tmp = _vreg_allocator.alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
+	add_instruction(InstructionKind::MOV, Operand::make_constant((uint64_t)__debug, 64), Operand::make_register(debug_tmp, 64));
+
+	add_mov_auto(offset->as_operand(*this), Operand::make_register(X86PhysicalRegisters::DI, 64));
+	add_mov_auto(result_value->as_operand(*this), Operand::make_register(X86PhysicalRegisters::SI, 64));
+	add_instruction(InstructionKind::CALL, Operand::make_register(debug_tmp, 64));*/
+
+	return result_value;
 }
 
 Value *X86Emitter::load_local(Value *ptr_, const dbt::el::Type &type)
@@ -1562,7 +1287,7 @@ Value *X86Emitter::load_memory(Value *addr_, const dbt::el::Type &type)
 
 	X86Value *addr = (X86Value *)addr_;
 
-	if (_no_mmu)
+	if (options_.no_mmu)
 	{
 		auto address = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
 
@@ -1925,7 +1650,7 @@ void X86Emitter::store_memory(Value *addr_, Value *value_)
 	X86Value *addr = (X86Value *)addr_;
 	X86Value *value = (X86Value *)value_;
 
-	if (_no_mmu)
+	if (options_.no_mmu)
 	{
 		auto address = vreg_allocator().alloc_vreg(X86RegisterClasses::GENERAL_PURPOSE);
 
@@ -2841,7 +2566,12 @@ void X86Emitter::increment_pcb()
 
 void X86Emitter::increment_icount()
 {
-	add_instruction(InstructionKind::ADD, Operand::make_constant(1, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0x38));
+	add_instruction(InstructionKind::ADD, Operand::make_constant(1, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0xb8));
+}
+
+void X86Emitter::increment_brcount()
+{
+	add_instruction(InstructionKind::ADD, Operand::make_constant(1, 64), Operand::make_mem(64, 64, X86PhysicalRegisters::FS, X86PhysicalRegisters::RIZ, 0xc0));
 }
 
 void X86Emitter::super_chain_direct(dbt_u64 target, void *default_target)

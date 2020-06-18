@@ -4,6 +4,9 @@
 
 #include <define.h>
 
+extern void *__captive___branch_taken;
+extern void *__captive___branch_not_taken;
+
 extern void *__captive_mmu_flush_va;
 extern void *__captive_mmu_flush_all;
 extern void *__captive_mmu_notify_pgt_change;

@@ -51,7 +51,7 @@ namespace captive {
 				void enter_kernel_mode() override;
 				void enter_user_mode() override;
 				void inc_pc(Value* amount) override;
-				void instruction_end(dbt_u64 addr) override;
+				void instruction_end(dbt_u64 addr, bool end_of_block) override;
 				void instruction_start(dbt_u64 addr) override;
 				void jump(Block* target) override;
 				void leave(Value* value) override;

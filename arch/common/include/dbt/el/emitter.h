@@ -202,7 +202,7 @@ namespace captive {
 					virtual void block_start(dbt_u64 addr, dbt_u32 feature_set) = 0;
 					virtual void block_end(dbt_u32 feature_set) = 0;
 					virtual void instruction_start(dbt_u64 addr) = 0;
-					virtual void instruction_end(dbt_u64 addr) = 0;
+					virtual void instruction_end(dbt_u64 addr, bool end_of_block) = 0;
 					virtual void trace(TraceEvent event, Value *o0 = nullptr, Value *o1 = nullptr, Value *o2 = nullptr, Value *o3 = nullptr) = 0;
 
 					virtual Value *vector_extract(Value *vct, Value *index) = 0;

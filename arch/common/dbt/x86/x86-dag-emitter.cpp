@@ -280,7 +280,7 @@ void X86DAGEmitter::inc_pc(Value* amount)
 	sequence_point(node);
 }
 
-void X86DAGEmitter::instruction_end(dbt_u64 addr)
+void X86DAGEmitter::instruction_end(dbt_u64 addr, bool end_of_block)
 {
 	//
 }

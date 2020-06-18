@@ -59,7 +59,7 @@ namespace captive {
 
 					void inc_pc(dbt::el::Value* amount) override;
 					void instruction_start(dbt_u64 addr) override;
-					void instruction_end(dbt_u64 addr) override;
+					void instruction_end(dbt_u64 addr, bool end_of_block) override;
 
 					void jump(dbt::el::Block* target) override;
 					void leave(dbt::el::Value* value = nullptr) override;

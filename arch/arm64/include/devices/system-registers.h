@@ -28,7 +28,7 @@ namespace captive::arch::arm64
 			register_access decode_access(uint32_t ir);
 
 			uint64_t CPACR, MAIR, SCTLR, TCR;
-			uint64_t TPIDRRO_EL0, TPIDR_EL0, TPIDR_EL1;
+			uint64_t TPIDR_EL0, TPIDR_EL1;
 			uint64_t OSLAR_EL1;
 
 			uint64_t CSSELR;

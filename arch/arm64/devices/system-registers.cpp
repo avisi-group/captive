@@ -16,7 +16,6 @@ SystemRegisters::SystemRegisters(Environment &env)
 	MAIR(0),
 	SCTLR(0),
 	TCR(0),
-	TPIDRRO_EL0(0),
 	TPIDR_EL0(0),
 	TPIDR_EL1(0),
 	OSLAR_EL1(0),
@@ -50,9 +49,9 @@ bool SystemRegisters::read(CPU &cpu, uint32_t reg, uint64_t &data)
 	REG_TPIDR_EL0:
 		data = TPIDR_EL0;
 		return true;
-	REG_TPIDRRO_EL0:
+	/*REG_TPIDRRO_EL0:
 		data = TPIDRRO_EL0;
-		return true;
+		return true;*/
 	REG_TPIDR_EL1:
 		data = TPIDR_EL1;
 		return true;
@@ -95,7 +94,7 @@ bool SystemRegisters::read(CPU &cpu, uint32_t reg, uint64_t &data)
 		data = 0;
 		return true;
 	REG_ID_AA64_DFR0_EL1:
-		data = 0x10101106;
+		data = 0x10101606;
 		return true;
 	REG_ID_AA64_DFR1_EL1:
 		data = 0;
@@ -141,8 +140,6 @@ bool SystemRegisters::read(CPU &cpu, uint32_t reg, uint64_t &data)
 	REG_PMCNTENCLR_EL0:
 	REG_PMCNTENSET_EL0:
 	REG_PMCR_EL0:
-	REG_PMEVCNNTR_EL0(0):
-	REG_PMEVTYPER_EL0(0):
 	REG_PMINTENCLR_EL1:
 	REG_PMINTENSET_EL1:
 	REG_PMMIR_EL1:
@@ -243,9 +240,9 @@ bool SystemRegisters::write(CPU &cpu, uint32_t reg, uint64_t data)
 	REG_TPIDR_EL0:
 		TPIDR_EL0 = data;
 		return true;
-	REG_TPIDRRO_EL0:
+	/*REG_TPIDRRO_EL0:
 		TPIDRRO_EL0 = data;
-		return true;
+		return true;*/
 	REG_TPIDR_EL1:
 		printf("XXXXX THREAD WRITE %p %p\n", data, read_pc());
 		TPIDR_EL1 = data;
@@ -283,8 +280,6 @@ bool SystemRegisters::write(CPU &cpu, uint32_t reg, uint64_t data)
 	REG_PMCNTENCLR_EL0:
 	REG_PMCNTENSET_EL0:
 	REG_PMCR_EL0:
-	REG_PMEVCNNTR_EL0(0):
-	REG_PMEVTYPER_EL0(0):
 	REG_PMINTENCLR_EL1:
 	REG_PMINTENSET_EL1:
 	REG_PMMIR_EL1:
