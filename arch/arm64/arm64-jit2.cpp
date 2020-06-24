@@ -93,6 +93,8 @@ template<bool TRACE>bool arm64_jit2<TRACE>::translate(const Decode *decode_obj, 
     return translate_a64_cmge_zero((const arm64_decode_a64_SIMD_TWO_REG_MISC&)insn, emitter);
   case arm64_decode::arm64_a64_cmhi_reg:
     return translate_a64_cmhi_reg((const arm64_decode_a64_SIMD_THREE_SAME&)insn, emitter);
+  case arm64_decode::arm64_a64_cmhs_reg:
+    return translate_a64_cmhs_reg((const arm64_decode_a64_SIMD_THREE_SAME&)insn, emitter);
   case arm64_decode::arm64_a64_cmlt_zero:
     return translate_a64_cmlt_zero((const arm64_decode_a64_SIMD_TWO_REG_MISC&)insn, emitter);
   case arm64_decode::arm64_a64_cmtst:
@@ -539,6 +541,8 @@ template<bool TRACE>bool arm64_jit2<TRACE>::translate(const Decode *decode_obj, 
     return translate_a64_ubfm((const arm64_decode_a64_BITFIELD&)insn, emitter);
   case arm64_decode::arm64_a64_ucvtf:
     return translate_a64_ucvtf((const arm64_decode_a64_CVT_FP_I&)insn, emitter);
+  case arm64_decode::arm64_a64_ucvtf_fxp:
+    return translate_a64_ucvtf_fxp((const arm64_decode_a64_CVT_FP_FXP&)insn, emitter);
   case arm64_decode::arm64_a64_ucvtf_simd:
     return translate_a64_ucvtf_simd((const arm64_decode_a64_SIMD_TWO_REG_MISC&)insn, emitter);
   case arm64_decode::arm64_a64_udiv:

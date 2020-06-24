@@ -203,6 +203,9 @@ const char *arm64_disasm::disassemble(uint64_t pc, const uint8_t *data)
   case arm64_decode::arm64_a64_cmhi_reg:
     disassemble_a64_cmhi_reg(pc, (const arm64_decode_a64_SIMD_THREE_SAME&)insn);
     break;
+  case arm64_decode::arm64_a64_cmhs_reg:
+    disassemble_a64_cmhs_reg(pc, (const arm64_decode_a64_SIMD_THREE_SAME&)insn);
+    break;
   case arm64_decode::arm64_a64_cmlt_zero:
     disassemble_a64_cmlt_zero(pc, (const arm64_decode_a64_SIMD_TWO_REG_MISC&)insn);
     break;
@@ -871,6 +874,9 @@ const char *arm64_disasm::disassemble(uint64_t pc, const uint8_t *data)
     break;
   case arm64_decode::arm64_a64_ucvtf:
     disassemble_a64_ucvtf(pc, (const arm64_decode_a64_CVT_FP_I&)insn);
+    break;
+  case arm64_decode::arm64_a64_ucvtf_fxp:
+    disassemble_a64_ucvtf_fxp(pc, (const arm64_decode_a64_CVT_FP_FXP&)insn);
     break;
   case arm64_decode::arm64_a64_ucvtf_simd:
     disassemble_a64_ucvtf_simd(pc, (const arm64_decode_a64_SIMD_TWO_REG_MISC&)insn);
@@ -5172,6 +5178,114 @@ void arm64_disasm::disassemble_a64_cmhi_reg(uint64_t pc, const arm64_decode_a64_
   if ((insn.SCALAR == (0))) 
   {
     append_str("cmhi");
+    append_str(" ");
+    map_val = 0 + (insn.rd);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    map_val = 0 + (insn.arrangement);
+    if (map_val < 7)
+    {
+      append_str(_map_a64_arrg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rn);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    map_val = 0 + (insn.arrangement);
+    if (map_val < 7)
+    {
+      append_str(_map_a64_arrg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rm);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_vreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(".");
+    map_val = 0 + (insn.arrangement);
+    if (map_val < 7)
+    {
+      append_str(_map_a64_arrg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    return;
+  }
+}
+void arm64_disasm::disassemble_a64_cmhs_reg(uint64_t pc, const arm64_decode_a64_SIMD_THREE_SAME& insn)
+{
+  uint32_t map_val = 0;
+  if ((insn.Q == (1)) && (insn.SCALAR == (1)) && (insn.size == (3))) 
+  {
+    append_str("cmhs");
+    append_str(" ");
+    map_val = 0 + (insn.rd);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_dreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rn);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_dreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    append_str(",");
+    append_str(" ");
+    map_val = 0 + (insn.rm);
+    if (map_val < 32)
+    {
+      append_str(_map_a64_dreg[map_val]);
+    }
+    else 
+    {
+      append_str("???");
+    }
+    return;
+  }
+  if ((insn.SCALAR == (0))) 
+  {
+    append_str("cmhs");
     append_str(" ");
     map_val = 0 + (insn.rd);
     if (map_val < 32)
@@ -25752,6 +25866,11 @@ void arm64_disasm::disassemble_a64_ucvtf(uint64_t pc, const arm64_decode_a64_CVT
     }
     return;
   }
+}
+void arm64_disasm::disassemble_a64_ucvtf_fxp(uint64_t pc, const arm64_decode_a64_CVT_FP_FXP& insn)
+{
+  uint32_t map_val = 0;
+  append_str("ucvtf_fxp");
 }
 void arm64_disasm::disassemble_a64_ucvtf_simd(uint64_t pc, const arm64_decode_a64_SIMD_TWO_REG_MISC& insn)
 {

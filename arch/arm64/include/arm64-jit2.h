@@ -64,6 +64,7 @@ namespace captive
         bool translate_a64_cmeq_zero(const arm64_decode_a64_SIMD_TWO_REG_MISC& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_cmge_zero(const arm64_decode_a64_SIMD_TWO_REG_MISC& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_cmhi_reg(const arm64_decode_a64_SIMD_THREE_SAME& insn, captive::arch::dbt::el::Emitter& emitter);
+        bool translate_a64_cmhs_reg(const arm64_decode_a64_SIMD_THREE_SAME& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_cmlt_zero(const arm64_decode_a64_SIMD_TWO_REG_MISC& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_cmtst(const arm64_decode_a64_SIMD_THREE_SAME& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_cnt(const arm64_decode_a64_SIMD_TWO_REG_MISC& insn, captive::arch::dbt::el::Emitter& emitter);
@@ -287,6 +288,7 @@ namespace captive
         bool translate_a64_uaddw(const arm64_decode_a64_SIMD_THREE_DIFF& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_ubfm(const arm64_decode_a64_BITFIELD& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_ucvtf(const arm64_decode_a64_CVT_FP_I& insn, captive::arch::dbt::el::Emitter& emitter);
+        bool translate_a64_ucvtf_fxp(const arm64_decode_a64_CVT_FP_FXP& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_ucvtf_simd(const arm64_decode_a64_SIMD_TWO_REG_MISC& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_udiv(const arm64_decode_a64_DP_2S& insn, captive::arch::dbt::el::Emitter& emitter);
         bool translate_a64_umaddl(const arm64_decode_a64_DP_3S& insn, captive::arch::dbt::el::Emitter& emitter);

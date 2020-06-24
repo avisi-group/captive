@@ -68,6 +68,7 @@ namespace captive
         void disassemble_a64_cmeq_zero(uint64_t, const arm64_decode_a64_SIMD_TWO_REG_MISC&);
         void disassemble_a64_cmge_zero(uint64_t, const arm64_decode_a64_SIMD_TWO_REG_MISC&);
         void disassemble_a64_cmhi_reg(uint64_t, const arm64_decode_a64_SIMD_THREE_SAME&);
+        void disassemble_a64_cmhs_reg(uint64_t, const arm64_decode_a64_SIMD_THREE_SAME&);
         void disassemble_a64_cmlt_zero(uint64_t, const arm64_decode_a64_SIMD_TWO_REG_MISC&);
         void disassemble_a64_cmtst(uint64_t, const arm64_decode_a64_SIMD_THREE_SAME&);
         void disassemble_a64_cnt(uint64_t, const arm64_decode_a64_SIMD_TWO_REG_MISC&);
@@ -291,6 +292,7 @@ namespace captive
         void disassemble_a64_uaddw(uint64_t, const arm64_decode_a64_SIMD_THREE_DIFF&);
         void disassemble_a64_ubfm(uint64_t, const arm64_decode_a64_BITFIELD&);
         void disassemble_a64_ucvtf(uint64_t, const arm64_decode_a64_CVT_FP_I&);
+        void disassemble_a64_ucvtf_fxp(uint64_t, const arm64_decode_a64_CVT_FP_FXP&);
         void disassemble_a64_ucvtf_simd(uint64_t, const arm64_decode_a64_SIMD_TWO_REG_MISC&);
         void disassemble_a64_udiv(uint64_t, const arm64_decode_a64_DP_2S&);
         void disassemble_a64_umaddl(uint64_t, const arm64_decode_a64_DP_3S&);
