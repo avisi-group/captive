@@ -1,6 +1,8 @@
 # captive
 The Captive Hypervisor
 
+[![CI](https://github.com/tspink/captive/actions/workflows/ci.yml/badge.svg)](https://github.com/tspink/captive/actions/workflows/ci.yml)
+
 Captive only works on Linux with KVM support.  You will need to have the appropriate permissions
 on the `/dev/kvm` device to use it.
 
@@ -28,7 +30,7 @@ You can build a Linux kernel from source quite easily:
     $ export ARCH=arm64
     $ make defconfig
     $ make
-    
+
 Which should have built `arch/arm64/boot/Image`.  Alternatively, you can download an example kernel from:
 
 https://groups.inf.ed.ac.uk/card-project/captive/arm64-kernel-image (approx. 25 Mb)
