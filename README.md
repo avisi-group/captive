@@ -52,7 +52,7 @@ Once you have built captive, have your Linux kernel and arm64 userspace, you can
 following command (assuming you're in the top of the captive build directory).
 
     $ bin/captive --block-dev-file <PATH TO BLOCK DEVICE FILE> \
-    --engine arch/aarch64.arch \
+    --engine arch/arm64.arch \
     --device-tree ./captive-platform.dtb \
     --kernel <PATH TO KERNEL IMAGE> \
     --platform virt
