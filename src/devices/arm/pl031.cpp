@@ -3,6 +3,7 @@
 #include <devices/arm/pl031.h>
 #include <captive.h>
 #include <chrono>
+#include <mutex>
 
 using namespace captive::devices::arm;
 
