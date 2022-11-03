@@ -65,6 +65,18 @@ device.
 
 See the next section for how to use the network.
 
+## Docker
+
+Captive can be ran inside Docker using the supplied `Dockerfile`. Executing
+
+```bash
+$ docker build . -t captive && docker run --privileged captive
+```
+
+will build a Captive image (as well as a userspace using buildroot) and run it in privileged mode (required for access to KVM). This can take
+
+The userspace and kernel are built using older toolchain and Linux versions as more modern versions use instructions not supported by the current ARM64 GenSim model.
+
 ## Networking
 Captive can support networking by means of a TAP device.
 

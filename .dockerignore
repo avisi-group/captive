@@ -1,0 +1,17 @@
+*.o
+*.so
+*.d
+*.arch
+*.a
+*.ll
+*.bin
+nbproject/
+bin/
+bios.bin
+bios.elf
+zero
+/dist/
+fs/
+run.sh
+.vscode
+Dockerfile

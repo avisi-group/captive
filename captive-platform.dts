@@ -8,7 +8,7 @@
 
 	chosen {
 		stdout-path = "/uart@8020000";
-		bootargs = "console=ttyAMA0 root=/dev/vda1 earlyprintk=pl011,0x08020000 consolelog=9 rw randomize_va_space=0 audit=0";
+		bootargs = "console=ttyAMA0 root=/dev/vda earlyprintk=pl011,0x08020000 consolelog=9 rw randomize_va_space=0 audit=0";
 	};
 
 	memory@0 {
