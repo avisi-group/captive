@@ -6,7 +6,6 @@ ENV FORCE_UNSAFE_CONFIGURE=1
 RUN curl https://buildroot.org/downloads/buildroot-2020.05.2.tar.gz | tar -xz --strip-components=1
 COPY example_buildroot_config .config
 RUN make
-RUN curl https://groups.inf.ed.ac.uk/card-project/captive/arm64-kernel-image -o output/images/Image
 
 # build captive
 FROM ubuntu as captive
