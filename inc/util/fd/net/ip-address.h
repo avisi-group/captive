@@ -2,6 +2,7 @@
 #pragma once
 
 #include <string>
+#include <cstdint>
 
 namespace captive {
 	namespace util {

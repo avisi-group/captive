@@ -77,22 +77,22 @@ bool KVMCpu::init() {
 	}
 #if 1
 	struct {
-		struct kvm_cpuid2 header;
+		struct kvm_cpuid2_header header;
 		struct kvm_cpuid_entry2 entries[5];
 	} cpuid_data;
-	
+
 	bzero(&cpuid_data, sizeof(cpuid_data));
-	
+
 	cpuid_data.header.nent = sizeof(cpuid_data.entries) / sizeof(cpuid_data.entries[0]);
-	
+
 	cpuid_data.entries[0].function = 1;
 	cpuid_data.entries[0].index = 0;
 	cpuid_data.entries[0].eax = 0;
 	cpuid_data.entries[0].ebx = 0;
-	
+
 	// pcid, xsave, osxsave, fma, avx, sse3
 	cpuid_data.entries[0].ecx |= (1u << 17) | (1u << 26) | (1u << 27) | (1u << 12) | (1u << 28) | (1u << 0);
-	
+
 	// fxsr, sse, sse2
 	cpuid_data.entries[0].edx |= (1u << 24) | (1u << 25) | (1u << 26);
 	cpuid_data.entries[0].flags = 0;
@@ -100,19 +100,19 @@ bool KVMCpu::init() {
 	cpuid_data.entries[1].function = 7;
 	cpuid_data.entries[1].index = 0;
 	cpuid_data.entries[1].eax = 0;
-	
+
 	cpuid_data.entries[1].ebx = 0;
 	cpuid_data.entries[1].ebx |= (1u << 10);				// invpcid
-	cpuid_data.entries[1].ebx |= (1u << 5) | (1u << 21);	// avx2	
+	cpuid_data.entries[1].ebx |= (1u << 5) | (1u << 21);	// avx2
 	cpuid_data.entries[1].ebx |= (1u << 0);					// fsgsbase
 	cpuid_data.entries[1].ebx |= (1u << 14);				// mpx
 
 	cpuid_data.entries[1].ecx = 0;
 	cpuid_data.entries[1].ecx |= (1u << 3);		// pku
-	
+
 	cpuid_data.entries[1].edx = 0;
 	cpuid_data.entries[1].flags = 0;
-	
+
 	cpuid_data.entries[2].function = 0xd;
 	cpuid_data.entries[2].index = 1;
 	cpuid_data.entries[2].eax = 7;
@@ -120,7 +120,7 @@ bool KVMCpu::init() {
 	cpuid_data.entries[2].ecx = 0;
 	cpuid_data.entries[2].edx = 0;
 	cpuid_data.entries[2].flags = 0;
-	
+
 	cpuid_data.entries[3].function = 0x50000000;
 	cpuid_data.entries[3].index = 0;
 	cpuid_data.entries[3].eax = 0x1234;
@@ -136,7 +136,7 @@ bool KVMCpu::init() {
 	cpuid_data.entries[4].ecx = 0;
 	cpuid_data.entries[4].edx = (1u << 27);
 	cpuid_data.entries[4].flags = 0;
-	
+
 	if (vmioctl(KVM_SET_CPUID2, &cpuid_data)) {
 		ERROR << "Unable to update CPUID";
 		return false;
@@ -155,15 +155,15 @@ void KVMCpu::interrupt(uint32_t code) {
 void KVMCpu::raise_guest_interrupt(uint8_t irq) {
 	if (__sync_val_compare_and_swap(&per_cpu_data().isr, 0, 2) == 0) {
 		//irq_raise.raise();
-		
+
 		KVMGuest& kvm_guest = (KVMGuest &) owner();
-		
+
 		uintptr_t ipp = (uintptr_t)per_cpu_data().interrupt_pending;
 		if (ipp) {
 			uint64_t *x = (uint64_t *)kvm_guest.vm_phys_to_host_virt(kvm_guest.vm_virt_to_vm_phys(ipp));
 			*x = 1;
 		}
-		
+
 		//*per_cpu_data().interrupt_pending = 1;
 	}
 }
@@ -198,7 +198,7 @@ bool KVMCpu::run() {
 	regs.rsi = id();
 	regs.rflags = 2;
 	regs.rsp = kvm_guest.vm_phys_to_vm_virt(VM_PHYS_HEAP_BASE + VM_HEAP_SIZE);
-	
+
 	vmioctl(KVM_SET_REGS, &regs);
 
 	struct kvm_sregs sregs;
@@ -212,7 +212,7 @@ bool KVMCpu::run() {
 	sregs.cr0 = 0x80010007; // PG, PE, MP, EM, WP
 	sregs.cr3 = VM_PHYS_PML4_0;
 	sregs.cr4 = 0x206b0;
-	
+
 	// Allow SSE
 	sregs.cr0 &= ~(1u << 2);	// Clear EM
 	sregs.cr0 |= (1u << 1);		// Set MP
@@ -222,15 +222,15 @@ bool KVMCpu::run() {
 	sregs.cr4 |= (1u << 18);	// Set OSXSAVE
 	sregs.cr4 |= (1u << 18);	// Set OSXSAVE
 	sregs.cr4 |= (1u << 16);	// Set FSGSBASE
-	
+
 	if (owner().platform().host_configuration().mpk) {
 		sregs.cr4 |= (1u << 22);		// Set PKE
 	}
-	
+
 	//sregs.cr0 &= ~(1u << 16);	// Disable WP
 	//sregs.cr4 &= ~(1u << 20);	// Disable SMEP
 	//sregs.cr4 &= ~(1u << 21);	// Disable SMAP
-	
+
 	sregs.efer = 0;
 	sregs.efer |= (1u << 0);		// SCE
 	sregs.efer |= (1u << 8);		// LME
@@ -239,7 +239,7 @@ bool KVMCpu::run() {
 	//sregs.efer |= (1 << 13);	// LMSLE
 	//sregs.efer |= (1 << 14);	// FFXSR
 	//sregs.efer |= (1 << 15);	// TCE
-		
+
 	struct kvm_segment cs, ds, tr;
 	cs.base = 0;
 	cs.limit = 0xffffffff;
@@ -287,10 +287,10 @@ bool KVMCpu::run() {
 		ERROR << CONTEXT(CPU) << "Unable to update SREGS: " << LAST_ERROR_TEXT;
 		return false;
 	}
-	
+
 	struct kvm_lapic_state lapic_state;
 	bzero(&lapic_state, sizeof(lapic_state));
-	
+
 	vmioctl(KVM_GET_LAPIC, &lapic_state);
 	vmioctl(KVM_SET_LAPIC, &lapic_state);
 
@@ -299,13 +299,13 @@ bool KVMCpu::run() {
 	if (owner().owner().debugger() != nullptr) {
 		debug_stop();
 	}
-	
+
 	DEBUG << CONTEXT(CPU) << "Running CPU " << id();
 	do {
 		if (single_stepping) {
 			pthread_barrier_wait(&single_step_barrier);
 		}
-		
+
 		rc = vmioctl(KVM_RUN);
 		if (rc < 0) {
 			if (errno == EINTR) {
@@ -328,9 +328,9 @@ bool KVMCpu::run() {
 			struct kvm_regs regs;
 			vmioctl(KVM_GET_REGS, &regs);
 			run_cpu = handle_port_io(regs);
-			
+
 			break;
-			
+
 		/*case KVM_EXIT_IOAPIC_EOI:
 			break;*/
 
@@ -434,7 +434,7 @@ bool KVMCpu::handle_device_access(devices::Device* device, uint64_t pa) {
 bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 {
 	KVMGuest& kvm_guest = (KVMGuest &) owner();
-	
+
 	switch (cpu_run_struct->io.port) {
 	case 0xff:
 		return handle_hypercall(regs.rax, regs.rdi, regs.rsi);
@@ -445,9 +445,9 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 		} else {
 			fprintf(stderr, "%c", (char) regs.rax & 0xff);
 		}
-		
+
 		return true;
-		
+
 	case 0xfd:
 		dump_regs();
 		return true;
@@ -458,7 +458,7 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 			owner().owner().debugger()->interrupt();
 		}
 		return true;
-		
+
 	case 0xfb:
 		switch(regs.rax & 0xff) {
 		case 0:
@@ -469,15 +469,15 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 			break;
 		}
 		return true;
-		
+
 	case 0xf1:
 		instrument_fn_enter(regs.rdi, regs.rsi);
 		return true;
-		
+
 	case 0xf2:
 		instrument_fn_exit(regs.rdi, regs.rsi);
 		return true;
-		
+
 	case 0xf0:
 	{
 		uint64_t base_addr;
@@ -487,21 +487,21 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 			if (cpu_run_struct->io.direction == KVM_EXIT_IO_OUT) {
 #ifndef NDEBUG
 				device_writes[dev]++;
-#endif   
+#endif
 				// Device Write
 				dev->write(offset, cpu_run_struct->io.size, *(uint64_t *) ((uint64_t) cpu_run_struct + cpu_run_struct->io.data_offset));
 			} else {
 #ifndef NDEBUG
 				device_reads[dev]++;
-#endif   
+#endif
 				// Device Read
 				dev->read(offset, cpu_run_struct->io.size, *(uint64_t *) ((uint64_t) cpu_run_struct + cpu_run_struct->io.data_offset));
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	case 0xed:
 	{
 		SemihostingCallData call_data;
@@ -522,7 +522,7 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 		call_data.arguments[13] = regs.r13;
 		call_data.arguments[14] = regs.r14;
 		call_data.arguments[15] = regs.r15;
-		
+
 		if (kvm_guest.handle_semihosting_call(*this, call_data)) {
 			regs.rax = call_data.result;
 			vmioctl(KVM_SET_REGS, &regs);
@@ -532,11 +532,11 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 
 		return true;
 	}
-	
+
 	case 0xee:
 		kvm_guest.handle_simulation_events(*this, 8192);
 		return true;
-	
+
 	case 0xef:
 		switch (regs.rax) {
 		case 0:
@@ -544,7 +544,7 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 				sim->dump();
 			}
 			break;
-			
+
 		case 1:
 			for (simulation::Simulation *sim : kvm_guest.simulations()) {
 				sim->begin_record();
@@ -557,19 +557,19 @@ bool KVMCpu::handle_port_io(struct kvm_regs& regs)
 			}
 			break;
 		}
-		
+
 		return true;
-		
+
 	case 0x30 ... 0x3f:
 		fprintf(stderr, "x");
 		return true;
-		
+
 	default:
 		DEBUG << CONTEXT(CPU) << "EXIT IO "
 				"port=" << std::hex << cpu_run_struct->io.port << ", "
 				"data offset=" << std::hex << cpu_run_struct->io.data_offset << ", "
 				"count=" << std::hex << cpu_run_struct->io.count;
-		
+
 		return false;
 	}
 }
@@ -655,7 +655,7 @@ void KVMCpu::dump_regs() {
 		ERROR << "Unable to retrieve FP CPU registers";
 		return;
 	}
-	
+
 #define PREG(rg) << #rg " = " << std::hex << regs.rg << " (" << std::dec << regs.rg << ")" << std::endl
 
 	INFO << "Registers:" << std::endl
@@ -677,13 +677,13 @@ void KVMCpu::dump_regs() {
 	PREG(r13)
 	PREG(r14)
 	PREG(r15)
-	
+
 	PREG(rip)
 	PREG(rflags)
 
 #undef PREG
 	<< "mxcsr = " << std::hex << fregs.mxcsr << std::endl
-			
+
 #define PFREG(rg,i) << #rg " = " << std::hex << std::setw(2) << std::setfill('0') \
 			<< (uint64_t)fregs.xmm[i][15] \
 			<< (uint64_t)fregs.xmm[i][14] \
@@ -702,12 +702,12 @@ void KVMCpu::dump_regs() {
 			<< (uint64_t)fregs.xmm[i][1] \
 			<< (uint64_t)fregs.xmm[i][0] \
 			<< std::endl
-			
+
 	PFREG(xmm0,0)
 	PFREG(xmm1,1)
 	PFREG(xmm2,2)
 	PFREG(xmm3,3)
-			
+
 #undef PFREG
 #define PSREG(rg) << #rg ": base=" << std::hex << sregs.rg.base << ", limit=" << std::hex << sregs.rg.limit << ", selector=" << std::hex << sregs.rg.selector << ", dpl=" << (uint32_t)sregs.rg.dpl << ", avl=" << (uint32_t)sregs.rg.avl << std::endl
 
@@ -747,12 +747,12 @@ void KVMCpu::debug_stop()
 {
 	struct kvm_guest_debug guest_debug;
 	bzero(&guest_debug, sizeof(guest_debug));
-	
+
 	guest_debug.control = KVM_GUESTDBG_ENABLE;
 	guest_debug.control = KVM_GUESTDBG_ENABLE | KVM_GUESTDBG_SINGLESTEP;
-	
+
 	vmioctl(KVM_SET_GUEST_DEBUG, &guest_debug);
-	
+
 	single_stepping = true;
 }
 
@@ -760,9 +760,9 @@ void KVMCpu::debug_resume()
 {
 	struct kvm_guest_debug guest_debug;
 	bzero(&guest_debug, sizeof(guest_debug));
-	
+
 	vmioctl(KVM_SET_GUEST_DEBUG, &guest_debug);
-	
+
 	single_stepping = false;
 	pthread_barrier_wait(&single_step_barrier);
 }
@@ -777,9 +777,9 @@ bool KVMCpu::debug_get_registers(uint64_t* registers, size_t& count)
 	struct kvm_regs regs;
 	int rc = vmioctl(KVM_GET_REGS, &regs);
 	if (rc) return false;
-	
+
 	if (count < 18) return false;
-	
+
 	registers[0] = regs.rax;
 	registers[1] = regs.rbx;
 	registers[2] = regs.rcx;
@@ -788,7 +788,7 @@ bool KVMCpu::debug_get_registers(uint64_t* registers, size_t& count)
 	registers[5] = regs.rdi;
 	registers[6] = regs.rbp;
 	registers[7] = regs.rsp;
-	
+
 	registers[8] = regs.r8;
 	registers[9] = regs.r9;
 	registers[10] = regs.r10;
@@ -797,10 +797,10 @@ bool KVMCpu::debug_get_registers(uint64_t* registers, size_t& count)
 	registers[13] = regs.r13;
 	registers[14] = regs.r14;
 	registers[15] = regs.r15;
-	
+
 	registers[16] = regs.rip;
 	registers[17] = regs.rflags;
-	
+
 	count = 18;
 	return true;
 }
@@ -808,15 +808,15 @@ bool KVMCpu::debug_get_registers(uint64_t* registers, size_t& count)
 bool KVMCpu::debug_get_memory(uint64_t gva, void* buffer, size_t size)
 {
 	KVMGuest& guest = (KVMGuest&)owner();
-	
+
 	if (gva < VM_VIRT_SPLIT) {
 		return false;
 	}
-	
+
 	uintptr_t gpa = guest.vm_virt_to_vm_phys(gva);
 	void *mem = guest.vm_phys_to_host_virt(gpa);
 	if (mem == nullptr) return false;
-	
+
 	memcpy(buffer, mem, size);
 	return true;
 }

@@ -82,7 +82,7 @@ bool KVMGuest::init(const util::config::Configuration& cfg)
 {
 	if (!Guest::init(cfg))
 		return false;
-	
+
 	if (!prepare_event_loop())
 		return false;
 
@@ -104,13 +104,13 @@ bool KVMGuest::init(const util::config::Configuration& cfg)
 
 	if (!attach_guest_devices())
 		return false;
-	
+
 	for (auto core : platform().config().cores) {
 		if (!create_cpu(core)) {
 			return false;
 		}
 	}
-	
+
 	_initialised = true;
 	return true;
 }
@@ -123,11 +123,11 @@ static bool stop_callback(int fd, bool is_input, void *p)
 bool KVMGuest::intr_callback(int fd, bool is_input, void *p)
 {
 	KVMGuest *g = (KVMGuest *)p;
-	
+
 	//g->dump_simulations();
-	
+
 	//g->platform().dump();
-	
+
 	g->kvm_cpus.front()->interrupt(6);
 	return true;
 }
@@ -154,7 +154,7 @@ bool KVMGuest::prepare_event_loop()
 		close(stopfd);
 		return false;
 	}
-	
+
 	if (!attach_event(stopfd, stop_callback, true, false, NULL)) {
 		close(intrfd);
 		close(stopfd);
@@ -166,7 +166,7 @@ bool KVMGuest::prepare_event_loop()
 		close(stopfd);
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -176,19 +176,19 @@ bool KVMGuest::attach_event(int fd, event_callback_t cb, bool input, bool output
 	loop_event->fd = fd;
 	loop_event->cb = cb;
 	loop_event->data = data;
-	
+
 	struct epoll_event evt;
 	evt.data.ptr = (void *)loop_event;
 	evt.events = EPOLLET;
-	
+
 	if (input) evt.events |= EPOLLIN;
 	if (output) evt.events |= EPOLLOUT;
-	
+
 	if (epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &evt) < 0) {
 		ERROR << CONTEXT(Guest) << "Unable to attach event";
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -204,7 +204,7 @@ bool KVMGuest::load(loader::Loader& loader)
 		ERROR << "KVM guest is not yet initialised";
 		return false;
 	}
-	
+
 	DEBUG << CONTEXT(Guest) << "Installing Loader";
 	if (!loader.install((uint8_t *)guest_phys_to_host_virt(0))) {
 		ERROR << CONTEXT(Guest) << "Loader failed to install";
@@ -231,47 +231,47 @@ std::map<captive::devices::Device *, uint64_t> device_reads, device_writes;
 bool KVMGuest::run()
 {
 	__stop = false;
-	
+
 	//if (!initialise_simulations((void *)GUEST_SYS_EVENT_RING_VIRT)) return false;
-	
+
 	for (KVMCpu *core : kvm_cpus) {
 		for (simulation::Simulation *sim : simulations()) {
 			sim->register_core(*core);
 			per_guest_data->simulation_events |= (uint64_t)sim->required_events();
 		}
 	}
-	
+
 	start_simulations();
-	
+
 #ifdef FAST_DEVICE_ACCESS
 	// Create the device thread
 	std::thread device_thread(device_thread_proc, (KVMGuest *)this);
 #endif
-	
+
 #ifdef RDTSC_PUMP
 	std::thread rdtsc_pump_thread(rdtsc_pump_thread_proc, (KVMGuest *)this);
 #endif
-	
+
 	if (owner().debugger() != nullptr) {
 		if (!owner().debugger()->wait_attach(*kvm_cpus.front())) {
 			return false;
 		}
 	}
-	
+
 	// Create and run each core thread.
 	std::list<std::thread *> core_threads;
 	for (auto core : kvm_cpus) {
 		auto core_thread = new std::thread(core_thread_proc, core);
 		core_threads.push_back(core_thread);
 	}
-	
+
 #define MAX_EVENTS	8
-	
+
 	struct epoll_event evts[MAX_EVENTS];
-	
+
 	while (!__stop) {
 		int count = epoll_wait(epollfd, evts, MAX_EVENTS, -1);
-		
+
 		if (count < 0) {
 			if (errno != EINTR) {
 				ERROR << CONTEXT(Guest) << "epoll error: " << LAST_ERROR_TEXT;
@@ -286,7 +286,7 @@ bool KVMGuest::run()
 			}
 		}
 	}
-		
+
 	fprintf(stderr, "--------------------------------------------------------------------\n");
 	// Signal each core to stop.
 	for (KVMCpu *core : kvm_cpus) {
@@ -296,55 +296,55 @@ bool KVMGuest::run()
 		fprintf(stderr, "[core %d] comp time: %lu\n", core->id(), core->per_cpu_data().compilation_time);
 	}
 	fprintf(stderr, "--------------------------------------------------------------------\n");
-	
+
 	//
-	
+
 	// Wait for core threads to terminate.
 	for (auto thread : core_threads) {
 		if (thread->joinable()) thread->join();
 	}
-	
+
 	stop_simulations();
-	
+
 #ifndef NDEBUG
 	fprintf(stderr, "device reads:\n");
 	for (auto devread : device_reads) {
 		fprintf(stderr, "  %s: %lu\n", devread.first->name().c_str(), devread.second);
 	}
-	
+
 	fprintf(stderr, "device writes:\n");
 	for (auto devwrite : device_writes) {
 		fprintf(stderr, "  %s: %lu\n", devwrite.first->name().c_str(), devwrite.second);
 	}
 #endif
-	
+
 #ifdef FAST_DEVICE_ACCESS
 	// Shutdown the device thread
 	per_guest_data->fast_device.operation = FAST_DEV_OP_QUIT;
 	captive::lock::barrier_wait(&per_guest_data->fast_device.hypervisor_barrier, FAST_DEV_GUEST_TID);
-	
+
 	if (device_thread.joinable()) {
 		device_thread.join();
 	}
 #endif
-		
+
 #ifdef RDTSC_PUMP
 	if (rdtsc_pump_thread.joinable())
 		rdtsc_pump_thread.join();
 #endif
-	
+
 #if 0
 	uint64_t *profiling_stuff = (uint64_t *)vm_phys_to_host_virt(per_guest_data->some_sort_of_pointer & ~0xffff800000000000ull);
-	
+
 	fprintf(stderr, "ptr: %p %p\n", per_guest_data->some_sort_of_pointer, profiling_stuff);
-	
+
 	while (*profiling_stuff) {
 		fprintf(stderr, "RIP=%p\n", *profiling_stuff++);
 	}
-	
+
 	fprintf(stderr, "STOPPING\n");
 #endif
-	
+
 	return true;
 }
 
@@ -367,22 +367,22 @@ void KVMGuest::debug_interrupt(int code)
 void KVMGuest::rdtsc_pump_thread_proc(KVMGuest *guest)
 {
 	pthread_setname_np(pthread_self(), "rdtsc-pump");
-	
+
 	cpu_set_t cpuset;
 	CPU_ZERO(&cpuset);
 	CPU_SET(1, &cpuset);
-	
+
 	pthread_setaffinity_np(pthread_self(), sizeof(cpuset), &cpuset);
-	
+
 	volatile uint64_t *value_ptr = &guest->per_guest_data->jiffies;
-	
+
 	//struct timespec ts;
 	while (!guest->__stop) {
 		/*clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-		
+
 		*value_ptr = ((ts.tv_sec * 1e9) + ts.tv_nsec);
 		asm volatile("":::"memory");*/
-		
+
 		uint64_t lo, hi;
 		asm volatile("rdtscp" : "=a"(lo), "=d"(hi) :: "rcx");
 		*value_ptr = ((hi << 32) | lo);
@@ -392,12 +392,12 @@ void KVMGuest::rdtsc_pump_thread_proc(KVMGuest *guest)
 void KVMGuest::device_thread_proc(KVMGuest *guest)
 {
 	pthread_setname_np(pthread_self(), "dev-comm");
-	
+
 	PerGuestData *pgd = guest->per_guest_data;
 	while (true) {
 		captive::lock::barrier_wait(&pgd->fast_device.hypervisor_barrier, FAST_DEV_HYPERVISOR_TID);
 		if (pgd->fast_device.operation == FAST_DEV_OP_QUIT) break;
-		
+
 		auto& devices = guest->devices;
 		uint64_t addr = pgd->fast_device.address;
 		auto dev = devices.find(devices_range_type(addr));
@@ -406,7 +406,7 @@ void KVMGuest::device_thread_proc(KVMGuest *guest)
 
 		captive::devices::Device *device = dev->second.dev;
 		uint64_t offset = pgd->fast_device.address - dev->first.min();
-		
+
 		if (pgd->fast_device.operation == FAST_DEV_OP_WRITE) {
 #ifndef NDEBUG
 			device_writes[device]++;
@@ -422,7 +422,7 @@ void KVMGuest::device_thread_proc(KVMGuest *guest)
 		} else {
 			break;
 		}
-		
+
 		captive::lock::barrier_wait(&pgd->fast_device.guest_barrier, FAST_DEV_HYPERVISOR_TID);
 	}
 }
@@ -431,18 +431,18 @@ void KVMGuest::core_thread_proc(KVMCpu *core)
 {
 	std::string thread_name = "core-" + std::to_string(core->id());
 	pthread_setname_np(pthread_self(), thread_name.c_str());
-	
+
 	cpu_set_t cpuset;
 	CPU_ZERO(&cpuset);
 	CPU_SET(0, &cpuset);
-	
+
 	pthread_setaffinity_np(pthread_self(), sizeof(cpuset), &cpuset);
-	
+
 	Guest::current_core = core;
 	core->run();
 	core->instrument_dump();
-	
-	core->owner().stop();	
+
+	core->owner().stop();
 }
 
 bool KVMGuest::create_cpu(const GuestCPUConfiguration& config)
@@ -459,7 +459,7 @@ bool KVMGuest::create_cpu(const GuestCPUConfiguration& config)
 		ERROR << "Failed to create KVM VCPU: " << LAST_ERROR_TEXT;
 		return false;
 	}
-	
+
 	struct kvm_irqchip irqchip;
 	bzero(&irqchip, sizeof(irqchip));
 	irqchip.chip_id = 2;
@@ -468,12 +468,12 @@ bool KVMGuest::create_cpu(const GuestCPUConfiguration& config)
 		ERROR << "Unable to retrieve IRQCHIP";
 		return false;
 	}
-			
+
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 16].fields.vector = 0x30;
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 16].fields.trig_mode = 1;
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 16].fields.mask = 0;
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 16].fields.dest_id = next_cpu_id;
-	
+
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 17].fields.vector = 0x31;
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 17].fields.trig_mode = 1;
 	irqchip.chip.ioapic.redirtbl[(next_cpu_id * 2) + 17].fields.mask = 0;
@@ -505,7 +505,7 @@ bool KVMGuest::create_cpu(const GuestCPUConfiguration& config)
 		delete cpu;
 		return false;
 	}
-	
+
 	kvm_cpus.push_back(cpu);
 
 	next_cpu_id++;
@@ -524,10 +524,10 @@ bool KVMGuest::attach_guest_devices()
 		desc.dev = &device.device();
 
 		devices[devices_range_type(device.base_address(), device.base_address() + device.device().size())] = desc;
-		
+
 		// Map in physical memory mapping
 		map_pages(vm_phys_to_vm_virt(VM_PHYS_GPM_BASE + device.base_address()), VM_PHYS_GPM_BASE + device.base_address(), device.device().size(), PT_WRITABLE | PT_USER_ACCESS | PT_GLOBAL | PT_CACHE_DISABLED | PT_WRITE_THROUGH | PT_VRT_DEVICE, false);
-		
+
 		// Map in one-to-one mapping
 		//map_pages(device.base_address(), VM_PHYS_GPM_BASE + device.base_address(), device.device().size(), PT_WRITABLE | PT_USER_ACCESS, false, VM_PHYS_PML4_1);
 	}
@@ -540,7 +540,7 @@ captive::devices::Device *KVMGuest::lookup_device(uint64_t addr, uint64_t& base_
 	auto dev = devices.find(util::range<uint64_t>(addr));
 	if (dev == devices.end())
 		return NULL;
-	
+
 	base_addr = dev->first.min();
 	return dev->second.dev;
 }
@@ -551,18 +551,18 @@ bool KVMGuest::prepare_guest_irq()
 	struct kvm_pit_config cfg;
 	bzero(&cfg, sizeof(cfg));
 	cfg.flags = KVM_PIT_SPEAKER_DUMMY;
-	
-	if (vmioctl(KVM_CREATE_PIT2, &cfg)) {
-		ERROR << "Unable to create IRQCHIP";
-		return false;
-	}
 
 	DEBUG << CONTEXT(Guest) << "Creating IRQ chip";
 	if (vmioctl(KVM_CREATE_IRQCHIP)) {
 		ERROR << "Unable to create IRQCHIP";
 		return false;
 	}
-	
+
+	if (vmioctl(KVM_CREATE_PIT2, &cfg)) {
+		ERROR << "Unable to create PIT2";
+		return false;
+	}
+
 	return true;
 }
 
@@ -578,15 +578,15 @@ bool KVMGuest::prepare_guest_memory(const util::config::Configuration& cfg)
 		ERROR << "Unable to allocate guest memory heap region";
 		return false;
 	}
-	
+
 	_vm_code_region = vm_region_check->host_buffer;
-	
+
 	// Install the engine code
 	if (!engine().install((uint8_t *)_vm_code_region)) {
 		ERROR << "Unable to install execution engine";
 		return false;
 	}
-	
+
 	// Heap Area
 	DEBUG << CONTEXT(Guest) << "Installing HEAP region, base=" << std::hex << VM_PHYS_HEAP_BASE << ", size=" << VM_HEAP_SIZE;
 	vm_region_check = alloc_guest_memory(VM_PHYS_HEAP_BASE, VM_HEAP_SIZE, 0, (void *)0x670100000000);
@@ -595,15 +595,15 @@ bool KVMGuest::prepare_guest_memory(const util::config::Configuration& cfg)
 		ERROR << "Unable to allocate guest memory heap region";
 		return false;
 	}
-	
+
 	_vm_heap_region = vm_region_check->host_buffer;
-	
+
 	// Guest Physical Memory
 	for (auto& region : platform().config().memory_regions) {
 		void *host_virt_addr = (void *)((uintptr_t)HOST_VIRT_GPM + (uintptr_t)region.base_address());
-		
+
 		DEBUG << CONTEXT(Guest) << "Installing GPM region, base=" << std::hex << region.base_address() << ", size=" << region.size() << ", addr=" << host_virt_addr;
-		
+
 		struct vm_mem_region *vm_region = alloc_guest_memory(VM_PHYS_GPM_BASE + region.base_address(), region.size(), 0, host_virt_addr);
 		if (!vm_region) {
 			release_all_guest_memory();
@@ -617,16 +617,16 @@ bool KVMGuest::prepare_guest_memory(const util::config::Configuration& cfg)
 
 		gpm.push_back(desc);
 	}
-	
+
 	// Initial PGT page is the PML4
 	next_init_pgt_page = VM_PHYS_PML4_0;
 	last_init_pgt_page = next_init_pgt_page + (0x1000ULL * 64);
-	
+
 	// Zero it out?
-	
+
 	next_init_pgt_page += 0x2000;
 	DEBUG << CONTEXT(Guest) << "Next phys page for init pgt = " << std::hex << next_init_pgt_page;
-	
+
 	per_guest_data = (PerGuestData *)vm_phys_to_host_virt(VM_PHYS_GUEST_DATA);
 
 	DEBUG << CONTEXT(Guest) << "Initialising per-guest data structure @ " << std::hex << per_guest_data;
@@ -636,22 +636,22 @@ bool KVMGuest::prepare_guest_memory(const util::config::Configuration& cfg)
 	per_guest_data->fast_device.operation = 0;
 	captive::lock::barrier_init(&per_guest_data->fast_device.hypervisor_barrier);
 	captive::lock::barrier_init(&per_guest_data->fast_device.guest_barrier);
-	
+
 	per_guest_data->printf_buffer = vm_phys_to_vm_virt(VM_PHYS_PRINTF_BUFFER);
 	per_guest_data->trace_buffer = vm_phys_to_vm_virt(VM_PHYS_TRACE_BUFFER);
-	
+
 	per_guest_data->code_virt_base = vm_phys_to_vm_virt(VM_PHYS_CODE_BASE);
 	per_guest_data->code_phys_base = VM_PHYS_CODE_BASE;
 	per_guest_data->code_size = VM_CODE_SIZE;
-	
+
 	per_guest_data->heap_virt_base = vm_phys_to_vm_virt(VM_PHYS_HEAP_BASE);
 	per_guest_data->heap_phys_base = VM_PHYS_HEAP_BASE;
 	per_guest_data->heap_size = VM_HEAP_SIZE;
-	
+
 	per_guest_data->simulation_events = 0;
 	per_guest_data->tracing = cfg.tracing;
 	per_guest_data->dump_code = cfg.dump_code;
-		
+
 	if (!install_gdt()) {
 		ERROR << CONTEXT(Guest) << "Unable to install GDT";
 		return false;
@@ -661,29 +661,29 @@ bool KVMGuest::prepare_guest_memory(const util::config::Configuration& cfg)
 		ERROR << CONTEXT(Guest) << "Unable to install TSS";
 		return false;
 	}
-	
+
 	DEBUG << CONTEXT(Guest) << "Mapping CODE LOW";
 	map_pages(vm_phys_to_vm_virt(VM_PHYS_CODE_BASE), VM_PHYS_CODE_BASE, VM_CODE_SIZE, PT_WRITABLE | PT_USER_ACCESS | PT_GLOBAL, true);
-	
+
 	DEBUG << CONTEXT(Guest) << "Mapping CODE HIGH @ " << std::hex << vm_phys_to_vm_kernel_virt(VM_PHYS_CODE_BASE);
 	map_pages(vm_phys_to_vm_kernel_virt(VM_PHYS_CODE_BASE), VM_PHYS_CODE_BASE, 0x70000000, PT_WRITABLE | PT_USER_ACCESS | PT_GLOBAL, true);
-	
+
 	DEBUG << CONTEXT(Guest) << "Mapping HEAP";
 	map_pages(vm_phys_to_vm_virt(VM_PHYS_HEAP_BASE), VM_PHYS_HEAP_BASE, VM_HEAP_SIZE, PT_WRITABLE | PT_USER_ACCESS | PT_GLOBAL, true);
-	
+
 	DEBUG << CONTEXT(Guest) << "Mapping LAPIC";
 	map_pages(vm_phys_to_vm_virt(VM_PHYS_LAPIC_BASE), VM_PHYS_LAPIC_BASE, VM_LAPIC_SIZE, PT_WRITABLE | PT_USER_ACCESS | PT_GLOBAL | PT_CACHE_DISABLED | PT_WRITE_THROUGH, false);
 
 	DEBUG << CONTEXT(Guest) << "Mapping GPM";
 	for (const auto& g : gpm) {
 		//map_pages(vm_phys_to_vm_virt(VM_PHYS_GPM_BASE + g.cfg->base_address()), VM_PHYS_GPM_BASE + g.cfg->base_address(), g.cfg->size(), PT_WRITABLE | PT_USER_ACCESS, true);
-		
+
 		// TODO: FIXME: HACK HACK HACK
 		if (g.cfg->base_address() < 0x1000000000) {
 			//map_pages(g.cfg->base_address(), VM_PHYS_GPM_BASE + g.cfg->base_address(), g.cfg->size(), PT_WRITABLE | PT_USER_ACCESS, true, VM_PHYS_PML4_1);
 		}
 	}
-	
+
 	return true;
 }
 
@@ -696,7 +696,7 @@ bool KVMGuest::install_gdt()
 {
 	// Hack in the GDT
 	uint64_t *gdt = (uint64_t *)vm_phys_to_host_virt(VM_PHYS_GDT);
-	
+
 	DEBUG << CONTEXT(Guest) << "Installing GDT @ " << std::hex << gdt;
 
 	*gdt++ = 0;							// NULL				 0
@@ -706,13 +706,13 @@ bool KVMGuest::install_gdt()
 	*gdt++ = 0x0000f20000000000;		// USER DS			20
 	*gdt++ = 0x00408900510000d0;		// TSS				28
 	*gdt++ = 0x00000000ffff8000;		//					30
-	
+
 	//0xfffffffd00002000ULL
 	//0x
-	
+
 	// 4100
 	// 0xffff800000004100ULL
-			
+
 	return true;
 }
 
@@ -720,7 +720,7 @@ bool KVMGuest::install_tss()
 {
 	// Hack in the TSS
 	uint64_t *tss = (uint64_t *)(vm_phys_to_host_virt(VM_PHYS_TSS + 4));
-	
+
 	DEBUG << CONTEXT(Guest) << "Installing TSS @ " << std::hex << tss;
 
 	tss[0] = vm_phys_to_vm_virt(VM_PHYS_KSTACK + 0x2000);
@@ -781,7 +781,7 @@ KVMGuest::vm_mem_region *KVMGuest::alloc_guest_memory(uint64_t gpa, uint64_t siz
 
 	// Allocate a userspace buffer for the region.
 	int mmap_flags = MAP_PRIVATE | MAP_NORESERVE | MAP_ANONYMOUS;
-	
+
 #ifdef HUGETLB
 	mmap_flags |= MAP_HUGETLB;
 #endif
@@ -800,15 +800,15 @@ KVMGuest::vm_mem_region *KVMGuest::alloc_guest_memory(uint64_t gpa, uint64_t siz
 		ERROR << "Unable to allocate memory";
 		return NULL;
 	}
-		
+
 	if (fixed_addr && rgn->host_buffer != fixed_addr) {
 		munmap(rgn->host_buffer, rgn->kvm.memory_size);
 		put_mem_slot(rgn);
-		
+
 		ERROR << "Unable to allocate fixed memory";
 		return NULL;
 	}
-	
+
 	//madvise(rgn->host_buffer, size, MADV_MERGEABLE);
 
 	// Store the buffer address in the KVM memory structure.

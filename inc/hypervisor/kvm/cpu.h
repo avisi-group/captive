@@ -11,6 +11,11 @@
 #include <vector>
 #include <chrono>
 
+struct kvm_cpuid2_header {
+	__u32 nent;
+	__u32 padding;
+};
+
 namespace captive {
 	namespace devices {
 		class Device;
